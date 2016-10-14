@@ -59,6 +59,8 @@ public class InstanceProfileCredentialsProvider implements AWSCredentialsProvide
      */
     private volatile ScheduledExecutorService executor;
 
+    private volatile boolean getCredentialsCalled = false;
+
     /**
      * @deprecated for the singleton method {@link #getInstance()}.
      */
@@ -76,7 +78,22 @@ public class InstanceProfileCredentialsProvider implements AWSCredentialsProvide
      *            true if credentials needs to be refreshed asynchronously else
      *            false.
      */
-    public InstanceProfileCredentialsProvider(boolean refreshCredentialsAsync) {
+    public InstanceProfileCredentialsProvider(boolean refreshCredentialsAsync) { this(refreshCredentialsAsync, true); }
+
+    /**
+     * Spins up a new thread to refresh the credentials asynchronously if
+     * refreshCredentialsAsync is set to true, otherwise the credentials will be
+     * refreshed from the instance metadata service synchronously,
+     *
+     * @param refreshCredentialsAsync
+     *            true if credentials needs to be refreshed asynchronously else
+     *            false.
+     * @param eagerlyRefreshCredentialsAsync
+     *            when set to false will not attempt to refresh credentials asynchronously
+     *            until after a call has been made to {@link #getCredentials()} - ensures that
+     *            {@link EC2CredentialsFetcher#getCredentials()} is only hit when this CredentialProvider is actually required
+     */
+    public InstanceProfileCredentialsProvider(boolean refreshCredentialsAsync, boolean eagerlyRefreshCredentialsAsync) {
         credentialsFetcher = new EC2CredentialsFetcher(new InstanceMetadataCredentialsEndpointProvider());
 
         if (refreshCredentialsAsync) {
@@ -85,7 +102,7 @@ public class InstanceProfileCredentialsProvider implements AWSCredentialsProvide
                 @Override
                 public void run() {
                     try {
-                        credentialsFetcher.getCredentials();
+                        if (eagerlyRefreshCredentialsAsync || getCredentialsCalled) credentialsFetcher.getCredentials();
                     } catch (AmazonClientException ace) {
                         handleError(ace);
                     } catch (RuntimeException re) {
@@ -121,6 +138,7 @@ public class InstanceProfileCredentialsProvider implements AWSCredentialsProvide
 
     @Override
     public AWSCredentials getCredentials() {
+        getCredentialsCalled = true;
         return credentialsFetcher.getCredentials();
     }
 
