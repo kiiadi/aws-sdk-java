@@ -32,7 +32,7 @@ import com.amazonaws.annotation.ThreadSafe;
  * href="http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl"
  * >http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software
  * Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to
- * access the API, go to <a href="https://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.
+ * access the API, go to <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.
  * </p>
  * <p>
  * <b>Endpoints</b>
@@ -67,7 +67,7 @@ public class AWSElasticBeanstalkAsyncClient extends AWSElasticBeanstalkClient im
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AWSElasticBeanstalkAsyncClient() {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain());
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance());
     }
 
     /**
@@ -91,7 +91,7 @@ public class AWSElasticBeanstalkAsyncClient extends AWSElasticBeanstalkClient im
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AWSElasticBeanstalkAsyncClient(com.amazonaws.ClientConfiguration clientConfiguration) {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain(), clientConfiguration, java.util.concurrent.Executors
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance(), clientConfiguration, java.util.concurrent.Executors
                 .newFixedThreadPool(clientConfiguration.getMaxConnections()));
     }
 

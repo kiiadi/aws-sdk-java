@@ -39,7 +39,7 @@ public class RegisterImageRequestMarshaller implements Marshaller<Request<Regist
 
         Request<RegisterImageRequest> request = new DefaultRequest<RegisterImageRequest>(registerImageRequest, "AmazonEC2");
         request.addParameter("Action", "RegisterImage");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (registerImageRequest.getImageLocation() != null) {
@@ -70,24 +70,24 @@ public class RegisterImageRequestMarshaller implements Marshaller<Request<Regist
             request.addParameter("RootDeviceName", StringUtils.fromString(registerImageRequest.getRootDeviceName()));
         }
 
-        com.amazonaws.internal.SdkInternalList<BlockDeviceMapping> blockDeviceMappingsList = (com.amazonaws.internal.SdkInternalList<BlockDeviceMapping>) registerImageRequest
+        com.amazonaws.internal.SdkInternalList<BlockDeviceMapping> registerImageRequestBlockDeviceMappingsList = (com.amazonaws.internal.SdkInternalList<BlockDeviceMapping>) registerImageRequest
                 .getBlockDeviceMappings();
-        if (!blockDeviceMappingsList.isEmpty() || !blockDeviceMappingsList.isAutoConstruct()) {
+        if (!registerImageRequestBlockDeviceMappingsList.isEmpty() || !registerImageRequestBlockDeviceMappingsList.isAutoConstruct()) {
             int blockDeviceMappingsListIndex = 1;
 
-            for (BlockDeviceMapping blockDeviceMappingsListValue : blockDeviceMappingsList) {
+            for (BlockDeviceMapping registerImageRequestBlockDeviceMappingsListValue : registerImageRequestBlockDeviceMappingsList) {
 
-                if (blockDeviceMappingsListValue.getVirtualName() != null) {
+                if (registerImageRequestBlockDeviceMappingsListValue.getVirtualName() != null) {
                     request.addParameter("BlockDeviceMapping." + blockDeviceMappingsListIndex + ".VirtualName",
-                            StringUtils.fromString(blockDeviceMappingsListValue.getVirtualName()));
+                            StringUtils.fromString(registerImageRequestBlockDeviceMappingsListValue.getVirtualName()));
                 }
 
-                if (blockDeviceMappingsListValue.getDeviceName() != null) {
+                if (registerImageRequestBlockDeviceMappingsListValue.getDeviceName() != null) {
                     request.addParameter("BlockDeviceMapping." + blockDeviceMappingsListIndex + ".DeviceName",
-                            StringUtils.fromString(blockDeviceMappingsListValue.getDeviceName()));
+                            StringUtils.fromString(registerImageRequestBlockDeviceMappingsListValue.getDeviceName()));
                 }
 
-                EbsBlockDevice ebs = blockDeviceMappingsListValue.getEbs();
+                EbsBlockDevice ebs = registerImageRequestBlockDeviceMappingsListValue.getEbs();
                 if (ebs != null) {
 
                     if (ebs.getSnapshotId() != null) {
@@ -120,9 +120,9 @@ public class RegisterImageRequestMarshaller implements Marshaller<Request<Regist
                     }
                 }
 
-                if (blockDeviceMappingsListValue.getNoDevice() != null) {
+                if (registerImageRequestBlockDeviceMappingsListValue.getNoDevice() != null) {
                     request.addParameter("BlockDeviceMapping." + blockDeviceMappingsListIndex + ".NoDevice",
-                            StringUtils.fromString(blockDeviceMappingsListValue.getNoDevice()));
+                            StringUtils.fromString(registerImageRequestBlockDeviceMappingsListValue.getNoDevice()));
                 }
                 blockDeviceMappingsListIndex++;
             }

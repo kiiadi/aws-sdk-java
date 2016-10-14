@@ -39,7 +39,7 @@ public class AttachClassicLinkVpcRequestMarshaller implements Marshaller<Request
 
         Request<AttachClassicLinkVpcRequest> request = new DefaultRequest<AttachClassicLinkVpcRequest>(attachClassicLinkVpcRequest, "AmazonEC2");
         request.addParameter("Action", "AttachClassicLinkVpc");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (attachClassicLinkVpcRequest.getInstanceId() != null) {
@@ -50,13 +50,14 @@ public class AttachClassicLinkVpcRequestMarshaller implements Marshaller<Request
             request.addParameter("VpcId", StringUtils.fromString(attachClassicLinkVpcRequest.getVpcId()));
         }
 
-        com.amazonaws.internal.SdkInternalList<String> groupsList = (com.amazonaws.internal.SdkInternalList<String>) attachClassicLinkVpcRequest.getGroups();
-        if (!groupsList.isEmpty() || !groupsList.isAutoConstruct()) {
+        com.amazonaws.internal.SdkInternalList<String> attachClassicLinkVpcRequestGroupsList = (com.amazonaws.internal.SdkInternalList<String>) attachClassicLinkVpcRequest
+                .getGroups();
+        if (!attachClassicLinkVpcRequestGroupsList.isEmpty() || !attachClassicLinkVpcRequestGroupsList.isAutoConstruct()) {
             int groupsListIndex = 1;
 
-            for (String groupsListValue : groupsList) {
-                if (groupsListValue != null) {
-                    request.addParameter("SecurityGroupId." + groupsListIndex, StringUtils.fromString(groupsListValue));
+            for (String attachClassicLinkVpcRequestGroupsListValue : attachClassicLinkVpcRequestGroupsList) {
+                if (attachClassicLinkVpcRequestGroupsListValue != null) {
+                    request.addParameter("SecurityGroupId." + groupsListIndex, StringUtils.fromString(attachClassicLinkVpcRequestGroupsListValue));
                 }
                 groupsListIndex++;
             }

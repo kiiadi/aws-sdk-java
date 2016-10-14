@@ -39,16 +39,17 @@ public class DeleteFlowLogsRequestMarshaller implements Marshaller<Request<Delet
 
         Request<DeleteFlowLogsRequest> request = new DefaultRequest<DeleteFlowLogsRequest>(deleteFlowLogsRequest, "AmazonEC2");
         request.addParameter("Action", "DeleteFlowLogs");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> flowLogIdsList = (com.amazonaws.internal.SdkInternalList<String>) deleteFlowLogsRequest.getFlowLogIds();
-        if (!flowLogIdsList.isEmpty() || !flowLogIdsList.isAutoConstruct()) {
+        com.amazonaws.internal.SdkInternalList<String> deleteFlowLogsRequestFlowLogIdsList = (com.amazonaws.internal.SdkInternalList<String>) deleteFlowLogsRequest
+                .getFlowLogIds();
+        if (!deleteFlowLogsRequestFlowLogIdsList.isEmpty() || !deleteFlowLogsRequestFlowLogIdsList.isAutoConstruct()) {
             int flowLogIdsListIndex = 1;
 
-            for (String flowLogIdsListValue : flowLogIdsList) {
-                if (flowLogIdsListValue != null) {
-                    request.addParameter("FlowLogId." + flowLogIdsListIndex, StringUtils.fromString(flowLogIdsListValue));
+            for (String deleteFlowLogsRequestFlowLogIdsListValue : deleteFlowLogsRequestFlowLogIdsList) {
+                if (deleteFlowLogsRequestFlowLogIdsListValue != null) {
+                    request.addParameter("FlowLogId." + flowLogIdsListIndex, StringUtils.fromString(deleteFlowLogsRequestFlowLogIdsListValue));
                 }
                 flowLogIdsListIndex++;
             }

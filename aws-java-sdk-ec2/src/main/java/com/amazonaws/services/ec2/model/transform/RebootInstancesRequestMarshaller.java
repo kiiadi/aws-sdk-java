@@ -39,17 +39,17 @@ public class RebootInstancesRequestMarshaller implements Marshaller<Request<Rebo
 
         Request<RebootInstancesRequest> request = new DefaultRequest<RebootInstancesRequest>(rebootInstancesRequest, "AmazonEC2");
         request.addParameter("Action", "RebootInstances");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> instanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) rebootInstancesRequest
+        com.amazonaws.internal.SdkInternalList<String> rebootInstancesRequestInstanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) rebootInstancesRequest
                 .getInstanceIds();
-        if (!instanceIdsList.isEmpty() || !instanceIdsList.isAutoConstruct()) {
+        if (!rebootInstancesRequestInstanceIdsList.isEmpty() || !rebootInstancesRequestInstanceIdsList.isAutoConstruct()) {
             int instanceIdsListIndex = 1;
 
-            for (String instanceIdsListValue : instanceIdsList) {
-                if (instanceIdsListValue != null) {
-                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(instanceIdsListValue));
+            for (String rebootInstancesRequestInstanceIdsListValue : rebootInstancesRequestInstanceIdsList) {
+                if (rebootInstancesRequestInstanceIdsListValue != null) {
+                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(rebootInstancesRequestInstanceIdsListValue));
                 }
                 instanceIdsListIndex++;
             }

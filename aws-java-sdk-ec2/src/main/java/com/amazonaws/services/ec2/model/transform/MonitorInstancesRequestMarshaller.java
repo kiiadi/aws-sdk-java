@@ -39,17 +39,17 @@ public class MonitorInstancesRequestMarshaller implements Marshaller<Request<Mon
 
         Request<MonitorInstancesRequest> request = new DefaultRequest<MonitorInstancesRequest>(monitorInstancesRequest, "AmazonEC2");
         request.addParameter("Action", "MonitorInstances");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> instanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) monitorInstancesRequest
+        com.amazonaws.internal.SdkInternalList<String> monitorInstancesRequestInstanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) monitorInstancesRequest
                 .getInstanceIds();
-        if (!instanceIdsList.isEmpty() || !instanceIdsList.isAutoConstruct()) {
+        if (!monitorInstancesRequestInstanceIdsList.isEmpty() || !monitorInstancesRequestInstanceIdsList.isAutoConstruct()) {
             int instanceIdsListIndex = 1;
 
-            for (String instanceIdsListValue : instanceIdsList) {
-                if (instanceIdsListValue != null) {
-                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(instanceIdsListValue));
+            for (String monitorInstancesRequestInstanceIdsListValue : monitorInstancesRequestInstanceIdsList) {
+                if (monitorInstancesRequestInstanceIdsListValue != null) {
+                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(monitorInstancesRequestInstanceIdsListValue));
                 }
                 instanceIdsListIndex++;
             }

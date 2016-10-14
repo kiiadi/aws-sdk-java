@@ -53,7 +53,7 @@ public class AmazonECRAsyncClient extends AmazonECRClient implements AmazonECRAs
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AmazonECRAsyncClient() {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain());
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance());
     }
 
     /**
@@ -77,7 +77,7 @@ public class AmazonECRAsyncClient extends AmazonECRClient implements AmazonECRAs
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AmazonECRAsyncClient(com.amazonaws.ClientConfiguration clientConfiguration) {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain(), clientConfiguration, java.util.concurrent.Executors
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance(), clientConfiguration, java.util.concurrent.Executors
                 .newFixedThreadPool(clientConfiguration.getMaxConnections()));
     }
 
@@ -424,6 +424,38 @@ public class AmazonECRAsyncClient extends AmazonECRClient implements AmazonECRAs
 
                 try {
                     result = deleteRepositoryPolicy(request);
+                } catch (Exception ex) {
+                    if (asyncHandler != null) {
+                        asyncHandler.onError(ex);
+                    }
+                    throw ex;
+                }
+
+                if (asyncHandler != null) {
+                    asyncHandler.onSuccess(request, result);
+                }
+                return result;
+            }
+        });
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeImagesResult> describeImagesAsync(DescribeImagesRequest request) {
+
+        return describeImagesAsync(request, null);
+    }
+
+    @Override
+    public java.util.concurrent.Future<DescribeImagesResult> describeImagesAsync(final DescribeImagesRequest request,
+            final com.amazonaws.handlers.AsyncHandler<DescribeImagesRequest, DescribeImagesResult> asyncHandler) {
+
+        return executorService.submit(new java.util.concurrent.Callable<DescribeImagesResult>() {
+            @Override
+            public DescribeImagesResult call() throws Exception {
+                DescribeImagesResult result;
+
+                try {
+                    result = describeImages(request);
                 } catch (Exception ex) {
                     if (asyncHandler != null) {
                         asyncHandler.onError(ex);

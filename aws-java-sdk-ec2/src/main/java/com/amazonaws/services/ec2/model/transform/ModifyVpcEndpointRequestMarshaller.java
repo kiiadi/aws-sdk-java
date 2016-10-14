@@ -39,7 +39,7 @@ public class ModifyVpcEndpointRequestMarshaller implements Marshaller<Request<Mo
 
         Request<ModifyVpcEndpointRequest> request = new DefaultRequest<ModifyVpcEndpointRequest>(modifyVpcEndpointRequest, "AmazonEC2");
         request.addParameter("Action", "ModifyVpcEndpoint");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (modifyVpcEndpointRequest.getVpcEndpointId() != null) {
@@ -54,27 +54,29 @@ public class ModifyVpcEndpointRequestMarshaller implements Marshaller<Request<Mo
             request.addParameter("PolicyDocument", StringUtils.fromString(modifyVpcEndpointRequest.getPolicyDocument()));
         }
 
-        com.amazonaws.internal.SdkInternalList<String> addRouteTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) modifyVpcEndpointRequest
+        com.amazonaws.internal.SdkInternalList<String> modifyVpcEndpointRequestAddRouteTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) modifyVpcEndpointRequest
                 .getAddRouteTableIds();
-        if (!addRouteTableIdsList.isEmpty() || !addRouteTableIdsList.isAutoConstruct()) {
+        if (!modifyVpcEndpointRequestAddRouteTableIdsList.isEmpty() || !modifyVpcEndpointRequestAddRouteTableIdsList.isAutoConstruct()) {
             int addRouteTableIdsListIndex = 1;
 
-            for (String addRouteTableIdsListValue : addRouteTableIdsList) {
-                if (addRouteTableIdsListValue != null) {
-                    request.addParameter("AddRouteTableId." + addRouteTableIdsListIndex, StringUtils.fromString(addRouteTableIdsListValue));
+            for (String modifyVpcEndpointRequestAddRouteTableIdsListValue : modifyVpcEndpointRequestAddRouteTableIdsList) {
+                if (modifyVpcEndpointRequestAddRouteTableIdsListValue != null) {
+                    request.addParameter("AddRouteTableId." + addRouteTableIdsListIndex,
+                            StringUtils.fromString(modifyVpcEndpointRequestAddRouteTableIdsListValue));
                 }
                 addRouteTableIdsListIndex++;
             }
         }
 
-        com.amazonaws.internal.SdkInternalList<String> removeRouteTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) modifyVpcEndpointRequest
+        com.amazonaws.internal.SdkInternalList<String> modifyVpcEndpointRequestRemoveRouteTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) modifyVpcEndpointRequest
                 .getRemoveRouteTableIds();
-        if (!removeRouteTableIdsList.isEmpty() || !removeRouteTableIdsList.isAutoConstruct()) {
+        if (!modifyVpcEndpointRequestRemoveRouteTableIdsList.isEmpty() || !modifyVpcEndpointRequestRemoveRouteTableIdsList.isAutoConstruct()) {
             int removeRouteTableIdsListIndex = 1;
 
-            for (String removeRouteTableIdsListValue : removeRouteTableIdsList) {
-                if (removeRouteTableIdsListValue != null) {
-                    request.addParameter("RemoveRouteTableId." + removeRouteTableIdsListIndex, StringUtils.fromString(removeRouteTableIdsListValue));
+            for (String modifyVpcEndpointRequestRemoveRouteTableIdsListValue : modifyVpcEndpointRequestRemoveRouteTableIdsList) {
+                if (modifyVpcEndpointRequestRemoveRouteTableIdsListValue != null) {
+                    request.addParameter("RemoveRouteTableId." + removeRouteTableIdsListIndex,
+                            StringUtils.fromString(modifyVpcEndpointRequestRemoveRouteTableIdsListValue));
                 }
                 removeRouteTableIdsListIndex++;
             }

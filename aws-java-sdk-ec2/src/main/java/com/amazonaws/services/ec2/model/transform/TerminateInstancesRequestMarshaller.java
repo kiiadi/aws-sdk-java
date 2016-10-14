@@ -39,17 +39,17 @@ public class TerminateInstancesRequestMarshaller implements Marshaller<Request<T
 
         Request<TerminateInstancesRequest> request = new DefaultRequest<TerminateInstancesRequest>(terminateInstancesRequest, "AmazonEC2");
         request.addParameter("Action", "TerminateInstances");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> instanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) terminateInstancesRequest
+        com.amazonaws.internal.SdkInternalList<String> terminateInstancesRequestInstanceIdsList = (com.amazonaws.internal.SdkInternalList<String>) terminateInstancesRequest
                 .getInstanceIds();
-        if (!instanceIdsList.isEmpty() || !instanceIdsList.isAutoConstruct()) {
+        if (!terminateInstancesRequestInstanceIdsList.isEmpty() || !terminateInstancesRequestInstanceIdsList.isAutoConstruct()) {
             int instanceIdsListIndex = 1;
 
-            for (String instanceIdsListValue : instanceIdsList) {
-                if (instanceIdsListValue != null) {
-                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(instanceIdsListValue));
+            for (String terminateInstancesRequestInstanceIdsListValue : terminateInstancesRequestInstanceIdsList) {
+                if (terminateInstancesRequestInstanceIdsListValue != null) {
+                    request.addParameter("InstanceId." + instanceIdsListIndex, StringUtils.fromString(terminateInstancesRequestInstanceIdsListValue));
                 }
                 instanceIdsListIndex++;
             }

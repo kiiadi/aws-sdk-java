@@ -39,17 +39,17 @@ public class CreateFlowLogsRequestMarshaller implements Marshaller<Request<Creat
 
         Request<CreateFlowLogsRequest> request = new DefaultRequest<CreateFlowLogsRequest>(createFlowLogsRequest, "AmazonEC2");
         request.addParameter("Action", "CreateFlowLogs");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> resourceIdsList = (com.amazonaws.internal.SdkInternalList<String>) createFlowLogsRequest
+        com.amazonaws.internal.SdkInternalList<String> createFlowLogsRequestResourceIdsList = (com.amazonaws.internal.SdkInternalList<String>) createFlowLogsRequest
                 .getResourceIds();
-        if (!resourceIdsList.isEmpty() || !resourceIdsList.isAutoConstruct()) {
+        if (!createFlowLogsRequestResourceIdsList.isEmpty() || !createFlowLogsRequestResourceIdsList.isAutoConstruct()) {
             int resourceIdsListIndex = 1;
 
-            for (String resourceIdsListValue : resourceIdsList) {
-                if (resourceIdsListValue != null) {
-                    request.addParameter("ResourceId." + resourceIdsListIndex, StringUtils.fromString(resourceIdsListValue));
+            for (String createFlowLogsRequestResourceIdsListValue : createFlowLogsRequestResourceIdsList) {
+                if (createFlowLogsRequestResourceIdsListValue != null) {
+                    request.addParameter("ResourceId." + resourceIdsListIndex, StringUtils.fromString(createFlowLogsRequestResourceIdsListValue));
                 }
                 resourceIdsListIndex++;
             }

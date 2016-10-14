@@ -27,9 +27,9 @@ import com.amazonaws.annotation.ThreadSafe;
  * cloud.
  * </p>
  * <p>
- * With ElastiCache, customers gain all of the benefits of a high-performance, in-memory cache with far less of the
- * administrative burden of launching and managing a distributed cache. The service makes setup, scaling, and cluster
- * failure handling much simpler than in a self-managed cache deployment.
+ * With ElastiCache, customers get all of the benefits of a high-performance, in-memory cache with less of the
+ * administrative burden involved in launching and managing a distributed cache. The service makes setup, scaling, and
+ * cluster failure handling much simpler than in a self-managed cache deployment.
  * </p>
  * <p>
  * In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance
@@ -60,7 +60,7 @@ public class AmazonElastiCacheAsyncClient extends AmazonElastiCacheClient implem
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AmazonElastiCacheAsyncClient() {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain());
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance());
     }
 
     /**
@@ -84,7 +84,7 @@ public class AmazonElastiCacheAsyncClient extends AmazonElastiCacheClient implem
      * @see java.util.concurrent.Executors#newFixedThreadPool(int)
      */
     public AmazonElastiCacheAsyncClient(com.amazonaws.ClientConfiguration clientConfiguration) {
-        this(new com.amazonaws.auth.DefaultAWSCredentialsProviderChain(), clientConfiguration, java.util.concurrent.Executors
+        this(com.amazonaws.auth.DefaultAWSCredentialsProviderChain.getInstance(), clientConfiguration, java.util.concurrent.Executors
                 .newFixedThreadPool(clientConfiguration.getMaxConnections()));
     }
 

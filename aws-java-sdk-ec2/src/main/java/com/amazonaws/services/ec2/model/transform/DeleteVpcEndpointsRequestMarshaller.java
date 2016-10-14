@@ -39,17 +39,17 @@ public class DeleteVpcEndpointsRequestMarshaller implements Marshaller<Request<D
 
         Request<DeleteVpcEndpointsRequest> request = new DefaultRequest<DeleteVpcEndpointsRequest>(deleteVpcEndpointsRequest, "AmazonEC2");
         request.addParameter("Action", "DeleteVpcEndpoints");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> vpcEndpointIdsList = (com.amazonaws.internal.SdkInternalList<String>) deleteVpcEndpointsRequest
+        com.amazonaws.internal.SdkInternalList<String> deleteVpcEndpointsRequestVpcEndpointIdsList = (com.amazonaws.internal.SdkInternalList<String>) deleteVpcEndpointsRequest
                 .getVpcEndpointIds();
-        if (!vpcEndpointIdsList.isEmpty() || !vpcEndpointIdsList.isAutoConstruct()) {
+        if (!deleteVpcEndpointsRequestVpcEndpointIdsList.isEmpty() || !deleteVpcEndpointsRequestVpcEndpointIdsList.isAutoConstruct()) {
             int vpcEndpointIdsListIndex = 1;
 
-            for (String vpcEndpointIdsListValue : vpcEndpointIdsList) {
-                if (vpcEndpointIdsListValue != null) {
-                    request.addParameter("VpcEndpointId." + vpcEndpointIdsListIndex, StringUtils.fromString(vpcEndpointIdsListValue));
+            for (String deleteVpcEndpointsRequestVpcEndpointIdsListValue : deleteVpcEndpointsRequestVpcEndpointIdsList) {
+                if (deleteVpcEndpointsRequestVpcEndpointIdsListValue != null) {
+                    request.addParameter("VpcEndpointId." + vpcEndpointIdsListIndex, StringUtils.fromString(deleteVpcEndpointsRequestVpcEndpointIdsListValue));
                 }
                 vpcEndpointIdsListIndex++;
             }

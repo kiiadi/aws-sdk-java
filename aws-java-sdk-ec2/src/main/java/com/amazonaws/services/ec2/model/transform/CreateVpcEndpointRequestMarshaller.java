@@ -39,7 +39,7 @@ public class CreateVpcEndpointRequestMarshaller implements Marshaller<Request<Cr
 
         Request<CreateVpcEndpointRequest> request = new DefaultRequest<CreateVpcEndpointRequest>(createVpcEndpointRequest, "AmazonEC2");
         request.addParameter("Action", "CreateVpcEndpoint");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (createVpcEndpointRequest.getVpcId() != null) {
@@ -54,14 +54,14 @@ public class CreateVpcEndpointRequestMarshaller implements Marshaller<Request<Cr
             request.addParameter("PolicyDocument", StringUtils.fromString(createVpcEndpointRequest.getPolicyDocument()));
         }
 
-        com.amazonaws.internal.SdkInternalList<String> routeTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) createVpcEndpointRequest
+        com.amazonaws.internal.SdkInternalList<String> createVpcEndpointRequestRouteTableIdsList = (com.amazonaws.internal.SdkInternalList<String>) createVpcEndpointRequest
                 .getRouteTableIds();
-        if (!routeTableIdsList.isEmpty() || !routeTableIdsList.isAutoConstruct()) {
+        if (!createVpcEndpointRequestRouteTableIdsList.isEmpty() || !createVpcEndpointRequestRouteTableIdsList.isAutoConstruct()) {
             int routeTableIdsListIndex = 1;
 
-            for (String routeTableIdsListValue : routeTableIdsList) {
-                if (routeTableIdsListValue != null) {
-                    request.addParameter("RouteTableId." + routeTableIdsListIndex, StringUtils.fromString(routeTableIdsListValue));
+            for (String createVpcEndpointRequestRouteTableIdsListValue : createVpcEndpointRequestRouteTableIdsList) {
+                if (createVpcEndpointRequestRouteTableIdsListValue != null) {
+                    request.addParameter("RouteTableId." + routeTableIdsListIndex, StringUtils.fromString(createVpcEndpointRequestRouteTableIdsListValue));
                 }
                 routeTableIdsListIndex++;
             }

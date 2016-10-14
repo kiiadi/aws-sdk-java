@@ -39,17 +39,17 @@ public class DescribeExportTasksRequestMarshaller implements Marshaller<Request<
 
         Request<DescribeExportTasksRequest> request = new DefaultRequest<DescribeExportTasksRequest>(describeExportTasksRequest, "AmazonEC2");
         request.addParameter("Action", "DescribeExportTasks");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> exportTaskIdsList = (com.amazonaws.internal.SdkInternalList<String>) describeExportTasksRequest
+        com.amazonaws.internal.SdkInternalList<String> describeExportTasksRequestExportTaskIdsList = (com.amazonaws.internal.SdkInternalList<String>) describeExportTasksRequest
                 .getExportTaskIds();
-        if (!exportTaskIdsList.isEmpty() || !exportTaskIdsList.isAutoConstruct()) {
+        if (!describeExportTasksRequestExportTaskIdsList.isEmpty() || !describeExportTasksRequestExportTaskIdsList.isAutoConstruct()) {
             int exportTaskIdsListIndex = 1;
 
-            for (String exportTaskIdsListValue : exportTaskIdsList) {
-                if (exportTaskIdsListValue != null) {
-                    request.addParameter("ExportTaskId." + exportTaskIdsListIndex, StringUtils.fromString(exportTaskIdsListValue));
+            for (String describeExportTasksRequestExportTaskIdsListValue : describeExportTasksRequestExportTaskIdsList) {
+                if (describeExportTasksRequestExportTaskIdsListValue != null) {
+                    request.addParameter("ExportTaskId." + exportTaskIdsListIndex, StringUtils.fromString(describeExportTasksRequestExportTaskIdsListValue));
                 }
                 exportTaskIdsListIndex++;
             }

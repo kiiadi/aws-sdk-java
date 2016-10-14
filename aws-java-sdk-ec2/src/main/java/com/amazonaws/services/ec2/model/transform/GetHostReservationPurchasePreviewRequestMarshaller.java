@@ -41,21 +41,21 @@ public class GetHostReservationPurchasePreviewRequestMarshaller implements
         Request<GetHostReservationPurchasePreviewRequest> request = new DefaultRequest<GetHostReservationPurchasePreviewRequest>(
                 getHostReservationPurchasePreviewRequest, "AmazonEC2");
         request.addParameter("Action", "GetHostReservationPurchasePreview");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (getHostReservationPurchasePreviewRequest.getOfferingId() != null) {
             request.addParameter("OfferingId", StringUtils.fromString(getHostReservationPurchasePreviewRequest.getOfferingId()));
         }
 
-        com.amazonaws.internal.SdkInternalList<String> hostIdSetList = (com.amazonaws.internal.SdkInternalList<String>) getHostReservationPurchasePreviewRequest
+        com.amazonaws.internal.SdkInternalList<String> getHostReservationPurchasePreviewRequestHostIdSetList = (com.amazonaws.internal.SdkInternalList<String>) getHostReservationPurchasePreviewRequest
                 .getHostIdSet();
-        if (!hostIdSetList.isEmpty() || !hostIdSetList.isAutoConstruct()) {
+        if (!getHostReservationPurchasePreviewRequestHostIdSetList.isEmpty() || !getHostReservationPurchasePreviewRequestHostIdSetList.isAutoConstruct()) {
             int hostIdSetListIndex = 1;
 
-            for (String hostIdSetListValue : hostIdSetList) {
-                if (hostIdSetListValue != null) {
-                    request.addParameter("HostIdSet." + hostIdSetListIndex, StringUtils.fromString(hostIdSetListValue));
+            for (String getHostReservationPurchasePreviewRequestHostIdSetListValue : getHostReservationPurchasePreviewRequestHostIdSetList) {
+                if (getHostReservationPurchasePreviewRequestHostIdSetListValue != null) {
+                    request.addParameter("HostIdSet." + hostIdSetListIndex, StringUtils.fromString(getHostReservationPurchasePreviewRequestHostIdSetListValue));
                 }
                 hostIdSetListIndex++;
             }

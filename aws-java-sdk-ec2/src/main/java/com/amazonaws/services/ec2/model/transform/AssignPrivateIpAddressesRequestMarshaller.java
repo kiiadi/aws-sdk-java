@@ -39,21 +39,22 @@ public class AssignPrivateIpAddressesRequestMarshaller implements Marshaller<Req
 
         Request<AssignPrivateIpAddressesRequest> request = new DefaultRequest<AssignPrivateIpAddressesRequest>(assignPrivateIpAddressesRequest, "AmazonEC2");
         request.addParameter("Action", "AssignPrivateIpAddresses");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         if (assignPrivateIpAddressesRequest.getNetworkInterfaceId() != null) {
             request.addParameter("NetworkInterfaceId", StringUtils.fromString(assignPrivateIpAddressesRequest.getNetworkInterfaceId()));
         }
 
-        com.amazonaws.internal.SdkInternalList<String> privateIpAddressesList = (com.amazonaws.internal.SdkInternalList<String>) assignPrivateIpAddressesRequest
+        com.amazonaws.internal.SdkInternalList<String> assignPrivateIpAddressesRequestPrivateIpAddressesList = (com.amazonaws.internal.SdkInternalList<String>) assignPrivateIpAddressesRequest
                 .getPrivateIpAddresses();
-        if (!privateIpAddressesList.isEmpty() || !privateIpAddressesList.isAutoConstruct()) {
+        if (!assignPrivateIpAddressesRequestPrivateIpAddressesList.isEmpty() || !assignPrivateIpAddressesRequestPrivateIpAddressesList.isAutoConstruct()) {
             int privateIpAddressesListIndex = 1;
 
-            for (String privateIpAddressesListValue : privateIpAddressesList) {
-                if (privateIpAddressesListValue != null) {
-                    request.addParameter("PrivateIpAddress." + privateIpAddressesListIndex, StringUtils.fromString(privateIpAddressesListValue));
+            for (String assignPrivateIpAddressesRequestPrivateIpAddressesListValue : assignPrivateIpAddressesRequestPrivateIpAddressesList) {
+                if (assignPrivateIpAddressesRequestPrivateIpAddressesListValue != null) {
+                    request.addParameter("PrivateIpAddress." + privateIpAddressesListIndex,
+                            StringUtils.fromString(assignPrivateIpAddressesRequestPrivateIpAddressesListValue));
                 }
                 privateIpAddressesListIndex++;
             }

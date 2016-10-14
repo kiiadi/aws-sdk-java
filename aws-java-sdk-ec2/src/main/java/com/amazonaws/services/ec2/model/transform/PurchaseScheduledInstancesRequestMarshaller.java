@@ -40,26 +40,26 @@ public class PurchaseScheduledInstancesRequestMarshaller implements Marshaller<R
         Request<PurchaseScheduledInstancesRequest> request = new DefaultRequest<PurchaseScheduledInstancesRequest>(purchaseScheduledInstancesRequest,
                 "AmazonEC2");
         request.addParameter("Action", "PurchaseScheduledInstances");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
         request.addParameter("ClientToken", IdempotentUtils.resolveString(purchaseScheduledInstancesRequest.getClientToken()));
 
-        com.amazonaws.internal.SdkInternalList<PurchaseRequest> purchaseRequestsList = (com.amazonaws.internal.SdkInternalList<PurchaseRequest>) purchaseScheduledInstancesRequest
+        com.amazonaws.internal.SdkInternalList<PurchaseRequest> purchaseScheduledInstancesRequestPurchaseRequestsList = (com.amazonaws.internal.SdkInternalList<PurchaseRequest>) purchaseScheduledInstancesRequest
                 .getPurchaseRequests();
-        if (!purchaseRequestsList.isEmpty() || !purchaseRequestsList.isAutoConstruct()) {
+        if (!purchaseScheduledInstancesRequestPurchaseRequestsList.isEmpty() || !purchaseScheduledInstancesRequestPurchaseRequestsList.isAutoConstruct()) {
             int purchaseRequestsListIndex = 1;
 
-            for (PurchaseRequest purchaseRequestsListValue : purchaseRequestsList) {
+            for (PurchaseRequest purchaseScheduledInstancesRequestPurchaseRequestsListValue : purchaseScheduledInstancesRequestPurchaseRequestsList) {
 
-                if (purchaseRequestsListValue.getPurchaseToken() != null) {
+                if (purchaseScheduledInstancesRequestPurchaseRequestsListValue.getPurchaseToken() != null) {
                     request.addParameter("PurchaseRequest." + purchaseRequestsListIndex + ".PurchaseToken",
-                            StringUtils.fromString(purchaseRequestsListValue.getPurchaseToken()));
+                            StringUtils.fromString(purchaseScheduledInstancesRequestPurchaseRequestsListValue.getPurchaseToken()));
                 }
 
-                if (purchaseRequestsListValue.getInstanceCount() != null) {
+                if (purchaseScheduledInstancesRequestPurchaseRequestsListValue.getInstanceCount() != null) {
                     request.addParameter("PurchaseRequest." + purchaseRequestsListIndex + ".InstanceCount",
-                            StringUtils.fromInteger(purchaseRequestsListValue.getInstanceCount()));
+                            StringUtils.fromInteger(purchaseScheduledInstancesRequestPurchaseRequestsListValue.getInstanceCount()));
                 }
                 purchaseRequestsListIndex++;
             }

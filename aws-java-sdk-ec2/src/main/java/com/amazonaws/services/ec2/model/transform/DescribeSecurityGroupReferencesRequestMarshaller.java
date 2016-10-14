@@ -41,17 +41,17 @@ public class DescribeSecurityGroupReferencesRequestMarshaller implements
         Request<DescribeSecurityGroupReferencesRequest> request = new DefaultRequest<DescribeSecurityGroupReferencesRequest>(
                 describeSecurityGroupReferencesRequest, "AmazonEC2");
         request.addParameter("Action", "DescribeSecurityGroupReferences");
-        request.addParameter("Version", "2016-04-01");
+        request.addParameter("Version", "2016-09-15");
         request.setHttpMethod(HttpMethodName.POST);
 
-        com.amazonaws.internal.SdkInternalList<String> groupIdList = (com.amazonaws.internal.SdkInternalList<String>) describeSecurityGroupReferencesRequest
+        com.amazonaws.internal.SdkInternalList<String> describeSecurityGroupReferencesRequestGroupIdList = (com.amazonaws.internal.SdkInternalList<String>) describeSecurityGroupReferencesRequest
                 .getGroupId();
-        if (!groupIdList.isEmpty() || !groupIdList.isAutoConstruct()) {
+        if (!describeSecurityGroupReferencesRequestGroupIdList.isEmpty() || !describeSecurityGroupReferencesRequestGroupIdList.isAutoConstruct()) {
             int groupIdListIndex = 1;
 
-            for (String groupIdListValue : groupIdList) {
-                if (groupIdListValue != null) {
-                    request.addParameter("GroupId." + groupIdListIndex, StringUtils.fromString(groupIdListValue));
+            for (String describeSecurityGroupReferencesRequestGroupIdListValue : describeSecurityGroupReferencesRequestGroupIdList) {
+                if (describeSecurityGroupReferencesRequestGroupIdListValue != null) {
+                    request.addParameter("GroupId." + groupIdListIndex, StringUtils.fromString(describeSecurityGroupReferencesRequestGroupIdListValue));
                 }
                 groupIdListIndex++;
             }
