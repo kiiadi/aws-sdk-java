@@ -66,7 +66,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * <p>
      * You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>. You
-     * cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
+     * can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
      * * must replace the entire label; for example, you can't specify <code>prod*.example.com</code>.
      * </p>
      */
@@ -107,10 +107,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -162,7 +166,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     * You can't create latency, failover, or geolocation resource record sets that have the same values for the
      * <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      * </p>
      * </li>
@@ -192,9 +196,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
     private Long weight;
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -204,7 +208,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -218,18 +222,18 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
@@ -255,7 +259,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * on that continent to a different resource.
      * </p>
      * <p>
-     * You cannot create two geolocation resource record sets that specify the same geographic location.
+     * You can't create two geolocation resource record sets that specify the same geographic location.
      * </p>
      * <p>
      * The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that aren't
@@ -274,7 +278,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-geolocation resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as geolocation resource record sets.
      * </p>
      */
@@ -319,7 +323,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -397,9 +401,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
     private com.amazonaws.internal.SdkInternalList<ResourceRecord> resourceRecords;
     /**
      * <p>
-     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
+     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic Beanstalk
      * environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     * redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.
+     * redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized subdomain.
      * </p>
      * <p>
      * If you're creating resource records sets for a private hosted zone, note the following:
@@ -509,7 +513,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     * For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      * </p>
      * <ul>
      * <li>
@@ -527,7 +531,22 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      */
     private String healthCheckId;
-
+    /**
+     * <p>
+     * When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     * <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created this
+     * resource record set for.
+     * </p>
+     * <important>
+     * <p>
+     * To delete the resource record set that is associated with a traffic policy instance, use
+     * <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set automatically. If
+     * you delete the resource record set by using <code>ChangeResourceRecordSets</code>, Amazon Route 53 doesn't
+     * automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no
+     * longer in use.
+     * </p>
+     * </important>
+     */
     private String trafficPolicyInstanceId;
 
     /**
@@ -584,7 +603,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </ul>
      *        <p>
      *        You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>
-     *        . You cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
+     *        . You can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
      *        addition, the * must replace the entire label; for example, you can't specify
      *        <code>prod*.example.com</code>.
      * @param type
@@ -623,10 +642,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -698,7 +721,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </ul>
      *        <p>
      *        You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>
-     *        . You cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
+     *        . You can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
      *        addition, the * must replace the entire label; for example, you can't specify
      *        <code>prod*.example.com</code>.
      * @param type
@@ -737,10 +760,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -810,7 +837,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * <p>
      * You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>. You
-     * cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
+     * can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
      * * must replace the entire label; for example, you can't specify <code>prod*.example.com</code>.
      * </p>
      * 
@@ -857,7 +884,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </ul>
      *        <p>
      *        You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>
-     *        . You cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
+     *        . You can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
      *        addition, the * must replace the entire label; for example, you can't specify
      *        <code>prod*.example.com</code>.
      */
@@ -911,7 +938,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * <p>
      * You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>. You
-     * cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
+     * can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
      * * must replace the entire label; for example, you can't specify <code>prod*.example.com</code>.
      * </p>
      * 
@@ -957,7 +984,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </ul>
      *         <p>
      *         You can use the * wildcard as the leftmost label in a domain name, for example,
-     *         <code>*.example.com</code>. You cannot use an * for one of the middle labels, for example,
+     *         <code>*.example.com</code>. You can't use an * for one of the middle labels, for example,
      *         <code>marketing.*.example.com</code>. In addition, the * must replace the entire label; for example, you
      *         can't specify <code>prod*.example.com</code>.
      */
@@ -1011,7 +1038,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * <p>
      * You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>. You
-     * cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
+     * can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In addition, the
      * * must replace the entire label; for example, you can't specify <code>prod*.example.com</code>.
      * </p>
      * 
@@ -1058,7 +1085,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </ul>
      *        <p>
      *        You can use the * wildcard as the leftmost label in a domain name, for example, <code>*.example.com</code>
-     *        . You cannot use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
+     *        . You can't use an * for one of the middle labels, for example, <code>marketing.*.example.com</code>. In
      *        addition, the * must replace the entire label; for example, you can't specify
      *        <code>prod*.example.com</code>.
      * @return Returns a reference to this object so that method calls can be chained together.
@@ -1105,10 +1132,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -1164,10 +1195,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -1229,10 +1264,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -1287,10 +1326,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         <p>
      *         <b>CloudFront distributions:</b> <code>A</code>
      *         </p>
+     *         <p>
+     *         If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *         distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *         <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *         </p>
      *         </li>
      *         <li>
@@ -1352,10 +1395,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -1411,10 +1458,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -1478,10 +1529,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -1537,10 +1592,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -1602,10 +1661,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * <b>CloudFront distributions:</b> <code>A</code>
      * </p>
+     * <p>
+     * If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution,
+     * one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     * </p>
      * </li>
      * <li>
      * <p>
-     * <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     * <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      * </p>
      * </li>
      * <li>
@@ -1661,10 +1724,14 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        <b>CloudFront distributions:</b> <code>A</code>
      *        </p>
+     *        <p>
+     *        If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your
+     *        distribution, one with a value of <code>A</code> and one with a value of <code>AAAA</code>.
+     *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        <b>Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
+     *        <b>AWS Elastic Beanstalk environment that has a regionalized subdomain</b>: <code>A</code>
      *        </p>
      *        </li>
      *        <li>
@@ -1771,7 +1838,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     * You can't create latency, failover, or geolocation resource record sets that have the same values for the
      * <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      * </p>
      * </li>
@@ -1817,7 +1884,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     *        You can't create latency, failover, or geolocation resource record sets that have the same values for the
      *        <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      *        </p>
      *        </li>
@@ -1870,7 +1937,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     * You can't create latency, failover, or geolocation resource record sets that have the same values for the
      * <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      * </p>
      * </li>
@@ -1915,8 +1982,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </li>
      *         <li>
      *         <p>
-     *         You cannot create latency, failover, or geolocation resource record sets that have the same values for
-     *         the <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
+     *         You can't create latency, failover, or geolocation resource record sets that have the same values for the
+     *         <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      *         </p>
      *         </li>
      *         <li>
@@ -1968,7 +2035,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     * You can't create latency, failover, or geolocation resource record sets that have the same values for the
      * <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      * </p>
      * </li>
@@ -2014,7 +2081,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create latency, failover, or geolocation resource record sets that have the same values for the
+     *        You can't create latency, failover, or geolocation resource record sets that have the same values for the
      *        <code>Name</code> and <code>Type</code> elements as weighted resource record sets.
      *        </p>
      *        </li>
@@ -2050,9 +2117,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -2062,7 +2129,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -2076,28 +2143,28 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
      * </ul>
      * 
      * @param region
-     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified
-     *        in this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2
-     *        instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on
-     *        the record type.</p> <note>
+     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified
+     *        in this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or
+     *        an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record
+     *        type.</p> <note>
      *        <p>
      *        Creating latency and latency alias resource record sets in private hosted zones is not supported.
      *        </p>
@@ -2105,7 +2172,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency
      *        resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency
-     *        between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is
+     *        between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is
      *        associated with the selected resource record set.
      *        </p>
      *        <p>
@@ -2119,19 +2186,19 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You can only create one latency resource record set for each Amazon EC2 region.
+     *        You can only create one latency resource record set for each Amazon EC2 Region.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53
+     *        You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53
      *        will choose the region with the best latency from among the regions for which you create latency resource
      *        record sets.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     *        You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      *        <code>Type</code> elements as latency resource record sets.
      *        </p>
      *        </li>
@@ -2144,9 +2211,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -2156,7 +2223,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -2170,27 +2237,27 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
      * </ul>
      * 
-     * @return <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is
-     *         specified in this resource record set resides. The resource typically is an AWS resource, such as an
-     *         Amazon EC2 instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name,
-     *         depending on the record type.</p> <note>
+     * @return <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is
+     *         specified in this resource record set resides. The resource typically is an AWS resource, such as an EC2
+     *         instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on
+     *         the record type.</p> <note>
      *         <p>
      *         Creating latency and latency alias resource record sets in private hosted zones is not supported.
      *         </p>
@@ -2198,7 +2265,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         <p>
      *         When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency
      *         resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency
-     *         between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is
+     *         between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is
      *         associated with the selected resource record set.
      *         </p>
      *         <p>
@@ -2212,20 +2279,20 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </li>
      *         <li>
      *         <p>
-     *         You can only create one latency resource record set for each Amazon EC2 region.
+     *         You can only create one latency resource record set for each Amazon EC2 Region.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53
+     *         You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53
      *         will choose the region with the best latency from among the regions for which you create latency resource
      *         record sets.
      *         </p>
      *         </li>
      *         <li>
      *         <p>
-     *         You cannot create non-latency resource record sets that have the same values for the <code>Name</code>
-     *         and <code>Type</code> elements as latency resource record sets.
+     *         You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
+     *         <code>Type</code> elements as latency resource record sets.
      *         </p>
      *         </li>
      * @see ResourceRecordSetRegion
@@ -2237,9 +2304,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -2249,7 +2316,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -2263,28 +2330,28 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
      * </ul>
      * 
      * @param region
-     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified
-     *        in this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2
-     *        instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on
-     *        the record type.</p> <note>
+     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified
+     *        in this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or
+     *        an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record
+     *        type.</p> <note>
      *        <p>
      *        Creating latency and latency alias resource record sets in private hosted zones is not supported.
      *        </p>
@@ -2292,7 +2359,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency
      *        resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency
-     *        between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is
+     *        between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is
      *        associated with the selected resource record set.
      *        </p>
      *        <p>
@@ -2306,19 +2373,19 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You can only create one latency resource record set for each Amazon EC2 region.
+     *        You can only create one latency resource record set for each Amazon EC2 Region.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53
+     *        You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53
      *        will choose the region with the best latency from among the regions for which you create latency resource
      *        record sets.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     *        You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      *        <code>Type</code> elements as latency resource record sets.
      *        </p>
      *        </li>
@@ -2333,9 +2400,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -2345,7 +2412,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -2359,28 +2426,28 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
      * </ul>
      * 
      * @param region
-     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified
-     *        in this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2
-     *        instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on
-     *        the record type.</p> <note>
+     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified
+     *        in this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or
+     *        an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record
+     *        type.</p> <note>
      *        <p>
      *        Creating latency and latency alias resource record sets in private hosted zones is not supported.
      *        </p>
@@ -2388,7 +2455,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency
      *        resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency
-     *        between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is
+     *        between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is
      *        associated with the selected resource record set.
      *        </p>
      *        <p>
@@ -2402,19 +2469,19 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You can only create one latency resource record set for each Amazon EC2 region.
+     *        You can only create one latency resource record set for each Amazon EC2 Region.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53
+     *        You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53
      *        will choose the region with the best latency from among the regions for which you create latency resource
      *        record sets.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     *        You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      *        <code>Type</code> elements as latency resource record sets.
      *        </p>
      *        </li>
@@ -2427,9 +2494,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified in
-     * this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2 instance or an
-     * ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
+     * <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified in
+     * this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or an ELB
+     * load balancer, and is referred to by an IP address or a DNS domain name, depending on the record type.
      * </p>
      * <note>
      * <p>
@@ -2439,7 +2506,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * <p>
      * When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency resource
      * record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency between the end
-     * user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is associated with the
+     * user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is associated with the
      * selected resource record set.
      * </p>
      * <p>
@@ -2453,28 +2520,28 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * <li>
      * <p>
-     * You can only create one latency resource record set for each Amazon EC2 region.
+     * You can only create one latency resource record set for each Amazon EC2 Region.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53 will
+     * You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53 will
      * choose the region with the best latency from among the regions for which you create latency resource record sets.
      * </p>
      * </li>
      * <li>
      * <p>
-     * You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as latency resource record sets.
      * </p>
      * </li>
      * </ul>
      * 
      * @param region
-     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 region where the resource that is specified
-     *        in this resource record set resides. The resource typically is an AWS resource, such as an Amazon EC2
-     *        instance or an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on
-     *        the record type.</p> <note>
+     *        <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where the resource that is specified
+     *        in this resource record set resides. The resource typically is an AWS resource, such as an EC2 instance or
+     *        an ELB load balancer, and is referred to by an IP address or a DNS domain name, depending on the record
+     *        type.</p> <note>
      *        <p>
      *        Creating latency and latency alias resource record sets in private hosted zones is not supported.
      *        </p>
@@ -2482,7 +2549,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        <p>
      *        When Amazon Route 53 receives a DNS query for a domain name and type for which you have created latency
      *        resource record sets, Amazon Route 53 selects the latency resource record set that has the lowest latency
-     *        between the end user and the associated Amazon EC2 region. Amazon Route 53 then returns the value that is
+     *        between the end user and the associated Amazon EC2 Region. Amazon Route 53 then returns the value that is
      *        associated with the selected resource record set.
      *        </p>
      *        <p>
@@ -2496,19 +2563,19 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        <li>
      *        <p>
-     *        You can only create one latency resource record set for each Amazon EC2 region.
+     *        You can only create one latency resource record set for each Amazon EC2 Region.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You are not required to create latency resource record sets for all Amazon EC2 regions. Amazon Route 53
+     *        You are not required to create latency resource record sets for all Amazon EC2 Regions. Amazon Route 53
      *        will choose the region with the best latency from among the regions for which you create latency resource
      *        record sets.
      *        </p>
      *        </li>
      *        <li>
      *        <p>
-     *        You cannot create non-latency resource record sets that have the same values for the <code>Name</code> and
+     *        You can't create non-latency resource record sets that have the same values for the <code>Name</code> and
      *        <code>Type</code> elements as latency resource record sets.
      *        </p>
      *        </li>
@@ -2540,7 +2607,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * on that continent to a different resource.
      * </p>
      * <p>
-     * You cannot create two geolocation resource record sets that specify the same geographic location.
+     * You can't create two geolocation resource record sets that specify the same geographic location.
      * </p>
      * <p>
      * The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that aren't
@@ -2559,7 +2626,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-geolocation resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as geolocation resource record sets.
      * </p>
      * 
@@ -2580,7 +2647,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        queries for a country on that continent to a different resource.
      *        </p>
      *        <p>
-     *        You cannot create two geolocation resource record sets that specify the same geographic location.
+     *        You can't create two geolocation resource record sets that specify the same geographic location.
      *        </p>
      *        <p>
      *        The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that
@@ -2600,7 +2667,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </p>
      *        </important>
      *        <p>
-     *        You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code>
+     *        You can't create non-geolocation resource record sets that have the same values for the <code>Name</code>
      *        and <code>Type</code> elements as geolocation resource record sets.
      */
 
@@ -2627,7 +2694,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * on that continent to a different resource.
      * </p>
      * <p>
-     * You cannot create two geolocation resource record sets that specify the same geographic location.
+     * You can't create two geolocation resource record sets that specify the same geographic location.
      * </p>
      * <p>
      * The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that aren't
@@ -2646,7 +2713,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-geolocation resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as geolocation resource record sets.
      * </p>
      * 
@@ -2666,7 +2733,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         queries for a country on that continent to a different resource.
      *         </p>
      *         <p>
-     *         You cannot create two geolocation resource record sets that specify the same geographic location.
+     *         You can't create two geolocation resource record sets that specify the same geographic location.
      *         </p>
      *         <p>
      *         The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that
@@ -2686,8 +2753,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </p>
      *         </important>
      *         <p>
-     *         You cannot create non-geolocation resource record sets that have the same values for the
-     *         <code>Name</code> and <code>Type</code> elements as geolocation resource record sets.
+     *         You can't create non-geolocation resource record sets that have the same values for the <code>Name</code>
+     *         and <code>Type</code> elements as geolocation resource record sets.
      */
 
     public GeoLocation getGeoLocation() {
@@ -2713,7 +2780,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * on that continent to a different resource.
      * </p>
      * <p>
-     * You cannot create two geolocation resource record sets that specify the same geographic location.
+     * You can't create two geolocation resource record sets that specify the same geographic location.
      * </p>
      * <p>
      * The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that aren't
@@ -2732,7 +2799,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-geolocation resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as geolocation resource record sets.
      * </p>
      * 
@@ -2753,7 +2820,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        queries for a country on that continent to a different resource.
      *        </p>
      *        <p>
-     *        You cannot create two geolocation resource record sets that specify the same geographic location.
+     *        You can't create two geolocation resource record sets that specify the same geographic location.
      *        </p>
      *        <p>
      *        The value <code>*</code> in the <code>CountryCode</code> element matches all geographic locations that
@@ -2773,7 +2840,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </p>
      *        </important>
      *        <p>
-     *        You cannot create non-geolocation resource record sets that have the same values for the <code>Name</code>
+     *        You can't create non-geolocation resource record sets that have the same values for the <code>Name</code>
      *        and <code>Type</code> elements as geolocation resource record sets.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
@@ -2823,7 +2890,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -2893,8 +2960,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        </ul>
      *        <p>
-     *        You cannot create non-failover resource record sets that have the same values for the <code>Name</code>
-     *        and <code>Type</code> elements as failover resource record sets.
+     *        You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
+     *        <code>Type</code> elements as failover resource record sets.
      *        </p>
      *        <p>
      *        For failover alias resource record sets, you must also include the <code>EvaluateTargetHealth</code>
@@ -2967,7 +3034,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -3036,7 +3103,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </li>
      *         </ul>
      *         <p>
-     *         You cannot create non-failover resource record sets that have the same values for the <code>Name</code>
+     *         You can't create non-failover resource record sets that have the same values for the <code>Name</code>
      *         and <code>Type</code> elements as failover resource record sets.
      *         </p>
      *         <p>
@@ -3111,7 +3178,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -3181,8 +3248,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        </ul>
      *        <p>
-     *        You cannot create non-failover resource record sets that have the same values for the <code>Name</code>
-     *        and <code>Type</code> elements as failover resource record sets.
+     *        You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
+     *        <code>Type</code> elements as failover resource record sets.
      *        </p>
      *        <p>
      *        For failover alias resource record sets, you must also include the <code>EvaluateTargetHealth</code>
@@ -3257,7 +3324,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -3327,8 +3394,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        </ul>
      *        <p>
-     *        You cannot create non-failover resource record sets that have the same values for the <code>Name</code>
-     *        and <code>Type</code> elements as failover resource record sets.
+     *        You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
+     *        <code>Type</code> elements as failover resource record sets.
      *        </p>
      *        <p>
      *        For failover alias resource record sets, you must also include the <code>EvaluateTargetHealth</code>
@@ -3401,7 +3468,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * <p>
-     * You cannot create non-failover resource record sets that have the same values for the <code>Name</code> and
+     * You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
      * <code>Type</code> elements as failover resource record sets.
      * </p>
      * <p>
@@ -3471,8 +3538,8 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </li>
      *        </ul>
      *        <p>
-     *        You cannot create non-failover resource record sets that have the same values for the <code>Name</code>
-     *        and <code>Type</code> elements as failover resource record sets.
+     *        You can't create non-failover resource record sets that have the same values for the <code>Name</code> and
+     *        <code>Type</code> elements as failover resource record sets.
      *        </p>
      *        <p>
      *        For failover alias resource record sets, you must also include the <code>EvaluateTargetHealth</code>
@@ -3828,9 +3895,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
+     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic Beanstalk
      * environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     * redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.
+     * redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized subdomain.
      * </p>
      * <p>
      * If you're creating resource records sets for a private hosted zone, note the following:
@@ -3857,9 +3924,10 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * 
      * @param aliasTarget
-     *        <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
-     *        environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     *        redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.</p>
+     *        <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic
+     *        Beanstalk environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to
+     *        which you are redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized
+     *        subdomain.</p>
      *        <p>
      *        If you're creating resource records sets for a private hosted zone, note the following:
      *        </p>
@@ -3890,9 +3958,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
+     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic Beanstalk
      * environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     * redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.
+     * redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized subdomain.
      * </p>
      * <p>
      * If you're creating resource records sets for a private hosted zone, note the following:
@@ -3918,9 +3986,10 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </li>
      * </ul>
      * 
-     * @return <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
-     *         environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     *         redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.</p>
+     * @return <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic
+     *         Beanstalk environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to
+     *         which you are redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized
+     *         subdomain.</p>
      *         <p>
      *         If you're creating resource records sets for a private hosted zone, note the following:
      *         </p>
@@ -3951,9 +4020,9 @@ public class ResourceRecordSet implements Serializable, Cloneable {
 
     /**
      * <p>
-     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
+     * <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic Beanstalk
      * environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     * redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.
+     * redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized subdomain.
      * </p>
      * <p>
      * If you're creating resource records sets for a private hosted zone, note the following:
@@ -3980,9 +4049,10 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </ul>
      * 
      * @param aliasTarget
-     *        <i>Alias resource record sets only:</i> Information about the CloudFront distribution, Elastic Beanstalk
-     *        environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to which you are
-     *        redirecting queries. The Elastic Beanstalk environment must have a regionalized subdomain.</p>
+     *        <i>Alias resource record sets only:</i> Information about the CloudFront distribution, AWS Elastic
+     *        Beanstalk environment, ELB load balancer, Amazon S3 bucket, or Amazon Route 53 resource record set to
+     *        which you are redirecting queries. The AWS Elastic Beanstalk environment must have a regionalized
+     *        subdomain.</p>
      *        <p>
      *        If you're creating resource records sets for a private hosted zone, note the following:
      *        </p>
@@ -4096,7 +4166,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     * For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      * </p>
      * <ul>
      * <li>
@@ -4195,7 +4265,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </p>
      *        </important>
      *        <p>
-     *        For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     *        For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      *        </p>
      *        <ul>
      *        <li>
@@ -4299,7 +4369,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     * For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      * </p>
      * <ul>
      * <li>
@@ -4398,7 +4468,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *         </p>
      *         </important>
      *         <p>
-     *         For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     *         For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      *         </p>
      *         <ul>
      *         <li>
@@ -4503,7 +4573,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      * </p>
      * </important>
      * <p>
-     * For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     * For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      * </p>
      * <ul>
      * <li>
@@ -4602,7 +4672,7 @@ public class ResourceRecordSet implements Serializable, Cloneable {
      *        </p>
      *        </important>
      *        <p>
-     *        For more informaiton, see the following topics in the Amazon Route 53 Developer Guide:
+     *        For more information, see the following topics in the <i>Amazon Route 53 Developer Guide</i>:
      *        </p>
      *        <ul>
      *        <li>
@@ -4626,7 +4696,32 @@ public class ResourceRecordSet implements Serializable, Cloneable {
     }
 
     /**
+     * <p>
+     * When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     * <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created this
+     * resource record set for.
+     * </p>
+     * <important>
+     * <p>
+     * To delete the resource record set that is associated with a traffic policy instance, use
+     * <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set automatically. If
+     * you delete the resource record set by using <code>ChangeResourceRecordSets</code>, Amazon Route 53 doesn't
+     * automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no
+     * longer in use.
+     * </p>
+     * </important>
+     * 
      * @param trafficPolicyInstanceId
+     *        When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     *        <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created
+     *        this resource record set for.</p> <important>
+     *        <p>
+     *        To delete the resource record set that is associated with a traffic policy instance, use
+     *        <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set
+     *        automatically. If you delete the resource record set by using <code>ChangeResourceRecordSets</code>,
+     *        Amazon Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be
+     *        charged for it even though it's no longer in use.
+     *        </p>
      */
 
     public void setTrafficPolicyInstanceId(String trafficPolicyInstanceId) {
@@ -4634,7 +4729,31 @@ public class ResourceRecordSet implements Serializable, Cloneable {
     }
 
     /**
-     * @return
+     * <p>
+     * When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     * <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created this
+     * resource record set for.
+     * </p>
+     * <important>
+     * <p>
+     * To delete the resource record set that is associated with a traffic policy instance, use
+     * <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set automatically. If
+     * you delete the resource record set by using <code>ChangeResourceRecordSets</code>, Amazon Route 53 doesn't
+     * automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no
+     * longer in use.
+     * </p>
+     * </important>
+     * 
+     * @return When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     *         <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53
+     *         created this resource record set for.</p> <important>
+     *         <p>
+     *         To delete the resource record set that is associated with a traffic policy instance, use
+     *         <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set
+     *         automatically. If you delete the resource record set by using <code>ChangeResourceRecordSets</code>,
+     *         Amazon Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be
+     *         charged for it even though it's no longer in use.
+     *         </p>
      */
 
     public String getTrafficPolicyInstanceId() {
@@ -4642,7 +4761,32 @@ public class ResourceRecordSet implements Serializable, Cloneable {
     }
 
     /**
+     * <p>
+     * When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     * <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created this
+     * resource record set for.
+     * </p>
+     * <important>
+     * <p>
+     * To delete the resource record set that is associated with a traffic policy instance, use
+     * <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set automatically. If
+     * you delete the resource record set by using <code>ChangeResourceRecordSets</code>, Amazon Route 53 doesn't
+     * automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no
+     * longer in use.
+     * </p>
+     * </important>
+     * 
      * @param trafficPolicyInstanceId
+     *        When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set.
+     *        <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Amazon Route 53 created
+     *        this resource record set for.</p> <important>
+     *        <p>
+     *        To delete the resource record set that is associated with a traffic policy instance, use
+     *        <code>DeleteTrafficPolicyInstance</code>. Amazon Route 53 will delete the resource record set
+     *        automatically. If you delete the resource record set by using <code>ChangeResourceRecordSets</code>,
+     *        Amazon Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be
+     *        charged for it even though it's no longer in use.
+     *        </p>
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

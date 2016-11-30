@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.amazonaws</groupId>
   <artifactId>aws-java-sdk-pom</artifactId>
-  <version>1.11.44-SNAPSHOT</version>
+  <version>1.11.63-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>AWS SDK for Java</name>
   <description>The Amazon Web Services SDK for Java provides Java APIs
@@ -36,6 +36,7 @@
     <module>aws-java-sdk-support</module>
     <module>aws-java-sdk-simpledb</module>
     <module>aws-java-sdk-servicecatalog</module>
+    <module>aws-java-sdk-servermigration</module>
     <module>aws-java-sdk-simpleworkflow</module>
     <module>aws-java-sdk-storagegateway</module>
     <module>aws-java-sdk-route53</module>
@@ -57,6 +58,7 @@
     <module>aws-java-sdk-ec2</module>
     <module>aws-java-sdk-dynamodb</module>
     <module>aws-java-sdk-sns</module>
+    <module>aws-java-sdk-budgets</module>
     <module>aws-java-sdk-cloudtrail</module>
     <module>aws-java-sdk-cloudwatch</module>
     <module>aws-java-sdk-logs</module>
@@ -101,6 +103,9 @@
     <module>aws-java-sdk-discovery</module>
     <module>aws-java-sdk-applicationautoscaling</module>
     <module>aws-java-sdk-snowball</module>
+    <module>aws-java-sdk-rekognition</module>
+    <module>aws-java-sdk-polly</module>
+    <module>aws-java-sdk-lightsail</module>
     <module>aws-java-sdk</module>
     <module>aws-java-sdk-osgi</module>
     <module>aws-java-sdk-core</module>
@@ -115,7 +120,7 @@
     <url>https://github.com/aws/aws-sdk-java.git</url>
   </scm>
   <properties>
-      <awsjavasdk.version>1.11.43</awsjavasdk.version>
+      <awsjavasdk.version>1.11.62</awsjavasdk.version>
       <jackson.version>2.6.6</jackson.version>
       <ion.java.version>1.0.1</ion.java.version>
       <junit.version>4.12</junit.version>
@@ -149,7 +154,7 @@
       <dependency>
         <groupId>com.amazonaws</groupId>
         <artifactId>jmespath-java</artifactId>
-        <version>1.0</version>
+        <version>1.11.63-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

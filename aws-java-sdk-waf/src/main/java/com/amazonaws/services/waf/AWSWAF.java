@@ -20,6 +20,10 @@ import com.amazonaws.services.waf.model.*;
 /**
  * Interface for accessing WAF.
  * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.waf.AbstractAWSWAF} instead.
+ * </p>
+ * <p>
  * <p>
  * This is the <i>AWS WAF API Reference</i>. This guide is for developers who need detailed information about the AWS
  * WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to
@@ -1984,7 +1988,7 @@ public interface AWSWAF {
      * </li>
      * <li>
      * <p>
-     * The IP address version, <code>IPv4</code> or <code>IPv6</code>.
+     * The IP address version, <code>IPv4</code>.
      * </p>
      * </li>
      * <li>
@@ -1996,35 +2000,10 @@ public interface AWSWAF {
      * </li>
      * </ul>
      * <p>
-     * AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48, /56, /64 and /128 for IPv6.
-     * For more information about CIDR notation, see the Wikipedia entry <a
-     * href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>.
+     * AWS WAF supports /8, /16, /24, and /32 IP address ranges. For more information about CIDR notation, see the
+     * Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain
+     * Routing</a>.
      * </p>
-     * <p>
-     * IPv6 addresses can be represented using any of the following formats:
-     * </p>
-     * <ul>
-     * <li>
-     * <p>
-     * 1111:0000:0000:0000:0000:0000:0000:0111/128
-     * </p>
-     * </li>
-     * <li>
-     * <p>
-     * 1111:0:0:0:0:0:0:0111/128
-     * </p>
-     * </li>
-     * <li>
-     * <p>
-     * 1111::0111/128
-     * </p>
-     * </li>
-     * <li>
-     * <p>
-     * 1111::111/128
-     * </p>
-     * </li>
-     * </ul>
      * <p>
      * You use an <code>IPSet</code> to specify which web requests you want to allow or block based on the IP addresses
      * that the requests originated from. For example, if you're receiving a lot of requests from one or a small number

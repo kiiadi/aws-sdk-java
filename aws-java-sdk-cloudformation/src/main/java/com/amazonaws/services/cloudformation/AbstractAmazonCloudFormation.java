@@ -141,6 +141,16 @@ public class AbstractAmazonCloudFormation implements AmazonCloudFormation {
     }
 
     @Override
+    public ListExportsResult listExports(ListExportsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public ListImportsResult listImports(ListImportsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public ListStackResourcesResult listStackResources(ListStackResourcesRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -189,4 +199,5 @@ public class AbstractAmazonCloudFormation implements AmazonCloudFormation {
     public AmazonCloudFormationWaiters waiters() {
         throw new java.lang.UnsupportedOperationException();
     }
+
 }

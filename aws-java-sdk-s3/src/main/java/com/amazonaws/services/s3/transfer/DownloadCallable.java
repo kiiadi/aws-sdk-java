@@ -33,6 +33,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.annotation.SdkInternalApi;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.internal.FileLocks;
@@ -46,6 +47,7 @@ import com.amazonaws.services.s3.transfer.internal.AbstractTransfer;
 import com.amazonaws.services.s3.transfer.internal.DownloadImpl;
 import com.amazonaws.services.s3.transfer.internal.DownloadMonitor;
 import com.amazonaws.services.s3.transfer.internal.DownloadPartCallable;
+import com.amazonaws.services.s3.transfer.internal.CompleteMultipartDownload;
 import com.amazonaws.util.IOUtils;
 
 @SdkInternalApi
@@ -117,7 +119,7 @@ final class DownloadCallable implements Callable<File> {
                                 download.abort();
                             }
                         } catch(Exception e) {
-                            throw new AmazonClientException(
+                            throw new SdkClientException(
                                     "Unable to abort download after timeout", e);
                         }
                     }
@@ -129,7 +131,6 @@ final class DownloadCallable implements Callable<File> {
 
             if (isDownloadParallel) {
                 downloadInParallel(ServiceUtils.getPartCount(req, s3));
-                download.setState(TransferState.Completed);
             } else {
                 S3Object s3Object = retryableDownloadS3ObjectToFile(dstfile,
                         new DownloadTaskImpl(s3, download, req));
@@ -167,7 +168,7 @@ final class DownloadCallable implements Callable<File> {
     }
 
     /**
-     * Downloads each part of the object into a seperate file synchronously and
+     * Downloads each part of the object into a separate file synchronously and
      * combines all the files into a single file.
      */
     private void downloadInParallel(int partCount) throws Exception {
@@ -190,27 +191,9 @@ final class DownloadCallable implements Callable<File> {
                     executor.submit(new DownloadPartCallable(s3, getPartRequest.withPartNumber(i), dstfile)));
         }
 
-        combineFiles();
-    }
-
-    /**
-     * Merges all the individual part Files into dstFile
-     */
-    private void combineFiles() throws Exception {
         truncateDestinationFileIfNecessary();
-
-        for (Future<File> f : futureFiles) {
-            File partFile = f.get();
-            ServiceUtils.appendFile(partFile, dstfile);
-            download.updatePersistableTransfer(++lastFullyMergedPartNumber);
-            try {
-                if (!partFile.delete()) {
-                    LOG.warn("The file " + partFile.getAbsolutePath() + " could not be deleted.");
-                }
-            } catch (SecurityException exception) {
-                LOG.warn("SecurityException denied delete access to file " + partFile.getAbsolutePath());
-            }
-        }
+        Future<File> future = executor.submit(new CompleteMultipartDownload(futureFiles, dstfile, download, ++lastFullyMergedPartNumber));
+        ((DownloadMonitor) download.getMonitor()).setFuture(future);
     }
 
     /**
@@ -231,14 +214,14 @@ final class DownloadCallable implements Callable<File> {
             } else {
                 long lastByte = ServiceUtils.getLastByteInPart(s3, req, lastFullyMergedPartNumber);
                 if (dstfile.length() < lastByte) {
-                    throw new AmazonClientException(
+                    throw new SdkClientException(
                             "File " + dstfile.getAbsolutePath() + " has been modified since last pause.");
                 }
                 raf.setLength(lastByte + 1);
                 download.getProgress().updateProgress(lastByte + 1);
             }
         } catch (Exception e) {
-            throw new AmazonClientException("Unable to append part file to dstfile " + e.getMessage(), e);
+            throw new SdkClientException("Unable to append part file to dstfile " + e.getMessage(), e);
         } finally {
             IOUtils.closeQuietly(raf, LOG);
             FileLocks.unlock(dstfile);
@@ -300,7 +283,7 @@ final class DownloadCallable implements Callable<File> {
                 return null;
             try {
                 if (testing && resumeExistingDownload && !hasRetried) {
-                    throw new AmazonClientException("testing");
+                    throw new SdkClientException("testing");
                 }
                 ServiceUtils.downloadToFile(s3Object, file,
                         retryableS3DownloadTask.needIntegrityCheck(),
@@ -309,8 +292,8 @@ final class DownloadCallable implements Callable<File> {
             } catch (AmazonClientException ace) {
                 if (!ace.isRetryable())
                     throw ace;
-                // Determine whether an immediate retry is needed according to the captured AmazonClientException.
-                // (There are three cases when downloadObjectToFile() throws AmazonClientException:
+                // Determine whether an immediate retry is needed according to the captured SdkClientException.
+                // (There are three cases when downloadObjectToFile() throws SdkClientException:
                 //      1) SocketException or SSLProtocolException when writing to disk (e.g. when user aborts the download)
                 //      2) Other IOException when writing to disk
                 //      3) MD5 hashes don't match

@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -44,7 +44,7 @@ public class ModifyInstanceGroupsRequestMarshaller implements Marshaller<Request
     public Request<ModifyInstanceGroupsRequest> marshall(ModifyInstanceGroupsRequest modifyInstanceGroupsRequest) {
 
         if (modifyInstanceGroupsRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<ModifyInstanceGroupsRequest> request = new DefaultRequest<ModifyInstanceGroupsRequest>(modifyInstanceGroupsRequest, "AmazonElasticMapReduce");
@@ -58,6 +58,10 @@ public class ModifyInstanceGroupsRequestMarshaller implements Marshaller<Request
             final StructuredJsonGenerator jsonGenerator = protocolFactory.createGenerator();
 
             jsonGenerator.writeStartObject();
+
+            if (modifyInstanceGroupsRequest.getClusterId() != null) {
+                jsonGenerator.writeFieldName("ClusterId").writeValue(modifyInstanceGroupsRequest.getClusterId());
+            }
 
             com.amazonaws.internal.SdkInternalList<InstanceGroupModifyConfig> instanceGroupsList = (com.amazonaws.internal.SdkInternalList<InstanceGroupModifyConfig>) modifyInstanceGroupsRequest
                     .getInstanceGroups();
@@ -80,7 +84,7 @@ public class ModifyInstanceGroupsRequestMarshaller implements Marshaller<Request
             request.addHeader("Content-Length", Integer.toString(content.length));
             request.addHeader("Content-Type", protocolFactory.getContentType());
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
 
         return request;

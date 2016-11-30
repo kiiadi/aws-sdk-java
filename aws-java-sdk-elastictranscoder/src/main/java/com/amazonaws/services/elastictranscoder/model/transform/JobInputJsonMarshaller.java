@@ -15,7 +15,7 @@ package com.amazonaws.services.elastictranscoder.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.elastictranscoder.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class JobInputJsonMarshaller {
     public void marshall(JobInput jobInput, StructuredJsonGenerator jsonGenerator) {
 
         if (jobInput == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -63,6 +63,14 @@ public class JobInputJsonMarshaller {
                 jsonGenerator.writeFieldName("Encryption");
                 EncryptionJsonMarshaller.getInstance().marshall(jobInput.getEncryption(), jsonGenerator);
             }
+            if (jobInput.getTimeSpan() != null) {
+                jsonGenerator.writeFieldName("TimeSpan");
+                TimeSpanJsonMarshaller.getInstance().marshall(jobInput.getTimeSpan(), jsonGenerator);
+            }
+            if (jobInput.getInputCaptions() != null) {
+                jsonGenerator.writeFieldName("InputCaptions");
+                InputCaptionsJsonMarshaller.getInstance().marshall(jobInput.getInputCaptions(), jsonGenerator);
+            }
             if (jobInput.getDetectedProperties() != null) {
                 jsonGenerator.writeFieldName("DetectedProperties");
                 DetectedPropertiesJsonMarshaller.getInstance().marshall(jobInput.getDetectedProperties(), jsonGenerator);
@@ -70,7 +78,7 @@ public class JobInputJsonMarshaller {
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

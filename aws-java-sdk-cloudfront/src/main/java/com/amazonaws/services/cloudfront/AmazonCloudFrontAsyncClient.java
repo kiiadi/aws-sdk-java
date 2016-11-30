@@ -17,15 +17,15 @@ import com.amazonaws.client.AwsAsyncClientParams;
 import com.amazonaws.annotation.ThreadSafe;
 
 /**
- * Interface for accessing CloudFront asynchronously. Each asynchronous method will return a Java Future object
+ * Client for accessing CloudFront asynchronously. Each asynchronous method will return a Java Future object
  * representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
  * <p>
  * <fullname>Amazon CloudFront</fullname>
  * <p>
- * Amazon CloudFront is a global content delivery network (CDN) service that accelerates delivery of your websites,
- * APIs, video content or other web assets. It integrates with other Amazon Web Services products to give developers and
- * businesses an easy way to accelerate content to end users with no minimum usage commitments.
+ * This is the <i>Amazon CloudFront API Reference</i>. This guide is for developers who need detailed information about
+ * the CloudFront API actions, data types, and errors. For detailed information about CloudFront features and their
+ * associated API calls, see the <i>Amazon CloudFront Developer Guide</i>.
  * </p>
  */
 @ThreadSafe

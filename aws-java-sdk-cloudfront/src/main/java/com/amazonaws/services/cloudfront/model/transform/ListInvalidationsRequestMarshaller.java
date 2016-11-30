@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -42,14 +42,14 @@ public class ListInvalidationsRequestMarshaller implements Marshaller<Request<Li
     public Request<ListInvalidationsRequest> marshall(ListInvalidationsRequest listInvalidationsRequest) {
 
         if (listInvalidationsRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<ListInvalidationsRequest> request = new DefaultRequest<ListInvalidationsRequest>(listInvalidationsRequest, "AmazonCloudFront");
 
         request.setHttpMethod(HttpMethodName.GET);
 
-        String uriResourcePath = "/2016-09-07/distribution/{DistributionId}/invalidation";
+        String uriResourcePath = "/2016-09-29/distribution/{DistributionId}/invalidation";
 
         uriResourcePath = uriResourcePath.replace(
                 "{DistributionId}",

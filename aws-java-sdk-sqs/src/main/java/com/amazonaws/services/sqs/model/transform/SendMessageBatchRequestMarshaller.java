@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class SendMessageBatchRequestMarshaller implements Marshaller<Request<Sen
     public Request<SendMessageBatchRequest> marshall(SendMessageBatchRequest sendMessageBatchRequest) {
 
         if (sendMessageBatchRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<SendMessageBatchRequest> request = new DefaultRequest<SendMessageBatchRequest>(sendMessageBatchRequest, "AmazonSQS");
@@ -122,6 +122,15 @@ public class SendMessageBatchRequestMarshaller implements Marshaller<Request<Sen
                     messageAttributesListIndex++;
                 }
 
+                if (entriesListValue.getMessageDeduplicationId() != null) {
+                    request.addParameter("SendMessageBatchRequestEntry." + entriesListIndex + ".MessageDeduplicationId",
+                            StringUtils.fromString(entriesListValue.getMessageDeduplicationId()));
+                }
+
+                if (entriesListValue.getMessageGroupId() != null) {
+                    request.addParameter("SendMessageBatchRequestEntry." + entriesListIndex + ".MessageGroupId",
+                            StringUtils.fromString(entriesListValue.getMessageGroupId()));
+                }
                 entriesListIndex++;
             }
         }

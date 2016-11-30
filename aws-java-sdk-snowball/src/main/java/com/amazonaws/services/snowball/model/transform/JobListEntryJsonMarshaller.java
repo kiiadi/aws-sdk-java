@@ -15,7 +15,7 @@ package com.amazonaws.services.snowball.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.snowball.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class JobListEntryJsonMarshaller {
     public void marshall(JobListEntry jobListEntry, StructuredJsonGenerator jsonGenerator) {
 
         if (jobListEntry == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -50,10 +50,22 @@ public class JobListEntryJsonMarshaller {
             if (jobListEntry.getIsMaster() != null) {
                 jsonGenerator.writeFieldName("IsMaster").writeValue(jobListEntry.getIsMaster());
             }
+            if (jobListEntry.getJobType() != null) {
+                jsonGenerator.writeFieldName("JobType").writeValue(jobListEntry.getJobType());
+            }
+            if (jobListEntry.getSnowballType() != null) {
+                jsonGenerator.writeFieldName("SnowballType").writeValue(jobListEntry.getSnowballType());
+            }
+            if (jobListEntry.getCreationDate() != null) {
+                jsonGenerator.writeFieldName("CreationDate").writeValue(jobListEntry.getCreationDate());
+            }
+            if (jobListEntry.getDescription() != null) {
+                jsonGenerator.writeFieldName("Description").writeValue(jobListEntry.getDescription());
+            }
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

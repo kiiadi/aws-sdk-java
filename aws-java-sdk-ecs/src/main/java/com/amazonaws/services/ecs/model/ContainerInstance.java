@@ -38,19 +38,34 @@ public class ContainerInstance implements Serializable, Cloneable {
     private String ec2InstanceId;
     /**
      * <p>
+     * The version counter for the container instance. Every time a container instance experiences a change that
+     * triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container
+     * instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon
+     * ECS APIs with the version reported in CloudWatch events for the container instance (inside the
+     * <code>detail</code> object) to verify that the version in your event stream is current.
+     * </p>
+     */
+    private Long version;
+    /**
+     * <p>
      * The version information for the Amazon ECS container agent and Docker daemon running on the container instance.
      * </p>
      */
     private VersionInfo versionInfo;
     /**
      * <p>
-     * The remaining resources of the container instance that are available for new tasks.
+     * For most resource types, this parameter describes the remaining resources of the container instance that are
+     * available for new tasks. For port resource types, this parameter describes the ports that are reserved by the
+     * Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified
+     * here is available for new tasks.
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<Resource> remainingResources;
     /**
      * <p>
-     * The registered resources on the container instance that are in use by current tasks.
+     * For most resource types, this parameter describes the registered resources on the container instance that are in
+     * use by current tasks. For port resource types, this parameter describes the ports that were reserved by the
+     * Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * </p>
      */
     private com.amazonaws.internal.SdkInternalList<Resource> registeredResources;
@@ -198,6 +213,70 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
+     * The version counter for the container instance. Every time a container instance experiences a change that
+     * triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container
+     * instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon
+     * ECS APIs with the version reported in CloudWatch events for the container instance (inside the
+     * <code>detail</code> object) to verify that the version in your event stream is current.
+     * </p>
+     * 
+     * @param version
+     *        The version counter for the container instance. Every time a container instance experiences a change that
+     *        triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS
+     *        container instance state with CloudWatch events, you can compare the version of a container instance
+     *        reported by the Amazon ECS APIs with the version reported in CloudWatch events for the container instance
+     *        (inside the <code>detail</code> object) to verify that the version in your event stream is current.
+     */
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    /**
+     * <p>
+     * The version counter for the container instance. Every time a container instance experiences a change that
+     * triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container
+     * instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon
+     * ECS APIs with the version reported in CloudWatch events for the container instance (inside the
+     * <code>detail</code> object) to verify that the version in your event stream is current.
+     * </p>
+     * 
+     * @return The version counter for the container instance. Every time a container instance experiences a change that
+     *         triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS
+     *         container instance state with CloudWatch events, you can compare the version of a container instance
+     *         reported by the Amazon ECS APIs with the version reported in CloudWatch events for the container instance
+     *         (inside the <code>detail</code> object) to verify that the version in your event stream is current.
+     */
+
+    public Long getVersion() {
+        return this.version;
+    }
+
+    /**
+     * <p>
+     * The version counter for the container instance. Every time a container instance experiences a change that
+     * triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS container
+     * instance state with CloudWatch events, you can compare the version of a container instance reported by the Amazon
+     * ECS APIs with the version reported in CloudWatch events for the container instance (inside the
+     * <code>detail</code> object) to verify that the version in your event stream is current.
+     * </p>
+     * 
+     * @param version
+     *        The version counter for the container instance. Every time a container instance experiences a change that
+     *        triggers a CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS
+     *        container instance state with CloudWatch events, you can compare the version of a container instance
+     *        reported by the Amazon ECS APIs with the version reported in CloudWatch events for the container instance
+     *        (inside the <code>detail</code> object) to verify that the version in your event stream is current.
+     * @return Returns a reference to this object so that method calls can be chained together.
+     */
+
+    public ContainerInstance withVersion(Long version) {
+        setVersion(version);
+        return this;
+    }
+
+    /**
+     * <p>
      * The version information for the Amazon ECS container agent and Docker daemon running on the container instance.
      * </p>
      * 
@@ -241,10 +320,16 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The remaining resources of the container instance that are available for new tasks.
+     * For most resource types, this parameter describes the remaining resources of the container instance that are
+     * available for new tasks. For port resource types, this parameter describes the ports that are reserved by the
+     * Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified
+     * here is available for new tasks.
      * </p>
      * 
-     * @return The remaining resources of the container instance that are available for new tasks.
+     * @return For most resource types, this parameter describes the remaining resources of the container instance that
+     *         are available for new tasks. For port resource types, this parameter describes the ports that are
+     *         reserved by the Amazon ECS container agent and any containers that have reserved port mappings; any port
+     *         that is not specified here is available for new tasks.
      */
 
     public java.util.List<Resource> getRemainingResources() {
@@ -256,11 +341,17 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The remaining resources of the container instance that are available for new tasks.
+     * For most resource types, this parameter describes the remaining resources of the container instance that are
+     * available for new tasks. For port resource types, this parameter describes the ports that are reserved by the
+     * Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified
+     * here is available for new tasks.
      * </p>
      * 
      * @param remainingResources
-     *        The remaining resources of the container instance that are available for new tasks.
+     *        For most resource types, this parameter describes the remaining resources of the container instance that
+     *        are available for new tasks. For port resource types, this parameter describes the ports that are reserved
+     *        by the Amazon ECS container agent and any containers that have reserved port mappings; any port that is
+     *        not specified here is available for new tasks.
      */
 
     public void setRemainingResources(java.util.Collection<Resource> remainingResources) {
@@ -274,7 +365,10 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The remaining resources of the container instance that are available for new tasks.
+     * For most resource types, this parameter describes the remaining resources of the container instance that are
+     * available for new tasks. For port resource types, this parameter describes the ports that are reserved by the
+     * Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified
+     * here is available for new tasks.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -283,7 +377,10 @@ public class ContainerInstance implements Serializable, Cloneable {
      * </p>
      * 
      * @param remainingResources
-     *        The remaining resources of the container instance that are available for new tasks.
+     *        For most resource types, this parameter describes the remaining resources of the container instance that
+     *        are available for new tasks. For port resource types, this parameter describes the ports that are reserved
+     *        by the Amazon ECS container agent and any containers that have reserved port mappings; any port that is
+     *        not specified here is available for new tasks.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -299,11 +396,17 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The remaining resources of the container instance that are available for new tasks.
+     * For most resource types, this parameter describes the remaining resources of the container instance that are
+     * available for new tasks. For port resource types, this parameter describes the ports that are reserved by the
+     * Amazon ECS container agent and any containers that have reserved port mappings; any port that is not specified
+     * here is available for new tasks.
      * </p>
      * 
      * @param remainingResources
-     *        The remaining resources of the container instance that are available for new tasks.
+     *        For most resource types, this parameter describes the remaining resources of the container instance that
+     *        are available for new tasks. For port resource types, this parameter describes the ports that are reserved
+     *        by the Amazon ECS container agent and any containers that have reserved port mappings; any port that is
+     *        not specified here is available for new tasks.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -314,10 +417,14 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The registered resources on the container instance that are in use by current tasks.
+     * For most resource types, this parameter describes the registered resources on the container instance that are in
+     * use by current tasks. For port resource types, this parameter describes the ports that were reserved by the
+     * Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * </p>
      * 
-     * @return The registered resources on the container instance that are in use by current tasks.
+     * @return For most resource types, this parameter describes the registered resources on the container instance that
+     *         are in use by current tasks. For port resource types, this parameter describes the ports that were
+     *         reserved by the Amazon ECS container agent when it registered the container instance with Amazon ECS.
      */
 
     public java.util.List<Resource> getRegisteredResources() {
@@ -329,11 +436,15 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The registered resources on the container instance that are in use by current tasks.
+     * For most resource types, this parameter describes the registered resources on the container instance that are in
+     * use by current tasks. For port resource types, this parameter describes the ports that were reserved by the
+     * Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * </p>
      * 
      * @param registeredResources
-     *        The registered resources on the container instance that are in use by current tasks.
+     *        For most resource types, this parameter describes the registered resources on the container instance that
+     *        are in use by current tasks. For port resource types, this parameter describes the ports that were
+     *        reserved by the Amazon ECS container agent when it registered the container instance with Amazon ECS.
      */
 
     public void setRegisteredResources(java.util.Collection<Resource> registeredResources) {
@@ -347,7 +458,9 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The registered resources on the container instance that are in use by current tasks.
+     * For most resource types, this parameter describes the registered resources on the container instance that are in
+     * use by current tasks. For port resource types, this parameter describes the ports that were reserved by the
+     * Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * </p>
      * <p>
      * <b>NOTE:</b> This method appends the values to the existing list (if any). Use
@@ -356,7 +469,9 @@ public class ContainerInstance implements Serializable, Cloneable {
      * </p>
      * 
      * @param registeredResources
-     *        The registered resources on the container instance that are in use by current tasks.
+     *        For most resource types, this parameter describes the registered resources on the container instance that
+     *        are in use by current tasks. For port resource types, this parameter describes the ports that were
+     *        reserved by the Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -372,11 +487,15 @@ public class ContainerInstance implements Serializable, Cloneable {
 
     /**
      * <p>
-     * The registered resources on the container instance that are in use by current tasks.
+     * For most resource types, this parameter describes the registered resources on the container instance that are in
+     * use by current tasks. For port resource types, this parameter describes the ports that were reserved by the
+     * Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * </p>
      * 
      * @param registeredResources
-     *        The registered resources on the container instance that are in use by current tasks.
+     *        For most resource types, this parameter describes the registered resources on the container instance that
+     *        are in use by current tasks. For port resource types, this parameter describes the ports that were
+     *        reserved by the Amazon ECS container agent when it registered the container instance with Amazon ECS.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 
@@ -750,6 +869,8 @@ public class ContainerInstance implements Serializable, Cloneable {
             sb.append("ContainerInstanceArn: " + getContainerInstanceArn() + ",");
         if (getEc2InstanceId() != null)
             sb.append("Ec2InstanceId: " + getEc2InstanceId() + ",");
+        if (getVersion() != null)
+            sb.append("Version: " + getVersion() + ",");
         if (getVersionInfo() != null)
             sb.append("VersionInfo: " + getVersionInfo() + ",");
         if (getRemainingResources() != null)
@@ -789,6 +910,10 @@ public class ContainerInstance implements Serializable, Cloneable {
         if (other.getEc2InstanceId() == null ^ this.getEc2InstanceId() == null)
             return false;
         if (other.getEc2InstanceId() != null && other.getEc2InstanceId().equals(this.getEc2InstanceId()) == false)
+            return false;
+        if (other.getVersion() == null ^ this.getVersion() == null)
+            return false;
+        if (other.getVersion() != null && other.getVersion().equals(this.getVersion()) == false)
             return false;
         if (other.getVersionInfo() == null ^ this.getVersionInfo() == null)
             return false;
@@ -836,6 +961,7 @@ public class ContainerInstance implements Serializable, Cloneable {
 
         hashCode = prime * hashCode + ((getContainerInstanceArn() == null) ? 0 : getContainerInstanceArn().hashCode());
         hashCode = prime * hashCode + ((getEc2InstanceId() == null) ? 0 : getEc2InstanceId().hashCode());
+        hashCode = prime * hashCode + ((getVersion() == null) ? 0 : getVersion().hashCode());
         hashCode = prime * hashCode + ((getVersionInfo() == null) ? 0 : getVersionInfo().hashCode());
         hashCode = prime * hashCode + ((getRemainingResources() == null) ? 0 : getRemainingResources().hashCode());
         hashCode = prime * hashCode + ((getRegisteredResources() == null) ? 0 : getRegisteredResources().hashCode());

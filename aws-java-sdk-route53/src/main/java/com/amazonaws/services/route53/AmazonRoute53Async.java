@@ -18,6 +18,10 @@ import com.amazonaws.services.route53.model.*;
  * Interface for accessing Route 53 asynchronously. Each asynchronous method will return a Java Future object
  * representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
+ * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.route53.AbstractAmazonRoute53Async} instead.
+ * </p>
  */
 public interface AmazonRoute53Async extends AmazonRoute53 {
 
@@ -27,28 +31,27 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * The VPC and the hosted zone must already exist, and you must have created a private hosted zone. You cannot
-     * convert a public hosted zone into a private hosted zone.
+     * To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public
+     * hosted zone into a private hosted zone.
      * </p>
      * </important>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/hostedzone/<i>hosted zone ID</i>/associatevpc</code> resource. The
-     * request body must include an XML document with a <code>AssociateVPCWithHostedZoneRequest</code> element. The
-     * response returns the <code>AssociateVPCWithHostedZoneResponse</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/associatevpc</code>
+     * resource. The request body must include a document with an <code>AssociateVPCWithHostedZoneRequest</code>
+     * element. The response contains a <code>ChangeInfo</code> data type that you can use to track the progress of the
+     * request.
      * </p>
      * <note>
      * <p>
-     * If you used different accounts to create the hosted zone and to create the Amazon VPCs that you want to associate
-     * with the hosted zone, we need to update account permissions for you. For more information, see <a href=
-     * "http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html"
-     * >Associating Amazon VPCs and Private Hosted Zones That You Create with Different AWS Accounts</a> in the Amazon
-     * Route 53 Developer Guide.
+     * If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was
+     * created by using a different account, the AWS account that created the private hosted zone must first submit a
+     * <code>CreateVPCAssociationAuthorization</code> request. Then the account that created the VPC must submit an
+     * <code>AssociateVPCWithHostedZone</code> request.
      * </p>
      * </note>
      * 
      * @param associateVPCWithHostedZoneRequest
-     *        A complex type that contains information about the VPC and the hosted zone that you want to associate.
+     *        A complex type that contains information about the request to associate a VPC with a private hosted zone.
      * @return A Java Future containing the result of the AssociateVPCWithHostedZone operation returned by the service.
      * @sample AmazonRoute53Async.AssociateVPCWithHostedZone
      */
@@ -61,28 +64,27 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * The VPC and the hosted zone must already exist, and you must have created a private hosted zone. You cannot
-     * convert a public hosted zone into a private hosted zone.
+     * To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public
+     * hosted zone into a private hosted zone.
      * </p>
      * </important>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/hostedzone/<i>hosted zone ID</i>/associatevpc</code> resource. The
-     * request body must include an XML document with a <code>AssociateVPCWithHostedZoneRequest</code> element. The
-     * response returns the <code>AssociateVPCWithHostedZoneResponse</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/associatevpc</code>
+     * resource. The request body must include a document with an <code>AssociateVPCWithHostedZoneRequest</code>
+     * element. The response contains a <code>ChangeInfo</code> data type that you can use to track the progress of the
+     * request.
      * </p>
      * <note>
      * <p>
-     * If you used different accounts to create the hosted zone and to create the Amazon VPCs that you want to associate
-     * with the hosted zone, we need to update account permissions for you. For more information, see <a href=
-     * "http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html"
-     * >Associating Amazon VPCs and Private Hosted Zones That You Create with Different AWS Accounts</a> in the Amazon
-     * Route 53 Developer Guide.
+     * If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was
+     * created by using a different account, the AWS account that created the private hosted zone must first submit a
+     * <code>CreateVPCAssociationAuthorization</code> request. Then the account that created the VPC must submit an
+     * <code>AssociateVPCWithHostedZone</code> request.
      * </p>
      * </note>
      * 
      * @param associateVPCWithHostedZoneRequest
-     *        A complex type that contains information about the VPC and the hosted zone that you want to associate.
+     *        A complex type that contains information about the request to associate a VPC with a private hosted zone.
      * @param asyncHandler
      *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
      *        implementation of the callback methods in this interface to receive notification of successful or
@@ -110,7 +112,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * intended changes to the resource record sets in a hosted zone.
      * </p>
      * <p>
-     * For example, a change batch request that deletes the <code>CNAME</code>record for www.example.com and creates an
+     * For example, a change batch request that deletes the <code>CNAME</code> record for www.example.com and creates an
      * alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates
      * the second resource record set in a single operation. If either the <code>DELETE</code> or the
      * <code>CREATE</code> action fails, then both changes (plus any other changes in the batch) fail, and the original
@@ -118,7 +120,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a
+     * Due to the nature of transactional changes, you can't delete the same resource record set more than once in a
      * single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an
      * <code>InvalidChangeBatch</code> error.
      * </p>
@@ -130,9 +132,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones.
      * You can roll back the updates if the new configuration isn't performing as expected. For more information, see <a
      * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html">Using Traffic Flow to Route DNS
-     * Traffic</a> in the Amazon Route 53 API Reference or <a
-     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/actions-on-polices">Actions on Traffic Policies
-     * and Traffic Policy Instances</a> in this guide.
+     * Traffic</a> in the <i>Amazon Route 53 Developer Guide</i>.
      * </p>
      * </note>
      * <p>
@@ -141,83 +141,109 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * <code>CREATE</code>:Creates a resource record set that has the specified values.
+     * <code>CREATE</code>: Creates a resource record set that has the specified values.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>DELETE</code>: Deletes an existing resource record set that has the specified values for <code>Name</code>,
-     * <code>Type</code>, <code>Set Identifier</code> (for code latency, weighted, geolocation, and failover resource
-     * record sets), and <code>TTL</code> (except alias resource record sets, for which the TTL is determined by the AWS
-     * resource you're routing queries to).
+     * <code>DELETE</code>: Deletes an existing resource record set that has the specified values.
      * </p>
      * </li>
      * <li>
      * <p>
      * <code>UPSERT</code>: If a resource record set does not already exist, AWS creates it. If a resource set does
-     * exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource
-     * record set only when all of the following values match: <code>Name</code>, <code>Type</code>, and
-     * <code>Set Identifier</code> (for weighted, latency, geolocation, and failover resource record sets).
+     * exist, Amazon Route 53 updates it with the values in the request.
      * </p>
      * </li>
      * </ul>
      * <p>
-     * In response to a <code>ChangeResourceRecordSets</code> request, the DNS data is changed on all Amazon Route 53
-     * DNS servers. Initially, the status of a change is <code>PENDING</code>, meaning the change has not yet propagated
-     * to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change
-     * returns a status of <code>INSYNC</code>.
+     * The values that you need to include in the request depend on the type of resource record set that you're
+     * creating, deleting, or updating:
      * </p>
      * <p>
-     * After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes
-     * generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can
-     * take up to 30 minutes. For more information, see <a>GetChange</a>.
-     * </p>
-     * <p>
-     * Note the following limitations on a <code>ChangeResourceRecordSets</code> request:
+     * <b>Basic resource record sets (excluding alias, failover, geolocation, latency, and weighted resource record
+     * sets)</b>
      * </p>
      * <ul>
      * <li>
      * <p>
-     * A request cannot contain more than 100 Change elements.
+     * <code>Name</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * A request cannot contain more than 1000 ResourceRecord elements.
+     * <code>Type</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * The sum of the number of characters (including spaces) in all <code>Value</code> elements in a request cannot
-     * exceed 32,000 characters.
-     * </p>
-     * </li>
-     * <li><note>
-     * <p>
-     * If the value of the Action element in a ChangeResourceRecordSets request is <code>UPSERT</code> and the resource
-     * record set already exists, Amazon Route 53 automatically performs a <code>DELETE</code> request and a
-     * <code>CREATE</code> request. When Amazon Route 53 calculates the number of characters in the Value elements of a
-     * change batch request, it adds the number of characters in the Value element of the resource record set being
-     * deleted and the number of characters in the Value element of the resource record set being created.
-     * </p>
-     * </note></li>
-     * <li>
-     * <p>
-     * The same resource cannot be deleted more than once in a single batch.
+     * <code>TTL</code>
      * </p>
      * </li>
      * </ul>
-     * <note>
      * <p>
-     * If the value of the Action element in a ChangeResourceRecordSets request is <code>UPSERT</code> and the resource
-     * record set already exists, Amazon Route 53 automatically performs a <code>DELETE</code> request and a
-     * <code>CREATE</code> request. When Amazon Route 53 calculates the number of characters in the Value elements of a
-     * change batch request, it adds the number of characters in the Value element of the resource record set being
-     * deleted and the number of characters in the Value element of the resource record set being created.
+     * <b>Failover, geolocation, latency, or weighted resource record sets (excluding alias resource record sets)</b>
      * </p>
-     * </note>
+     * <ul>
+     * <li>
      * <p>
-     * For more information on transactional changes, see <a>ChangeResourceRecordSets</a>.
+     * <code>Name</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>Type</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>TTL</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SetIdentifier</code>
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * <b>Alias resource record sets (including failover alias, geolocation alias, latency alias, and weighted alias
+     * resource record sets)</b>
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>Name</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>Type</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>AliasTarget</code> (includes <code>DNSName</code>, <code>EvaluateTargetHealth</code>, and
+     * <code>HostedZoneId</code>)
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SetIdentifier</code> (for failover, geolocation, latency, and weighted resource record sets)
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * When you submit a <code>ChangeResourceRecordSets</code> request, Amazon Route 53 propagates your changes to all
+     * of the Amazon Route 53 authoritative DNS servers. While your changes are propagating, <code>GetChange</code>
+     * returns a status of <code>PENDING</code>. When propagation is complete, <code>GetChange</code> returns a status
+     * of <code>INSYNC</code>. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare
+     * circumstances, propagation can take up to 30 minutes. For more information, see <a>GetChange</a>
+     * </p>
+     * <p>
+     * For information about the limits on a <code>ChangeResourceRecordSets</code> request, see <a
+     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html">Limits</a> in the <i>Amazon
+     * Route 53 Developer Guide</i>.
      * </p>
      * 
      * @param changeResourceRecordSetsRequest
@@ -243,7 +269,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * intended changes to the resource record sets in a hosted zone.
      * </p>
      * <p>
-     * For example, a change batch request that deletes the <code>CNAME</code>record for www.example.com and creates an
+     * For example, a change batch request that deletes the <code>CNAME</code> record for www.example.com and creates an
      * alias resource record set for www.example.com. Amazon Route 53 deletes the first resource record set and creates
      * the second resource record set in a single operation. If either the <code>DELETE</code> or the
      * <code>CREATE</code> action fails, then both changes (plus any other changes in the batch) fail, and the original
@@ -251,7 +277,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * Due to the nature of transactional changes, you cannot delete the same resource record set more than once in a
+     * Due to the nature of transactional changes, you can't delete the same resource record set more than once in a
      * single change batch. If you attempt to delete the same change batch more than once, Amazon Route 53 returns an
      * <code>InvalidChangeBatch</code> error.
      * </p>
@@ -263,9 +289,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones.
      * You can roll back the updates if the new configuration isn't performing as expected. For more information, see <a
      * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html">Using Traffic Flow to Route DNS
-     * Traffic</a> in the Amazon Route 53 API Reference or <a
-     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/actions-on-polices">Actions on Traffic Policies
-     * and Traffic Policy Instances</a> in this guide.
+     * Traffic</a> in the <i>Amazon Route 53 Developer Guide</i>.
      * </p>
      * </note>
      * <p>
@@ -274,83 +298,109 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * <code>CREATE</code>:Creates a resource record set that has the specified values.
+     * <code>CREATE</code>: Creates a resource record set that has the specified values.
      * </p>
      * </li>
      * <li>
      * <p>
-     * <code>DELETE</code>: Deletes an existing resource record set that has the specified values for <code>Name</code>,
-     * <code>Type</code>, <code>Set Identifier</code> (for code latency, weighted, geolocation, and failover resource
-     * record sets), and <code>TTL</code> (except alias resource record sets, for which the TTL is determined by the AWS
-     * resource you're routing queries to).
+     * <code>DELETE</code>: Deletes an existing resource record set that has the specified values.
      * </p>
      * </li>
      * <li>
      * <p>
      * <code>UPSERT</code>: If a resource record set does not already exist, AWS creates it. If a resource set does
-     * exist, Amazon Route 53 updates it with the values in the request. Amazon Route 53 can update an existing resource
-     * record set only when all of the following values match: <code>Name</code>, <code>Type</code>, and
-     * <code>Set Identifier</code> (for weighted, latency, geolocation, and failover resource record sets).
+     * exist, Amazon Route 53 updates it with the values in the request.
      * </p>
      * </li>
      * </ul>
      * <p>
-     * In response to a <code>ChangeResourceRecordSets</code> request, the DNS data is changed on all Amazon Route 53
-     * DNS servers. Initially, the status of a change is <code>PENDING</code>, meaning the change has not yet propagated
-     * to all the authoritative Amazon Route 53 DNS servers. When the change is propagated to all hosts, the change
-     * returns a status of <code>INSYNC</code>.
+     * The values that you need to include in the request depend on the type of resource record set that you're
+     * creating, deleting, or updating:
      * </p>
      * <p>
-     * After sending a change request, confirm your change has propagated to all Amazon Route 53 DNS servers. Changes
-     * generally propagate to all Amazon Route 53 name servers in a few minutes. In rare circumstances, propagation can
-     * take up to 30 minutes. For more information, see <a>GetChange</a>.
-     * </p>
-     * <p>
-     * Note the following limitations on a <code>ChangeResourceRecordSets</code> request:
+     * <b>Basic resource record sets (excluding alias, failover, geolocation, latency, and weighted resource record
+     * sets)</b>
      * </p>
      * <ul>
      * <li>
      * <p>
-     * A request cannot contain more than 100 Change elements.
+     * <code>Name</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * A request cannot contain more than 1000 ResourceRecord elements.
+     * <code>Type</code>
      * </p>
      * </li>
      * <li>
      * <p>
-     * The sum of the number of characters (including spaces) in all <code>Value</code> elements in a request cannot
-     * exceed 32,000 characters.
-     * </p>
-     * </li>
-     * <li><note>
-     * <p>
-     * If the value of the Action element in a ChangeResourceRecordSets request is <code>UPSERT</code> and the resource
-     * record set already exists, Amazon Route 53 automatically performs a <code>DELETE</code> request and a
-     * <code>CREATE</code> request. When Amazon Route 53 calculates the number of characters in the Value elements of a
-     * change batch request, it adds the number of characters in the Value element of the resource record set being
-     * deleted and the number of characters in the Value element of the resource record set being created.
-     * </p>
-     * </note></li>
-     * <li>
-     * <p>
-     * The same resource cannot be deleted more than once in a single batch.
+     * <code>TTL</code>
      * </p>
      * </li>
      * </ul>
-     * <note>
      * <p>
-     * If the value of the Action element in a ChangeResourceRecordSets request is <code>UPSERT</code> and the resource
-     * record set already exists, Amazon Route 53 automatically performs a <code>DELETE</code> request and a
-     * <code>CREATE</code> request. When Amazon Route 53 calculates the number of characters in the Value elements of a
-     * change batch request, it adds the number of characters in the Value element of the resource record set being
-     * deleted and the number of characters in the Value element of the resource record set being created.
+     * <b>Failover, geolocation, latency, or weighted resource record sets (excluding alias resource record sets)</b>
      * </p>
-     * </note>
+     * <ul>
+     * <li>
      * <p>
-     * For more information on transactional changes, see <a>ChangeResourceRecordSets</a>.
+     * <code>Name</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>Type</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>TTL</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SetIdentifier</code>
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * <b>Alias resource record sets (including failover alias, geolocation alias, latency alias, and weighted alias
+     * resource record sets)</b>
+     * </p>
+     * <ul>
+     * <li>
+     * <p>
+     * <code>Name</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>Type</code>
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>AliasTarget</code> (includes <code>DNSName</code>, <code>EvaluateTargetHealth</code>, and
+     * <code>HostedZoneId</code>)
+     * </p>
+     * </li>
+     * <li>
+     * <p>
+     * <code>SetIdentifier</code> (for failover, geolocation, latency, and weighted resource record sets)
+     * </p>
+     * </li>
+     * </ul>
+     * <p>
+     * When you submit a <code>ChangeResourceRecordSets</code> request, Amazon Route 53 propagates your changes to all
+     * of the Amazon Route 53 authoritative DNS servers. While your changes are propagating, <code>GetChange</code>
+     * returns a status of <code>PENDING</code>. When propagation is complete, <code>GetChange</code> returns a status
+     * of <code>INSYNC</code>. Changes generally propagate to all Amazon Route 53 name servers in a few minutes. In rare
+     * circumstances, propagation can take up to 30 minutes. For more information, see <a>GetChange</a>
+     * </p>
+     * <p>
+     * For information about the limits on a <code>ChangeResourceRecordSets</code> request, see <a
+     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html">Limits</a> in the <i>Amazon
+     * Route 53 Developer Guide</i>.
      * </p>
      * 
      * @param changeResourceRecordSetsRequest
@@ -366,6 +416,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
             com.amazonaws.handlers.AsyncHandler<ChangeResourceRecordSetsRequest, ChangeResourceRecordSetsResult> asyncHandler);
 
     /**
+     * <p>
+     * Adds, edits, or deletes tags for a health check or a hosted zone.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param changeTagsForResourceRequest
      *        A complex type that contains information about the tags that you want to add, edit, or delete.
      * @return A Java Future containing the result of the ChangeTagsForResource operation returned by the service.
@@ -374,6 +433,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
     java.util.concurrent.Future<ChangeTagsForResourceResult> changeTagsForResourceAsync(ChangeTagsForResourceRequest changeTagsForResourceRequest);
 
     /**
+     * <p>
+     * Adds, edits, or deletes tags for a health check or a hosted zone.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param changeTagsForResourceRequest
      *        A complex type that contains information about the tags that you want to add, edit, or delete.
      * @param asyncHandler
@@ -392,16 +460,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <p>
      * To create a new health check, send a <code>POST</code> request to the <code>/2013-04-01/healthcheck</code>
-     * resource. The request body must include an XML document with a <code>CreateHealthCheckRequest</code> element. The
+     * resource. The request body must include a document with a <code>CreateHealthCheckRequest</code> element. The
      * response returns the <code>CreateHealthCheckResponse</code> element, containing the health check ID specified
      * when adding health check to a resource record set. For information about adding health checks to resource record
      * sets, see <a>ResourceRecordSet$HealthCheckId</a> in <a>ChangeResourceRecordSets</a>.
      * </p>
      * <p>
-     * If you are registering Amazon EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create
-     * Amazon Route 53 health checks for the Amazon EC2 instances. When you register an Amazon EC2 instance with a load
-     * balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53
-     * health check.
+     * If you are registering EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon
+     * Route 53 health checks for the EC2 instances. When you register an EC2 instance with a load balancer, you
+     * configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check.
      * </p>
      * <p>
      * You can associate health checks with failover resource record sets in a private hosted zone. Note the following:
@@ -427,7 +494,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the
      * CloudWatch console, see the <a
      * href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html">Amazon CloudWatch
-     * Developer Guide</a>.
+     * User Guide</a>.
      * </p>
      * </li>
      * </ul>
@@ -445,16 +512,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <p>
      * To create a new health check, send a <code>POST</code> request to the <code>/2013-04-01/healthcheck</code>
-     * resource. The request body must include an XML document with a <code>CreateHealthCheckRequest</code> element. The
+     * resource. The request body must include a document with a <code>CreateHealthCheckRequest</code> element. The
      * response returns the <code>CreateHealthCheckResponse</code> element, containing the health check ID specified
      * when adding health check to a resource record set. For information about adding health checks to resource record
      * sets, see <a>ResourceRecordSet$HealthCheckId</a> in <a>ChangeResourceRecordSets</a>.
      * </p>
      * <p>
-     * If you are registering Amazon EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create
-     * Amazon Route 53 health checks for the Amazon EC2 instances. When you register an Amazon EC2 instance with a load
-     * balancer, you configure settings for an ELB health check, which performs a similar function to an Amazon Route 53
-     * health check.
+     * If you are registering EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon
+     * Route 53 health checks for the EC2 instances. When you register an EC2 instance with a load balancer, you
+     * configure settings for an ELB health check, which performs a similar function to an Amazon Route 53 health check.
      * </p>
      * <p>
      * You can associate health checks with failover resource record sets in a private hosted zone. Note the following:
@@ -480,7 +546,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the
      * CloudWatch console, see the <a
      * href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html">Amazon CloudWatch
-     * Developer Guide</a>.
+     * User Guide</a>.
      * </p>
      * </li>
      * </ul>
@@ -504,18 +570,18 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * Public hosted zones cannot be converted to a private hosted zone or vice versa. Instead, create a new hosted zone
+     * Public hosted zones can't be converted to a private hosted zone or vice versa. Instead, create a new hosted zone
      * with the same name and create new resource record sets.
      * </p>
      * </important>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/hostedzone</code> resource. The
-     * request body must include an XML document with a <code>CreateHostedZoneRequest</code> element. The response
-     * returns the <code>CreateHostedZoneResponse</code> element containing metadata about the hosted zone.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone</code> resource. The request body must
+     * include a document with a <code>CreateHostedZoneRequest</code> element. The response returns the
+     * <code>CreateHostedZoneResponse</code> element containing metadata about the hosted zone.
      * </p>
      * <p>
-     * Fore more information about charges for hosted zones, see <a
-     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/pricing/">AmazonAmazon Route 53 Pricing</a>.
+     * Fore more information about charges for hosted zones, see <a href="http://aws.amazon.com/route53/pricing/">Amazon
+     * Route 53 Pricing</a>.
      * </p>
      * <p>
      * Note the following:
@@ -523,7 +589,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * You cannot create a hosted zone for a top-level domain (TLD).
+     * You can't create a hosted zone for a top-level domain (TLD).
      * </p>
      * </li>
      * <li>
@@ -550,7 +616,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <p>
      * When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and
-     * Amazon Route 53 would assign those 4 NS records for the zone, instead of alloting a new one.
+     * Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
      * </p>
      * 
      * @param createHostedZoneRequest
@@ -567,18 +633,18 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <important>
      * <p>
-     * Public hosted zones cannot be converted to a private hosted zone or vice versa. Instead, create a new hosted zone
+     * Public hosted zones can't be converted to a private hosted zone or vice versa. Instead, create a new hosted zone
      * with the same name and create new resource record sets.
      * </p>
      * </important>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/hostedzone</code> resource. The
-     * request body must include an XML document with a <code>CreateHostedZoneRequest</code> element. The response
-     * returns the <code>CreateHostedZoneResponse</code> element containing metadata about the hosted zone.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone</code> resource. The request body must
+     * include a document with a <code>CreateHostedZoneRequest</code> element. The response returns the
+     * <code>CreateHostedZoneResponse</code> element containing metadata about the hosted zone.
      * </p>
      * <p>
-     * Fore more information about charges for hosted zones, see <a
-     * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/pricing/">AmazonAmazon Route 53 Pricing</a>.
+     * Fore more information about charges for hosted zones, see <a href="http://aws.amazon.com/route53/pricing/">Amazon
+     * Route 53 Pricing</a>.
      * </p>
      * <p>
      * Note the following:
@@ -586,7 +652,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * You cannot create a hosted zone for a top-level domain (TLD).
+     * You can't create a hosted zone for a top-level domain (TLD).
      * </p>
      * </li>
      * <li>
@@ -613,7 +679,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </p>
      * <p>
      * When trying to create a hosted zone using a reusable delegation set, specify an optional DelegationSetId, and
-     * Amazon Route 53 would assign those 4 NS records for the zone, instead of alloting a new one.
+     * Amazon Route 53 would assign those 4 NS records for the zone, instead of allotting a new one.
      * </p>
      * 
      * @param createHostedZoneRequest
@@ -630,17 +696,17 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
 
     /**
      * <p>
-     * Creates a delegation set (a group of four anem servers) that can be reused by multiple hosted zones. If a hosted
+     * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted
      * zoned ID is specified, <code>CreateReusableDelegationSet</code> marks the delegation set associated with that
      * zone as reusable
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/delegationset</code> resource.
-     * The request body must include an XML document with a <code>CreateReusableDelegationSetRequest</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/delegationset</code> resource. The request body must
+     * include a document with a <code>CreateReusableDelegationSetRequest</code> element.
      * </p>
      * <note>
      * <p>
-     * A reusable delegation set cannot be associated with a private hosted zone/
+     * A reusable delegation set can't be associated with a private hosted zone/
      * </p>
      * </note>
      * <p>
@@ -659,17 +725,17 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
 
     /**
      * <p>
-     * Creates a delegation set (a group of four anem servers) that can be reused by multiple hosted zones. If a hosted
+     * Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted
      * zoned ID is specified, <code>CreateReusableDelegationSet</code> marks the delegation set associated with that
      * zone as reusable
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/delegationset</code> resource.
-     * The request body must include an XML document with a <code>CreateReusableDelegationSetRequest</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/delegationset</code> resource. The request body must
+     * include a document with a <code>CreateReusableDelegationSetRequest</code> element.
      * </p>
      * <note>
      * <p>
-     * A reusable delegation set cannot be associated with a private hosted zone/
+     * A reusable delegation set can't be associated with a private hosted zone/
      * </p>
      * </note>
      * <p>
@@ -697,10 +763,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * example.com) or one subdomain name (such as www.example.com).
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicy</code> resource.
-     * The request body must include a document with a <code>CreateTrafficPolicyRequest</code> element. The response
-     * includes the <code>CreateTrafficPolicyResponse</code> element, which contains information about the new traffic
-     * policy.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy</code> resource. The request body must
+     * include a document with a <code>CreateTrafficPolicyRequest</code> element. The response includes the
+     * <code>CreateTrafficPolicyResponse</code> element, which contains information about the new traffic policy.
      * </p>
      * 
      * @param createTrafficPolicyRequest
@@ -716,10 +781,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * example.com) or one subdomain name (such as www.example.com).
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicy</code> resource.
-     * The request body must include a document with a <code>CreateTrafficPolicyRequest</code> element. The response
-     * includes the <code>CreateTrafficPolicyResponse</code> element, which contains information about the new traffic
-     * policy.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy</code> resource. The request body must
+     * include a document with a <code>CreateTrafficPolicyRequest</code> element. The response includes the
+     * <code>CreateTrafficPolicyResponse</code> element, which contains information about the new traffic policy.
      * </p>
      * 
      * @param createTrafficPolicyRequest
@@ -743,10 +807,10 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <code>CreateTrafficPolicyInstance</code> created.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicyinstance</code>
-     * resource. The request body must include a document with a <code>CreateTrafficPolicyRequest</code> element. The
-     * response returns the <code>CreateTrafficPolicyInstanceResponse</code> element, which contains information about
-     * the traffic policy instance.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicyinstance</code> resource. The request body
+     * must include a document with a <code>CreateTrafficPolicyRequest</code> element. The response returns the
+     * <code>CreateTrafficPolicyInstanceResponse</code> element, which contains information about the traffic policy
+     * instance.
      * </p>
      * 
      * @param createTrafficPolicyInstanceRequest
@@ -767,10 +831,10 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <code>CreateTrafficPolicyInstance</code> created.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicyinstance</code>
-     * resource. The request body must include a document with a <code>CreateTrafficPolicyRequest</code> element. The
-     * response returns the <code>CreateTrafficPolicyInstanceResponse</code> element, which contains information about
-     * the traffic policy instance.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicyinstance</code> resource. The request body
+     * must include a document with a <code>CreateTrafficPolicyRequest</code> element. The response returns the
+     * <code>CreateTrafficPolicyInstanceResponse</code> element, which contains information about the traffic policy
+     * instance.
      * </p>
      * 
      * @param createTrafficPolicyInstanceRequest
@@ -797,10 +861,10 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * policy.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 version</i>/trafficpolicy/</code> resource. The
-     * request body includes a document with a <code>CreateTrafficPolicyVersionRequest</code> element. The response
-     * returns the <code>CreateTrafficPolicyVersionResponse</code> element, which contains information about the new
-     * version of the traffic policy.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy/</code> resource. The request body
+     * includes a document with a <code>CreateTrafficPolicyVersionRequest</code> element. The response returns the
+     * <code>CreateTrafficPolicyVersionResponse</code> element, which contains information about the new version of the
+     * traffic policy.
      * </p>
      * 
      * @param createTrafficPolicyVersionRequest
@@ -822,10 +886,10 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * policy.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 version</i>/trafficpolicy/</code> resource. The
-     * request body includes a document with a <code>CreateTrafficPolicyVersionRequest</code> element. The response
-     * returns the <code>CreateTrafficPolicyVersionResponse</code> element, which contains information about the new
-     * version of the traffic policy.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy/</code> resource. The request body
+     * includes a document with a <code>CreateTrafficPolicyVersionRequest</code> element. The response returns the
+     * <code>CreateTrafficPolicyVersionResponse</code> element, which contains information about the new version of the
+     * traffic policy.
      * </p>
      * 
      * @param createTrafficPolicyVersionRequest
@@ -844,6 +908,75 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
 
     /**
      * <p>
+     * Authorizes the AWS account that created a specified VPC to submit an <code>AssociateVPCWithHostedZone</code>
+     * request to associate the VPC with a specified hosted zone that was created by a different account. To submit a
+     * <code>CreateVPCAssociationAuthorization</code> request, you must use the account that created the hosted zone.
+     * After you authorize the association, use the account that created the VPC to submit an
+     * <code>AssociateVPCWithHostedZone</code> request.
+     * </p>
+     * <note>
+     * <p>
+     * If you want to associate multiple VPCs that you created by using one account with a hosted zone that you created
+     * by using a different account, you must submit one authorization request for each VPC.
+     * </p>
+     * </note>
+     * <p>
+     * Send a <code>POST</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation</code> resource. The request body must
+     * include a document with a <code>CreateVPCAssociationAuthorizationRequest</code> element. The response contains
+     * information about the authorization.
+     * </p>
+     * 
+     * @param createVPCAssociationAuthorizationRequest
+     *        A complex type that contains information about the request to authorize associating a VPC with your
+     *        private hosted zone. Authorization is only required when a private hosted zone and a VPC were created by
+     *        using different accounts.
+     * @return A Java Future containing the result of the CreateVPCAssociationAuthorization operation returned by the
+     *         service.
+     * @sample AmazonRoute53Async.CreateVPCAssociationAuthorization
+     */
+    java.util.concurrent.Future<CreateVPCAssociationAuthorizationResult> createVPCAssociationAuthorizationAsync(
+            CreateVPCAssociationAuthorizationRequest createVPCAssociationAuthorizationRequest);
+
+    /**
+     * <p>
+     * Authorizes the AWS account that created a specified VPC to submit an <code>AssociateVPCWithHostedZone</code>
+     * request to associate the VPC with a specified hosted zone that was created by a different account. To submit a
+     * <code>CreateVPCAssociationAuthorization</code> request, you must use the account that created the hosted zone.
+     * After you authorize the association, use the account that created the VPC to submit an
+     * <code>AssociateVPCWithHostedZone</code> request.
+     * </p>
+     * <note>
+     * <p>
+     * If you want to associate multiple VPCs that you created by using one account with a hosted zone that you created
+     * by using a different account, you must submit one authorization request for each VPC.
+     * </p>
+     * </note>
+     * <p>
+     * Send a <code>POST</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation</code> resource. The request body must
+     * include a document with a <code>CreateVPCAssociationAuthorizationRequest</code> element. The response contains
+     * information about the authorization.
+     * </p>
+     * 
+     * @param createVPCAssociationAuthorizationRequest
+     *        A complex type that contains information about the request to authorize associating a VPC with your
+     *        private hosted zone. Authorization is only required when a private hosted zone and a VPC were created by
+     *        using different accounts.
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the CreateVPCAssociationAuthorization operation returned by the
+     *         service.
+     * @sample AmazonRoute53AsyncHandler.CreateVPCAssociationAuthorization
+     */
+    java.util.concurrent.Future<CreateVPCAssociationAuthorizationResult> createVPCAssociationAuthorizationAsync(
+            CreateVPCAssociationAuthorizationRequest createVPCAssociationAuthorizationRequest,
+            com.amazonaws.handlers.AsyncHandler<CreateVPCAssociationAuthorizationRequest, CreateVPCAssociationAuthorizationResult> asyncHandler);
+
+    /**
+     * <p>
      * Deletes a health check. Send a <code>DELETE</code> request to the
      * <code>/2013-04-01/healthcheck/<i>health check ID</i> </code> resource.
      * </p>
@@ -851,7 +984,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <p>
      * Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one
      * or more resource record sets. If you delete a health check and you don't update the associated resource record
-     * sets, the future status of the health check cannot be predicted and may change. This will affect the routing of
+     * sets, the future status of the health check can't be predicted and may change. This will affect the routing of
      * DNS queries for your DNS failover configuration. For more information, see <a href=
      * "http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html"
      * >Replacing and Deleting Health Checks</a> in the Amazon Route 53 Developer Guide.
@@ -875,7 +1008,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <p>
      * Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one
      * or more resource record sets. If you delete a health check and you don't update the associated resource record
-     * sets, the future status of the health check cannot be predicted and may change. This will affect the routing of
+     * sets, the future status of the health check can't be predicted and may change. This will affect the routing of
      * DNS queries for your DNS failover configuration. For more information, see <a href=
      * "http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html"
      * >Replacing and Deleting Health Checks</a> in the Amazon Route 53 Developer Guide.
@@ -1085,23 +1218,93 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
 
     /**
      * <p>
-     * Disassociates a VPC from a Amazon Route 53 private hosted zone.
-     * </p>
-     * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/hostedzone/<i>hosted zone ID</i>/disassociatevpc</code> resource. The
-     * request body must include an XML document with a <code>DisassociateVPCFromHostedZoneRequest</code> element. The
-     * response returns the <code>DisassociateVPCFromHostedZoneResponse</code> element.
+     * Removes authorization to submit an <code>AssociateVPCWithHostedZone</code> request to associate a specified VPC
+     * with a hosted zone that was created by a different account. You must use the account that created the hosted zone
+     * to submit a <code>DeleteVPCAssociationAuthorization</code> request.
      * </p>
      * <important>
      * <p>
-     * You can only disassociate a VPC from a private hosted zone when two or more VPCs are associated with that hosted
-     * zone. You cannot convert a private hosted zone into a public hosted zone.
+     * Sending this request only prevents the AWS account that created the VPC from associating the VPC with the Amazon
+     * Route 53 hosted zone in the future. If the VPC is already associated with the hosted zone,
+     * <code>DeleteVPCAssociationAuthorization</code> won't disassociate the VPC from the hosted zone. If you want to
+     * delete an existing association, use <code>DisassociateVPCFromHostedZone</code>.
+     * </p>
+     * </important>
+     * <p>
+     * Send a <code>DELETE</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/deauthorizevpcassociation</code> resource. The request body
+     * must include a document with a <code>DeleteVPCAssociationAuthorizationRequest</code> element.
+     * </p>
+     * 
+     * @param deleteVPCAssociationAuthorizationRequest
+     *        A complex type that contains information about the request to remove authorization to associate a VPC that
+     *        was created by one AWS account with a hosted zone that was created with a different AWS account.
+     * @return A Java Future containing the result of the DeleteVPCAssociationAuthorization operation returned by the
+     *         service.
+     * @sample AmazonRoute53Async.DeleteVPCAssociationAuthorization
+     */
+    java.util.concurrent.Future<DeleteVPCAssociationAuthorizationResult> deleteVPCAssociationAuthorizationAsync(
+            DeleteVPCAssociationAuthorizationRequest deleteVPCAssociationAuthorizationRequest);
+
+    /**
+     * <p>
+     * Removes authorization to submit an <code>AssociateVPCWithHostedZone</code> request to associate a specified VPC
+     * with a hosted zone that was created by a different account. You must use the account that created the hosted zone
+     * to submit a <code>DeleteVPCAssociationAuthorization</code> request.
+     * </p>
+     * <important>
+     * <p>
+     * Sending this request only prevents the AWS account that created the VPC from associating the VPC with the Amazon
+     * Route 53 hosted zone in the future. If the VPC is already associated with the hosted zone,
+     * <code>DeleteVPCAssociationAuthorization</code> won't disassociate the VPC from the hosted zone. If you want to
+     * delete an existing association, use <code>DisassociateVPCFromHostedZone</code>.
+     * </p>
+     * </important>
+     * <p>
+     * Send a <code>DELETE</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/deauthorizevpcassociation</code> resource. The request body
+     * must include a document with a <code>DeleteVPCAssociationAuthorizationRequest</code> element.
+     * </p>
+     * 
+     * @param deleteVPCAssociationAuthorizationRequest
+     *        A complex type that contains information about the request to remove authorization to associate a VPC that
+     *        was created by one AWS account with a hosted zone that was created with a different AWS account.
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the DeleteVPCAssociationAuthorization operation returned by the
+     *         service.
+     * @sample AmazonRoute53AsyncHandler.DeleteVPCAssociationAuthorization
+     */
+    java.util.concurrent.Future<DeleteVPCAssociationAuthorizationResult> deleteVPCAssociationAuthorizationAsync(
+            DeleteVPCAssociationAuthorizationRequest deleteVPCAssociationAuthorizationRequest,
+            com.amazonaws.handlers.AsyncHandler<DeleteVPCAssociationAuthorizationRequest, DeleteVPCAssociationAuthorizationResult> asyncHandler);
+
+    /**
+     * <p>
+     * Disassociates a VPC from a Amazon Route 53 private hosted zone.
+     * </p>
+     * <note>
+     * <p>
+     * You can't disassociate the last VPC from a private hosted zone.
+     * </p>
+     * </note>
+     * <p>
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/disassociatevpc</code>
+     * resource. The request body must include a document with a <code>DisassociateVPCFromHostedZoneRequest</code>
+     * element. The response includes a <code>DisassociateVPCFromHostedZoneResponse</code> element.
+     * </p>
+     * <important>
+     * <p>
+     * You can't disassociate a VPC from a private hosted zone when only one VPC is associated with the hosted zone. You
+     * also can't convert a private hosted zone into a public hosted zone.
      * </p>
      * </important>
      * 
      * @param disassociateVPCFromHostedZoneRequest
-     *        A complex type that contains information about the VPC and the hosted zone that you want to disassociate.
+     *        A complex type that contains information about the VPC that you want to disassociate from a specified
+     *        private hosted zone.
      * @return A Java Future containing the result of the DisassociateVPCFromHostedZone operation returned by the
      *         service.
      * @sample AmazonRoute53Async.DisassociateVPCFromHostedZone
@@ -1113,21 +1316,26 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <p>
      * Disassociates a VPC from a Amazon Route 53 private hosted zone.
      * </p>
+     * <note>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/hostedzone/<i>hosted zone ID</i>/disassociatevpc</code> resource. The
-     * request body must include an XML document with a <code>DisassociateVPCFromHostedZoneRequest</code> element. The
-     * response returns the <code>DisassociateVPCFromHostedZoneResponse</code> element.
+     * You can't disassociate the last VPC from a private hosted zone.
+     * </p>
+     * </note>
+     * <p>
+     * Send a <code>POST</code> request to the <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/disassociatevpc</code>
+     * resource. The request body must include a document with a <code>DisassociateVPCFromHostedZoneRequest</code>
+     * element. The response includes a <code>DisassociateVPCFromHostedZoneResponse</code> element.
      * </p>
      * <important>
      * <p>
-     * You can only disassociate a VPC from a private hosted zone when two or more VPCs are associated with that hosted
-     * zone. You cannot convert a private hosted zone into a public hosted zone.
+     * You can't disassociate a VPC from a private hosted zone when only one VPC is associated with the hosted zone. You
+     * also can't convert a private hosted zone into a public hosted zone.
      * </p>
      * </important>
      * 
      * @param disassociateVPCFromHostedZoneRequest
-     *        A complex type that contains information about the VPC and the hosted zone that you want to disassociate.
+     *        A complex type that contains information about the VPC that you want to disassociate from a specified
+     *        private hosted zone.
      * @param asyncHandler
      *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
      *        implementation of the callback methods in this interface to receive notification of successful or
@@ -1194,37 +1402,6 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      */
     java.util.concurrent.Future<GetChangeResult> getChangeAsync(GetChangeRequest getChangeRequest,
             com.amazonaws.handlers.AsyncHandler<GetChangeRequest, GetChangeResult> asyncHandler);
-
-    /**
-     * <p>
-     * Returns the status and changes of a change batch request.
-     * </p>
-     * 
-     * @param getChangeDetailsRequest
-     *        The input for a <code>GetChangeDetails</code> request.
-     * @return A Java Future containing the result of the GetChangeDetails operation returned by the service.
-     * @sample AmazonRoute53Async.GetChangeDetails
-     */
-    @Deprecated
-    java.util.concurrent.Future<GetChangeDetailsResult> getChangeDetailsAsync(GetChangeDetailsRequest getChangeDetailsRequest);
-
-    /**
-     * <p>
-     * Returns the status and changes of a change batch request.
-     * </p>
-     * 
-     * @param getChangeDetailsRequest
-     *        The input for a <code>GetChangeDetails</code> request.
-     * @param asyncHandler
-     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
-     *        implementation of the callback methods in this interface to receive notification of successful or
-     *        unsuccessful completion of the operation.
-     * @return A Java Future containing the result of the GetChangeDetails operation returned by the service.
-     * @sample AmazonRoute53AsyncHandler.GetChangeDetails
-     */
-    @Deprecated
-    java.util.concurrent.Future<GetChangeDetailsResult> getChangeDetailsAsync(GetChangeDetailsRequest getChangeDetailsRequest,
-            com.amazonaws.handlers.AsyncHandler<GetChangeDetailsRequest, GetChangeDetailsResult> asyncHandler);
 
     /**
      * <p>
@@ -1788,72 +1965,6 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
 
     /**
      * <p>
-     * Gets the list of ChangeBatches in a given time period for a given hosted zone.
-     * </p>
-     * 
-     * @param listChangeBatchesByHostedZoneRequest
-     *        The input for a ListChangeBatchesByHostedZone request.
-     * @return A Java Future containing the result of the ListChangeBatchesByHostedZone operation returned by the
-     *         service.
-     * @sample AmazonRoute53Async.ListChangeBatchesByHostedZone
-     */
-    @Deprecated
-    java.util.concurrent.Future<ListChangeBatchesByHostedZoneResult> listChangeBatchesByHostedZoneAsync(
-            ListChangeBatchesByHostedZoneRequest listChangeBatchesByHostedZoneRequest);
-
-    /**
-     * <p>
-     * Gets the list of ChangeBatches in a given time period for a given hosted zone.
-     * </p>
-     * 
-     * @param listChangeBatchesByHostedZoneRequest
-     *        The input for a ListChangeBatchesByHostedZone request.
-     * @param asyncHandler
-     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
-     *        implementation of the callback methods in this interface to receive notification of successful or
-     *        unsuccessful completion of the operation.
-     * @return A Java Future containing the result of the ListChangeBatchesByHostedZone operation returned by the
-     *         service.
-     * @sample AmazonRoute53AsyncHandler.ListChangeBatchesByHostedZone
-     */
-    @Deprecated
-    java.util.concurrent.Future<ListChangeBatchesByHostedZoneResult> listChangeBatchesByHostedZoneAsync(
-            ListChangeBatchesByHostedZoneRequest listChangeBatchesByHostedZoneRequest,
-            com.amazonaws.handlers.AsyncHandler<ListChangeBatchesByHostedZoneRequest, ListChangeBatchesByHostedZoneResult> asyncHandler);
-
-    /**
-     * <p>
-     * Gets the list of ChangeBatches in a given time period for a given hosted zone and RRSet.
-     * </p>
-     * 
-     * @param listChangeBatchesByRRSetRequest
-     *        The input for a ListChangeBatchesByRRSet request.
-     * @return A Java Future containing the result of the ListChangeBatchesByRRSet operation returned by the service.
-     * @sample AmazonRoute53Async.ListChangeBatchesByRRSet
-     */
-    @Deprecated
-    java.util.concurrent.Future<ListChangeBatchesByRRSetResult> listChangeBatchesByRRSetAsync(ListChangeBatchesByRRSetRequest listChangeBatchesByRRSetRequest);
-
-    /**
-     * <p>
-     * Gets the list of ChangeBatches in a given time period for a given hosted zone and RRSet.
-     * </p>
-     * 
-     * @param listChangeBatchesByRRSetRequest
-     *        The input for a ListChangeBatchesByRRSet request.
-     * @param asyncHandler
-     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
-     *        implementation of the callback methods in this interface to receive notification of successful or
-     *        unsuccessful completion of the operation.
-     * @return A Java Future containing the result of the ListChangeBatchesByRRSet operation returned by the service.
-     * @sample AmazonRoute53AsyncHandler.ListChangeBatchesByRRSet
-     */
-    @Deprecated
-    java.util.concurrent.Future<ListChangeBatchesByRRSetResult> listChangeBatchesByRRSetAsync(ListChangeBatchesByRRSetRequest listChangeBatchesByRRSetRequest,
-            com.amazonaws.handlers.AsyncHandler<ListChangeBatchesByRRSetRequest, ListChangeBatchesByRRSetResult> asyncHandler);
-
-    /**
-     * <p>
      * Retrieves a list of supported geo locations. Send a <code>GET</code> request to the
      * <code>/2013-04-01/geolocations</code> resource. The response to this request includes a
      * <code>GeoLocationDetailsList</code> element for each location that Amazon Route 53 supports.
@@ -2020,7 +2131,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * <code>MaxItems</code>is the value specified for the <code>maxitems</code> parameter in the request that produced
+     * <code>MaxItems</code> is the value specified for the <code>maxitems</code> parameter in the request that produced
      * the current response.
      * </p>
      * </li>
@@ -2032,7 +2143,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </li>
      * <li>
      * <p>
-     * <code>NextMarker</code>is the hosted zone ID of the next hosted zone that is associated with the current AWS
+     * <code>NextMarker</code> is the hosted zone ID of the next hosted zone that is associated with the current AWS
      * account. If you want to list more hosted zones, make another call to <code>ListHostedZones</code>, and specify
      * the value of the <code>NextMarker</code> element in the marker parameter.
      * </p>
@@ -2110,7 +2221,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * <ul>
      * <li>
      * <p>
-     * <code>MaxItems</code>is the value specified for the <code>maxitems</code> parameter in the request that produced
+     * <code>MaxItems</code> is the value specified for the <code>maxitems</code> parameter in the request that produced
      * the current response.
      * </p>
      * </li>
@@ -2122,7 +2233,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * </li>
      * <li>
      * <p>
-     * <code>NextMarker</code>is the hosted zone ID of the next hosted zone that is associated with the current AWS
+     * <code>NextMarker</code> is the hosted zone ID of the next hosted zone that is associated with the current AWS
      * account. If you want to list more hosted zones, make another call to <code>ListHostedZones</code>, and specify
      * the value of the <code>NextMarker</code> element in the marker parameter.
      * </p>
@@ -2517,6 +2628,66 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
             com.amazonaws.handlers.AsyncHandler<ListHostedZonesByNameRequest, ListHostedZonesByNameResult> asyncHandler);
 
     /**
+     * <p>
+     * Lists the resource record sets in a specified hosted zone.
+     * </p>
+     * <p>
+     * <code>ListResourceRecordSets</code> returns up to 100 resource record sets at a time in ASCII order, beginning at
+     * a position specified by the <code>name</code> and <code>type</code> elements. The action sorts results first by
+     * DNS name with the labels reversed, for example:
+     * </p>
+     * <p>
+     * <code>com.example.www.</code>
+     * </p>
+     * <p>
+     * Note the trailing dot, which can change the sort order in some circumstances.
+     * </p>
+     * <p>
+     * When multiple records have the same DNS name, the action sorts results by the record type.
+     * </p>
+     * <p>
+     * You can use the name and type elements to adjust the beginning position of the list of resource record sets
+     * returned:
+     * </p>
+     * <dl>
+     * <dt>If you do not specify Name or Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set that the hosted zone contains.
+     * </p>
+     * </dd>
+     * <dt>If you specify Name but not Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set in the list whose name is greater than or equal to
+     * <code>Name</code>.
+     * </p>
+     * </dd>
+     * <dt>If you specify Type but not Name</dt>
+     * <dd>
+     * <p>
+     * Amazon Route 53 returns the <code>InvalidInput</code> error.
+     * </p>
+     * </dd>
+     * <dt>If you specify both Name and Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set in the list whose name is greater than or equal to
+     * <code>Name</code>, and whose type is greater than or equal to <code>Type</code>.
+     * </p>
+     * </dd>
+     * </dl>
+     * <p>
+     * This action returns the most current version of the records. This includes records that are <code>PENDING</code>,
+     * and that are not yet available on all Amazon Route 53 DNS servers.
+     * </p>
+     * <p>
+     * To ensure that you get an accurate listing of the resource record sets for a hosted zone at a point in time, do
+     * not submit a <code>ChangeResourceRecordSets</code> request while you're paging through the results of a
+     * <code>ListResourceRecordSets</code> request. If you do, some pages may display results without the latest changes
+     * while other pages display results with the latest changes.
+     * </p>
+     * 
      * @param listResourceRecordSetsRequest
      *        The input for a ListResourceRecordSets request.
      * @return A Java Future containing the result of the ListResourceRecordSets operation returned by the service.
@@ -2525,6 +2696,66 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
     java.util.concurrent.Future<ListResourceRecordSetsResult> listResourceRecordSetsAsync(ListResourceRecordSetsRequest listResourceRecordSetsRequest);
 
     /**
+     * <p>
+     * Lists the resource record sets in a specified hosted zone.
+     * </p>
+     * <p>
+     * <code>ListResourceRecordSets</code> returns up to 100 resource record sets at a time in ASCII order, beginning at
+     * a position specified by the <code>name</code> and <code>type</code> elements. The action sorts results first by
+     * DNS name with the labels reversed, for example:
+     * </p>
+     * <p>
+     * <code>com.example.www.</code>
+     * </p>
+     * <p>
+     * Note the trailing dot, which can change the sort order in some circumstances.
+     * </p>
+     * <p>
+     * When multiple records have the same DNS name, the action sorts results by the record type.
+     * </p>
+     * <p>
+     * You can use the name and type elements to adjust the beginning position of the list of resource record sets
+     * returned:
+     * </p>
+     * <dl>
+     * <dt>If you do not specify Name or Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set that the hosted zone contains.
+     * </p>
+     * </dd>
+     * <dt>If you specify Name but not Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set in the list whose name is greater than or equal to
+     * <code>Name</code>.
+     * </p>
+     * </dd>
+     * <dt>If you specify Type but not Name</dt>
+     * <dd>
+     * <p>
+     * Amazon Route 53 returns the <code>InvalidInput</code> error.
+     * </p>
+     * </dd>
+     * <dt>If you specify both Name and Type</dt>
+     * <dd>
+     * <p>
+     * The results begin with the first resource record set in the list whose name is greater than or equal to
+     * <code>Name</code>, and whose type is greater than or equal to <code>Type</code>.
+     * </p>
+     * </dd>
+     * </dl>
+     * <p>
+     * This action returns the most current version of the records. This includes records that are <code>PENDING</code>,
+     * and that are not yet available on all Amazon Route 53 DNS servers.
+     * </p>
+     * <p>
+     * To ensure that you get an accurate listing of the resource record sets for a hosted zone at a point in time, do
+     * not submit a <code>ChangeResourceRecordSets</code> request while you're paging through the results of a
+     * <code>ListResourceRecordSets</code> request. If you do, some pages may display results without the latest changes
+     * while other pages display results with the latest changes.
+     * </p>
+     * 
      * @param listResourceRecordSetsRequest
      *        The input for a ListResourceRecordSets request.
      * @param asyncHandler
@@ -2624,6 +2855,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
             com.amazonaws.handlers.AsyncHandler<ListReusableDelegationSetsRequest, ListReusableDelegationSetsResult> asyncHandler);
 
     /**
+     * <p>
+     * Lists tags for one health check or hosted zone.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param listTagsForResourceRequest
      *        A complex type containing information about a request for a list of the tags that are associated with an
      *        individual resource.
@@ -2633,6 +2873,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
     java.util.concurrent.Future<ListTagsForResourceResult> listTagsForResourceAsync(ListTagsForResourceRequest listTagsForResourceRequest);
 
     /**
+     * <p>
+     * Lists tags for one health check or hosted zone.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param listTagsForResourceRequest
      *        A complex type containing information about a request for a list of the tags that are associated with an
      *        individual resource.
@@ -2647,6 +2896,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
             com.amazonaws.handlers.AsyncHandler<ListTagsForResourceRequest, ListTagsForResourceResult> asyncHandler);
 
     /**
+     * <p>
+     * Lists tags for up to 10 health checks or hosted zones.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param listTagsForResourcesRequest
      *        A complex type that contains information about the health checks or hosted zones for which you want to
      *        list tags.
@@ -2656,6 +2914,15 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
     java.util.concurrent.Future<ListTagsForResourcesResult> listTagsForResourcesAsync(ListTagsForResourcesRequest listTagsForResourcesRequest);
 
     /**
+     * <p>
+     * Lists tags for up to 10 health checks or hosted zones.
+     * </p>
+     * <p>
+     * For information about using tags for cost allocation, see <a
+     * href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation
+     * Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.
+     * </p>
+     * 
      * @param listTagsForResourcesRequest
      *        A complex type that contains information about the health checks or hosted zones for which you want to
      *        list tags.
@@ -3282,7 +3549,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * use the <code>maxitems</code> parameter to list them in groups of up to 100.
      * </p>
      * <p>
-     * The response includes three values that help you navigate from one group of <code>maxitems</code>maxitems traffic
+     * The response includes three values that help you navigate from one group of <code>maxitems</code> traffic
      * policies to the next:
      * </p>
      * <ul>
@@ -3345,7 +3612,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * use the <code>maxitems</code> parameter to list them in groups of up to 100.
      * </p>
      * <p>
-     * The response includes three values that help you navigate from one group of <code>maxitems</code>maxitems traffic
+     * The response includes three values that help you navigate from one group of <code>maxitems</code> traffic
      * policies to the next:
      * </p>
      * <ul>
@@ -3401,6 +3668,89 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
             com.amazonaws.handlers.AsyncHandler<ListTrafficPolicyVersionsRequest, ListTrafficPolicyVersionsResult> asyncHandler);
 
     /**
+     * <p>
+     * Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted
+     * zone because you've submitted one or more <code>CreateVPCAssociationAuthorization</code> requests.
+     * </p>
+     * <p>
+     * Send a <code>GET</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation</code> resource. The response to this
+     * request includes a <code>VPCs</code> element with a <code>VPC</code> child element for each VPC that can be
+     * associated with the hosted zone.
+     * </p>
+     * <p>
+     * Amazon Route 53 returns up to 50 VPCs per page. To return fewer VPCs per page, include the
+     * <code>MaxResults</code> parameter:
+     * </p>
+     * <p>
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation?MaxItems=<i>VPCs per page</i> </code>
+     * </p>
+     * <p>
+     * If the response includes a <code>NextToken</code> element, there are more VPCs to list. To get the next page of
+     * VPCs, submit another <code>ListVPCAssociationAuthorizations</code> request, and include the value of the
+     * <code>NextToken</code> element from the response in the <code>NextToken</code> request parameter:
+     * </p>
+     * <p>
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation?MaxItems=<i>VPCs per page</i>&amp;NextToken=<i/> </code>
+     * </p>
+     * 
+     * @param listVPCAssociationAuthorizationsRequest
+     *        A complex type that contains information about that can be associated with your hosted zone.
+     * @return A Java Future containing the result of the ListVPCAssociationAuthorizations operation returned by the
+     *         service.
+     * @sample AmazonRoute53Async.ListVPCAssociationAuthorizations
+     */
+    java.util.concurrent.Future<ListVPCAssociationAuthorizationsResult> listVPCAssociationAuthorizationsAsync(
+            ListVPCAssociationAuthorizationsRequest listVPCAssociationAuthorizationsRequest);
+
+    /**
+     * <p>
+     * Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted
+     * zone because you've submitted one or more <code>CreateVPCAssociationAuthorization</code> requests.
+     * </p>
+     * <p>
+     * Send a <code>GET</code> request to the
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation</code> resource. The response to this
+     * request includes a <code>VPCs</code> element with a <code>VPC</code> child element for each VPC that can be
+     * associated with the hosted zone.
+     * </p>
+     * <p>
+     * Amazon Route 53 returns up to 50 VPCs per page. To return fewer VPCs per page, include the
+     * <code>MaxResults</code> parameter:
+     * </p>
+     * <p>
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation?MaxItems=<i>VPCs per page</i> </code>
+     * </p>
+     * <p>
+     * If the response includes a <code>NextToken</code> element, there are more VPCs to list. To get the next page of
+     * VPCs, submit another <code>ListVPCAssociationAuthorizations</code> request, and include the value of the
+     * <code>NextToken</code> element from the response in the <code>NextToken</code> request parameter:
+     * </p>
+     * <p>
+     * <code>/2013-04-01/hostedzone/<i>hosted zone ID</i>/authorizevpcassociation?MaxItems=<i>VPCs per page</i>&amp;NextToken=<i/> </code>
+     * </p>
+     * 
+     * @param listVPCAssociationAuthorizationsRequest
+     *        A complex type that contains information about that can be associated with your hosted zone.
+     * @param asyncHandler
+     *        Asynchronous callback handler for events in the lifecycle of the request. Users can provide an
+     *        implementation of the callback methods in this interface to receive notification of successful or
+     *        unsuccessful completion of the operation.
+     * @return A Java Future containing the result of the ListVPCAssociationAuthorizations operation returned by the
+     *         service.
+     * @sample AmazonRoute53AsyncHandler.ListVPCAssociationAuthorizations
+     */
+    java.util.concurrent.Future<ListVPCAssociationAuthorizationsResult> listVPCAssociationAuthorizationsAsync(
+            ListVPCAssociationAuthorizationsRequest listVPCAssociationAuthorizationsRequest,
+            com.amazonaws.handlers.AsyncHandler<ListVPCAssociationAuthorizationsRequest, ListVPCAssociationAuthorizationsResult> asyncHandler);
+
+    /**
+     * <p>
+     * Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type.
+     * You can optionally specify the IP address of a DNS resolver, an EDNS0 client subnet IP address, and a subnet
+     * mask.
+     * </p>
+     * 
      * @param testDNSAnswerRequest
      *        Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and
      *        type. You can optionally specify the IP address of a DNS resolver, an EDNS0 client subnet IP address, and
@@ -3458,6 +3808,12 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
     java.util.concurrent.Future<TestDNSAnswerResult> testDNSAnswerAsync(TestDNSAnswerRequest testDNSAnswerRequest);
 
     /**
+     * <p>
+     * Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type.
+     * You can optionally specify the IP address of a DNS resolver, an EDNS0 client subnet IP address, and a subnet
+     * mask.
+     * </p>
+     * 
      * @param testDNSAnswerRequest
      *        Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and
      *        type. You can optionally specify the IP address of a DNS resolver, an EDNS0 client subnet IP address, and
@@ -3524,10 +3880,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * Updates an existing health check.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/healthcheck/<i>health check ID</i> </code> resource. The request body
-     * must include an XML document with an <code>UpdateHealthCheckRequest</code> element. For more information about
-     * updating health checks, see <a
+     * Send a <code>POST</code> request to the <code>/2013-04-01/healthcheck/<i>health check ID</i> </code> resource.
+     * The request body must include a document with an <code>UpdateHealthCheckRequest</code> element. For more
+     * information about updating health checks, see <a
      * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html">Creating,
      * Updating, and Deleting Health Checks</a> in the Amazon Route 53 Developer Guide.
      * </p>
@@ -3544,10 +3899,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * Updates an existing health check.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/healthcheck/<i>health check ID</i> </code> resource. The request body
-     * must include an XML document with an <code>UpdateHealthCheckRequest</code> element. For more information about
-     * updating health checks, see <a
+     * Send a <code>POST</code> request to the <code>/2013-04-01/healthcheck/<i>health check ID</i> </code> resource.
+     * The request body must include a document with an <code>UpdateHealthCheckRequest</code> element. For more
+     * information about updating health checks, see <a
      * href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html">Creating,
      * Updating, and Deleting Health Checks</a> in the Amazon Route 53 Developer Guide.
      * </p>
@@ -3600,7 +3954,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * Updates the comment for a specified traffic policy version.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicy/</code> resource.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy/</code> resource.
      * </p>
      * <p>
      * The request body must include a document with an <code>UpdateTrafficPolicyCommentRequest</code> element.
@@ -3620,7 +3974,7 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * Updates the comment for a specified traffic policy version.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the <code>/<i>Amazon Route 53 API version</i>/trafficpolicy/</code> resource.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicy/</code> resource.
      * </p>
      * <p>
      * The request body must include a document with an <code>UpdateTrafficPolicyCommentRequest</code> element.
@@ -3646,9 +4000,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * specified traffic policy version.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/trafficpolicyinstance/<i>traffic policy ID</i> </code> resource. The
-     * request body must include a document with an <code>UpdateTrafficPolicyInstanceRequest</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicyinstance/<i>traffic policy ID</i> </code>
+     * resource. The request body must include a document with an <code>UpdateTrafficPolicyInstanceRequest</code>
+     * element.
      * </p>
      * <p>
      * When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS queries for the root
@@ -3692,9 +4046,9 @@ public interface AmazonRoute53Async extends AmazonRoute53 {
      * specified traffic policy version.
      * </p>
      * <p>
-     * Send a <code>POST</code> request to the
-     * <code>/<i>Amazon Route 53 API version</i>/trafficpolicyinstance/<i>traffic policy ID</i> </code> resource. The
-     * request body must include a document with an <code>UpdateTrafficPolicyInstanceRequest</code> element.
+     * Send a <code>POST</code> request to the <code>/2013-04-01/trafficpolicyinstance/<i>traffic policy ID</i> </code>
+     * resource. The request body must include a document with an <code>UpdateTrafficPolicyInstanceRequest</code>
+     * element.
      * </p>
      * <p>
      * When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS queries for the root

@@ -39,7 +39,11 @@ public class AdminInitiateAuthResult extends com.amazonaws.AmazonWebServiceResul
      * </p>
      */
     private java.util.Map<String, String> challengeParameters;
-
+    /**
+     * <p>
+     * The result of the authentication response.
+     * </p>
+     */
     private AuthenticationResultType authenticationResult;
 
     /**
@@ -206,8 +210,9 @@ public class AdminInitiateAuthResult extends com.amazonaws.AmazonWebServiceResul
     }
 
     /**
-     * Removes all the entries added into ChallengeParameters. &lt;p> Returns a reference to this object so that method
-     * calls can be chained together.
+     * Removes all the entries added into ChallengeParameters.
+     *
+     * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public AdminInitiateAuthResult clearChallengeParametersEntries() {
@@ -216,7 +221,12 @@ public class AdminInitiateAuthResult extends com.amazonaws.AmazonWebServiceResul
     }
 
     /**
+     * <p>
+     * The result of the authentication response.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result of the authentication response.
      */
 
     public void setAuthenticationResult(AuthenticationResultType authenticationResult) {
@@ -224,7 +234,11 @@ public class AdminInitiateAuthResult extends com.amazonaws.AmazonWebServiceResul
     }
 
     /**
-     * @return
+     * <p>
+     * The result of the authentication response.
+     * </p>
+     * 
+     * @return The result of the authentication response.
      */
 
     public AuthenticationResultType getAuthenticationResult() {
@@ -232,7 +246,12 @@ public class AdminInitiateAuthResult extends com.amazonaws.AmazonWebServiceResul
     }
 
     /**
+     * <p>
+     * The result of the authentication response.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result of the authentication response.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

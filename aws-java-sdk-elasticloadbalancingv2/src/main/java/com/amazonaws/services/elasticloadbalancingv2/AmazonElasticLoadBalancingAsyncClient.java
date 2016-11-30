@@ -17,7 +17,7 @@ import com.amazonaws.client.AwsAsyncClientParams;
 import com.amazonaws.annotation.ThreadSafe;
 
 /**
- * Interface for accessing Elastic Load Balancing v2 asynchronously. Each asynchronous method will return a Java Future
+ * Client for accessing Elastic Load Balancing v2 asynchronously. Each asynchronous method will return a Java Future
  * object representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
  * <p>
@@ -32,25 +32,25 @@ import com.amazonaws.annotation.ThreadSafe;
  * targets.
  * </p>
  * <p>
- * Elastic Load Balancing supports two types of load balancers: Classic load balancers and Application load balancers
- * (new). A Classic load balancer makes routing and load balancing decisions either at the transport layer (TCP/SSL) or
- * the application layer (HTTP/HTTPS), and supports either EC2-Classic or a VPC. An Application load balancer makes
- * routing and load balancing decisions at the application layer (HTTP/HTTPS), supports path-based routing, and can
- * route requests to one or more ports on each EC2 instance or container instance in your virtual private cloud (VPC).
- * For more information, see the <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/">Elastic
- * Load Balancing User Guide</a>.
+ * Elastic Load Balancing supports two types of load balancers: Classic Load Balancers and Application Load Balancers. A
+ * Classic Load Balancer makes routing and load balancing decisions either at the transport layer (TCP/SSL) or the
+ * application layer (HTTP/HTTPS), and supports either EC2-Classic or a VPC. An Application Load Balancer makes routing
+ * and load balancing decisions at the application layer (HTTP/HTTPS), supports path-based routing, and can route
+ * requests to one or more ports on each EC2 instance or container instance in your virtual private cloud (VPC). For
+ * more information, see the <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/">Elastic Load
+ * Balancing User Guide</a>.
  * </p>
  * <p>
- * This reference covers the 2015-12-01 API, which supports Application load balancers. The 2012-06-01 API supports
- * Classic load balancers.
+ * This reference covers the 2015-12-01 API, which supports Application Load Balancers. The 2012-06-01 API supports
+ * Classic Load Balancers.
  * </p>
  * <p>
- * To get started with an Application load balancer, complete the following tasks:
+ * To get started, complete the following tasks:
  * </p>
  * <ol>
  * <li>
  * <p>
- * Create a load balancer using <a>CreateLoadBalancer</a>.
+ * Create an Application Load Balancer using <a>CreateLoadBalancer</a>.
  * </p>
  * </li>
  * <li>
@@ -75,7 +75,7 @@ import com.amazonaws.annotation.ThreadSafe;
  * </li>
  * </ol>
  * <p>
- * To delete an Application load balancer and its related resources, complete the following tasks:
+ * To delete an Application Load Balancer and its related resources, complete the following tasks:
  * </p>
  * <ol>
  * <li>

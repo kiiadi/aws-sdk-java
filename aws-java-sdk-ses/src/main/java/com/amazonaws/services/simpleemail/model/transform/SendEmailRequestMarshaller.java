@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class SendEmailRequestMarshaller implements Marshaller<Request<SendEmailR
     public Request<SendEmailRequest> marshall(SendEmailRequest sendEmailRequest) {
 
         if (sendEmailRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<SendEmailRequest> request = new DefaultRequest<SendEmailRequest>(sendEmailRequest, "AmazonSimpleEmailService");
@@ -153,6 +153,27 @@ public class SendEmailRequestMarshaller implements Marshaller<Request<SendEmailR
 
         if (sendEmailRequest.getReturnPathArn() != null) {
             request.addParameter("ReturnPathArn", StringUtils.fromString(sendEmailRequest.getReturnPathArn()));
+        }
+
+        com.amazonaws.internal.SdkInternalList<MessageTag> tagsList = (com.amazonaws.internal.SdkInternalList<MessageTag>) sendEmailRequest.getTags();
+        if (!tagsList.isEmpty() || !tagsList.isAutoConstruct()) {
+            int tagsListIndex = 1;
+
+            for (MessageTag tagsListValue : tagsList) {
+
+                if (tagsListValue.getName() != null) {
+                    request.addParameter("Tags.member." + tagsListIndex + ".Name", StringUtils.fromString(tagsListValue.getName()));
+                }
+
+                if (tagsListValue.getValue() != null) {
+                    request.addParameter("Tags.member." + tagsListIndex + ".Value", StringUtils.fromString(tagsListValue.getValue()));
+                }
+                tagsListIndex++;
+            }
+        }
+
+        if (sendEmailRequest.getConfigurationSetName() != null) {
+            request.addParameter("ConfigurationSetName", StringUtils.fromString(sendEmailRequest.getConfigurationSetName()));
         }
 
         return request;

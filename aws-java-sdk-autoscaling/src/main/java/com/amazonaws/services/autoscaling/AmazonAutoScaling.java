@@ -21,6 +21,10 @@ import com.amazonaws.services.autoscaling.waiters.AmazonAutoScalingWaiters;
 /**
  * Interface for accessing Auto Scaling.
  * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.autoscaling.AbstractAmazonAutoScaling} instead.
+ * </p>
+ * <p>
  * <fullname>Auto Scaling</fullname>
  * <p>
  * Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined policies,
@@ -99,8 +103,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html">Attach EC2 Instances
-     * to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html">Attach EC2 Instances to
+     * Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param attachInstancesRequest
@@ -123,7 +127,7 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html">Attach a Load
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load
      * Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -150,7 +154,7 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html">Attach a Load
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load
      * Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -209,7 +213,7 @@ public interface AmazonAutoScaling {
      * </ol>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html">Auto Scaling
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling
      * Lifecycle</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -233,8 +237,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroup.html">Auto Scaling Groups</a>
-     * in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html">Auto Scaling Groups</a> in
+     * the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param createAutoScalingGroupRequest
@@ -262,8 +266,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/LaunchConfiguration.html">Launch
-     * Configurations</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html">Launch Configurations</a>
+     * in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param createLaunchConfigurationRequest
@@ -291,8 +295,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html">Tagging Auto Scaling Groups
-     * and Instances</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html">Tagging Auto Scaling
+     * Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param createOrUpdateTagsRequest
@@ -877,8 +881,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/detach-instance-asg.html">Detach EC2 Instances
-     * from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html">Detach EC2 Instances from
+     * Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param detachInstancesRequest
@@ -954,7 +958,7 @@ public interface AmazonAutoScaling {
     /**
      * <p>
      * Enables group metrics for the specified Auto Scaling group. For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/userguide/as-instance-monitoring.html">Monitoring Your Auto
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html">Monitoring Your Auto
      * Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -974,7 +978,7 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html">Auto Scaling
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling
      * Lifecycle</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -1011,7 +1015,7 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html">Auto Scaling
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling
      * Lifecycle</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -1067,8 +1071,8 @@ public interface AmazonAutoScaling {
      * </ol>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html">Auto Scaling
-     * Lifecycle</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html">Auto Scaling Lifecycle
+     * Hooks</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * <p>
      * If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call
@@ -1100,7 +1104,7 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASGettingNotifications.html">Getting SNS
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html">Getting SNS
      * Notifications When Your Auto Scaling Group Scales</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -1146,13 +1150,12 @@ public interface AmazonAutoScaling {
     /**
      * <p>
      * Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling
-     * action, if you leave a parameter unspecified, the corresponding value remains unchanged in the affected Auto
-     * Scaling group.
+     * action, if you leave a parameter unspecified, the corresponding value remains unchanged.
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html">Scheduled Scaling</a> in
-     * the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html">Scheduled Scaling</a> in the
+     * <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param putScheduledUpdateGroupActionRequest
@@ -1209,7 +1212,7 @@ public interface AmazonAutoScaling {
      * </ol>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html">Auto Scaling
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling
      * Lifecycle</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -1230,8 +1233,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html">Suspending and Resuming
-     * Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html">Suspending and
+     * Resuming Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param resumeProcessesRequest
@@ -1252,8 +1255,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information about desired capacity, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html">What Is Auto
-     * Scaling?</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html">What Is Auto Scaling?</a>
+     * in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param setDesiredCapacityRequest
@@ -1274,8 +1277,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html">Health Checks</a> in the
-     * <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html">Health Checks</a> in the <i>Auto
+     * Scaling User Guide</i>.
      * </p>
      * 
      * @param setInstanceHealthRequest
@@ -1293,8 +1296,8 @@ public interface AmazonAutoScaling {
      * Updates the instance protection settings of the specified instances.
      * </p>
      * <p>
-     * For more information, see <a href=
-     * "http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html#instance-protection"
+     * For more information, see <a
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection"
      * >Instance Protection</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
@@ -1324,8 +1327,8 @@ public interface AmazonAutoScaling {
      * </p>
      * <p>
      * For more information, see <a
-     * href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html">Suspending and Resuming
-     * Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.
+     * href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html">Suspending and
+     * Resuming Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.
      * </p>
      * 
      * @param suspendProcessesRequest
@@ -1436,4 +1439,5 @@ public interface AmazonAutoScaling {
     ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request);
 
     AmazonAutoScalingWaiters waiters();
+
 }

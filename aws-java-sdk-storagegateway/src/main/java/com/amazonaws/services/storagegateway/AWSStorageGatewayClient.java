@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -300,6 +301,7 @@ public class AWSStorageGatewayClient extends AmazonWebServiceClient implements A
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/storagegateway/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/storagegateway/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**

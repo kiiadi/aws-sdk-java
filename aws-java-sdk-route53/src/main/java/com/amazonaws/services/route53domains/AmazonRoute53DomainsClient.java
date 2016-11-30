@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -240,6 +241,7 @@ public class AmazonRoute53DomainsClient extends AmazonWebServiceClient implement
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/route53domains/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/route53domains/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**

@@ -66,6 +66,11 @@ public class AbstractAmazonKinesis implements AmazonKinesis {
     }
 
     @Override
+    public DescribeLimitsResult describeLimits(DescribeLimitsRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public DescribeStreamResult describeStream(DescribeStreamRequest request) {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -193,6 +198,11 @@ public class AbstractAmazonKinesis implements AmazonKinesis {
     }
 
     @Override
+    public UpdateShardCountResult updateShardCount(UpdateShardCountRequest request) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
     public void shutdown() {
         throw new java.lang.UnsupportedOperationException();
     }
@@ -206,4 +216,5 @@ public class AbstractAmazonKinesis implements AmazonKinesis {
     public AmazonKinesisWaiters waiters() {
         throw new java.lang.UnsupportedOperationException();
     }
+
 }

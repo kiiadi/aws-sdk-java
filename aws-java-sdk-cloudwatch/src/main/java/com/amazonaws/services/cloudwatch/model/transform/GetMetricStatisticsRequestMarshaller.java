@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class GetMetricStatisticsRequestMarshaller implements Marshaller<Request<
     public Request<GetMetricStatisticsRequest> marshall(GetMetricStatisticsRequest getMetricStatisticsRequest) {
 
         if (getMetricStatisticsRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<GetMetricStatisticsRequest> request = new DefaultRequest<GetMetricStatisticsRequest>(getMetricStatisticsRequest, "AmazonCloudWatch");
@@ -90,6 +90,19 @@ public class GetMetricStatisticsRequestMarshaller implements Marshaller<Request<
                     request.addParameter("Statistics.member." + statisticsListIndex, StringUtils.fromString(statisticsListValue));
                 }
                 statisticsListIndex++;
+            }
+        }
+
+        com.amazonaws.internal.SdkInternalList<String> extendedStatisticsList = (com.amazonaws.internal.SdkInternalList<String>) getMetricStatisticsRequest
+                .getExtendedStatistics();
+        if (!extendedStatisticsList.isEmpty() || !extendedStatisticsList.isAutoConstruct()) {
+            int extendedStatisticsListIndex = 1;
+
+            for (String extendedStatisticsListValue : extendedStatisticsList) {
+                if (extendedStatisticsListValue != null) {
+                    request.addParameter("ExtendedStatistics.member." + extendedStatisticsListIndex, StringUtils.fromString(extendedStatisticsListValue));
+                }
+                extendedStatisticsListIndex++;
             }
         }
 

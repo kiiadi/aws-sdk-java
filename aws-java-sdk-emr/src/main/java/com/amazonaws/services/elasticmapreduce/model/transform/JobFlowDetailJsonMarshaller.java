@@ -15,7 +15,7 @@ package com.amazonaws.services.elasticmapreduce.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.elasticmapreduce.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class JobFlowDetailJsonMarshaller {
     public void marshall(JobFlowDetail jobFlowDetail, StructuredJsonGenerator jsonGenerator) {
 
         if (jobFlowDetail == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -110,10 +110,16 @@ public class JobFlowDetailJsonMarshaller {
             if (jobFlowDetail.getServiceRole() != null) {
                 jsonGenerator.writeFieldName("ServiceRole").writeValue(jobFlowDetail.getServiceRole());
             }
+            if (jobFlowDetail.getAutoScalingRole() != null) {
+                jsonGenerator.writeFieldName("AutoScalingRole").writeValue(jobFlowDetail.getAutoScalingRole());
+            }
+            if (jobFlowDetail.getScaleDownBehavior() != null) {
+                jsonGenerator.writeFieldName("ScaleDownBehavior").writeValue(jobFlowDetail.getScaleDownBehavior());
+            }
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

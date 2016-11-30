@@ -15,7 +15,7 @@ package com.amazonaws.services.iot.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.iot.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class ActionJsonMarshaller {
     public void marshall(Action action, StructuredJsonGenerator jsonGenerator) {
 
         if (action == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -44,6 +44,10 @@ public class ActionJsonMarshaller {
             if (action.getDynamoDB() != null) {
                 jsonGenerator.writeFieldName("dynamoDB");
                 DynamoDBActionJsonMarshaller.getInstance().marshall(action.getDynamoDB(), jsonGenerator);
+            }
+            if (action.getDynamoDBv2() != null) {
+                jsonGenerator.writeFieldName("dynamoDBv2");
+                DynamoDBv2ActionJsonMarshaller.getInstance().marshall(action.getDynamoDBv2(), jsonGenerator);
             }
             if (action.getLambda() != null) {
                 jsonGenerator.writeFieldName("lambda");
@@ -88,7 +92,7 @@ public class ActionJsonMarshaller {
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

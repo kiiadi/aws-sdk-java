@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -42,14 +42,14 @@ public class GetDistributionConfigRequestMarshaller implements Marshaller<Reques
     public Request<GetDistributionConfigRequest> marshall(GetDistributionConfigRequest getDistributionConfigRequest) {
 
         if (getDistributionConfigRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<GetDistributionConfigRequest> request = new DefaultRequest<GetDistributionConfigRequest>(getDistributionConfigRequest, "AmazonCloudFront");
 
         request.setHttpMethod(HttpMethodName.GET);
 
-        String uriResourcePath = "/2016-09-07/distribution/{Id}/config";
+        String uriResourcePath = "/2016-09-29/distribution/{Id}/config";
 
         uriResourcePath = uriResourcePath.replace("{Id}",
                 (getDistributionConfigRequest.getId() != null) ? SdkHttpUtils.urlEncode(StringUtils.fromString(getDistributionConfigRequest.getId()), false)

@@ -19,6 +19,10 @@ import com.amazonaws.services.lambda.model.*;
  * representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
  * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.lambda.AbstractAWSLambdaAsync} instead.
+ * </p>
+ * <p>
  * <fullname>AWS Lambda</fullname>
  * <p>
  * <b>Overview</b>
@@ -615,7 +619,9 @@ public interface AWSLambdaAsync extends AWSLambda {
 
     /**
      * <p>
-     * Invokes a specific Lambda function.
+     * Invokes a specific Lambda function. For an example, see <a
+     * href="http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually"
+     * >Create the Lambda Function and Test It Manually</a>.
      * </p>
      * <p>
      * If you are using the versioning feature, you can invoke the specific function version by providing function
@@ -638,7 +644,9 @@ public interface AWSLambdaAsync extends AWSLambda {
 
     /**
      * <p>
-     * Invokes a specific Lambda function.
+     * Invokes a specific Lambda function. For an example, see <a
+     * href="http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually"
+     * >Create the Lambda Function and Test It Manually</a>.
      * </p>
      * <p>
      * If you are using the versioning feature, you can invoke the specific function version by providing function

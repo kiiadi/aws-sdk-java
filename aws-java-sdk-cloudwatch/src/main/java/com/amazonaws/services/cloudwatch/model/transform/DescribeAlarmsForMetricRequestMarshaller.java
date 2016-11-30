@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class DescribeAlarmsForMetricRequestMarshaller implements Marshaller<Requ
     public Request<DescribeAlarmsForMetricRequest> marshall(DescribeAlarmsForMetricRequest describeAlarmsForMetricRequest) {
 
         if (describeAlarmsForMetricRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<DescribeAlarmsForMetricRequest> request = new DefaultRequest<DescribeAlarmsForMetricRequest>(describeAlarmsForMetricRequest, "AmazonCloudWatch");
@@ -52,6 +52,10 @@ public class DescribeAlarmsForMetricRequestMarshaller implements Marshaller<Requ
 
         if (describeAlarmsForMetricRequest.getStatistic() != null) {
             request.addParameter("Statistic", StringUtils.fromString(describeAlarmsForMetricRequest.getStatistic()));
+        }
+
+        if (describeAlarmsForMetricRequest.getExtendedStatistic() != null) {
+            request.addParameter("ExtendedStatistic", StringUtils.fromString(describeAlarmsForMetricRequest.getExtendedStatistic()));
         }
 
         com.amazonaws.internal.SdkInternalList<Dimension> dimensionsList = (com.amazonaws.internal.SdkInternalList<Dimension>) describeAlarmsForMetricRequest

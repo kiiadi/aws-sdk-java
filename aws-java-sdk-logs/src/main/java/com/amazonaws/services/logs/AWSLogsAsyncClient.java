@@ -17,15 +17,14 @@ import com.amazonaws.client.AwsAsyncClientParams;
 import com.amazonaws.annotation.ThreadSafe;
 
 /**
- * Interface for accessing Amazon CloudWatch Logs asynchronously. Each asynchronous method will return a Java Future
- * object representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
+ * Client for accessing Amazon CloudWatch Logs asynchronously. Each asynchronous method will return a Java Future object
+ * representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
  * <p>
  * <p>
- * You can use Amazon CloudWatch Logs to monitor, store, and access your log files from Amazon Elastic Compute Cloud
- * (Amazon EC2) instances, Amazon CloudTrail, or other sources. You can then retrieve the associated log data from
- * CloudWatch Logs using the Amazon CloudWatch console, the CloudWatch Logs commands in the AWS CLI, the CloudWatch Logs
- * API, or the CloudWatch Logs SDK.
+ * You can use Amazon CloudWatch Logs to monitor, store, and access your log files from EC2 instances, Amazon
+ * CloudTrail, or other sources. You can then retrieve the associated log data from CloudWatch Logs using the Amazon
+ * CloudWatch console, the CloudWatch Logs commands in the AWS CLI, the CloudWatch Logs API, or the CloudWatch Logs SDK.
  * </p>
  * <p>
  * You can use CloudWatch Logs to:

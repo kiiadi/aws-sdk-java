@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -43,7 +43,7 @@ public class DeleteStreamingDistributionRequestMarshaller implements
     public Request<DeleteStreamingDistributionRequest> marshall(DeleteStreamingDistributionRequest deleteStreamingDistributionRequest) {
 
         if (deleteStreamingDistributionRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<DeleteStreamingDistributionRequest> request = new DefaultRequest<DeleteStreamingDistributionRequest>(deleteStreamingDistributionRequest,
@@ -55,7 +55,7 @@ public class DeleteStreamingDistributionRequestMarshaller implements
             request.addHeader("If-Match", StringUtils.fromString(deleteStreamingDistributionRequest.getIfMatch()));
         }
 
-        String uriResourcePath = "/2016-09-07/streaming-distribution/{Id}";
+        String uriResourcePath = "/2016-09-29/streaming-distribution/{Id}";
 
         uriResourcePath = uriResourcePath.replace(
                 "{Id}",

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -35,7 +35,7 @@ public class AuthorizeSecurityGroupIngressRequestMarshaller implements
     public Request<AuthorizeSecurityGroupIngressRequest> marshall(AuthorizeSecurityGroupIngressRequest authorizeSecurityGroupIngressRequest) {
 
         if (authorizeSecurityGroupIngressRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<AuthorizeSecurityGroupIngressRequest> request = new DefaultRequest<AuthorizeSecurityGroupIngressRequest>(authorizeSecurityGroupIngressRequest,
@@ -139,20 +139,6 @@ public class AuthorizeSecurityGroupIngressRequestMarshaller implements
                     }
                 }
 
-                com.amazonaws.internal.SdkInternalList<String> ipPermissionIpRangesList = (com.amazonaws.internal.SdkInternalList<String>) authorizeSecurityGroupIngressRequestIpPermissionsListValue
-                        .getIpRanges();
-                if (!ipPermissionIpRangesList.isEmpty() || !ipPermissionIpRangesList.isAutoConstruct()) {
-                    int ipRangesListIndex = 1;
-
-                    for (String ipPermissionIpRangesListValue : ipPermissionIpRangesList) {
-                        if (ipPermissionIpRangesListValue != null) {
-                            request.addParameter("IpPermissions." + ipPermissionsListIndex + ".IpRanges." + ipRangesListIndex + ".CidrIp",
-                                    StringUtils.fromString(ipPermissionIpRangesListValue));
-                        }
-                        ipRangesListIndex++;
-                    }
-                }
-
                 com.amazonaws.internal.SdkInternalList<PrefixListId> ipPermissionPrefixListIdsList = (com.amazonaws.internal.SdkInternalList<PrefixListId>) authorizeSecurityGroupIngressRequestIpPermissionsListValue
                         .getPrefixListIds();
                 if (!ipPermissionPrefixListIdsList.isEmpty() || !ipPermissionPrefixListIdsList.isAutoConstruct()) {
@@ -165,6 +151,21 @@ public class AuthorizeSecurityGroupIngressRequestMarshaller implements
                                     StringUtils.fromString(ipPermissionPrefixListIdsListValue.getPrefixListId()));
                         }
                         prefixListIdsListIndex++;
+                    }
+                }
+
+                com.amazonaws.internal.SdkInternalList<IpRange> ipPermissionIpv4RangesList = (com.amazonaws.internal.SdkInternalList<IpRange>) authorizeSecurityGroupIngressRequestIpPermissionsListValue
+                        .getIpv4Ranges();
+                if (!ipPermissionIpv4RangesList.isEmpty() || !ipPermissionIpv4RangesList.isAutoConstruct()) {
+                    int ipv4RangesListIndex = 1;
+
+                    for (IpRange ipPermissionIpv4RangesListValue : ipPermissionIpv4RangesList) {
+
+                        if (ipPermissionIpv4RangesListValue.getCidrIp() != null) {
+                            request.addParameter("IpPermissions." + ipPermissionsListIndex + ".IpRanges." + ipv4RangesListIndex + ".CidrIp",
+                                    StringUtils.fromString(ipPermissionIpv4RangesListValue.getCidrIp()));
+                        }
+                        ipv4RangesListIndex++;
                     }
                 }
                 ipPermissionsListIndex++;

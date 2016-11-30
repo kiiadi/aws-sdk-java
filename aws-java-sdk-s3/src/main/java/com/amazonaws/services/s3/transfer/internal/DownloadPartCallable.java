@@ -17,7 +17,7 @@ package com.amazonaws.services.s3.transfer.internal;
 import java.io.File;
 import java.util.concurrent.Callable;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import org.apache.commons.logging.Log;
@@ -46,7 +46,8 @@ public class DownloadPartCallable implements Callable<File> {
     }
 
     public File call() throws Exception {
-        partFile = File.createTempFile(destinationFile.getName(),
+        partFile = File.createTempFile(
+                destinationFile.getName() + "-tmp",
                 TEMP_FILE_MIDDLE_NAME + getPartRequest.getPartNumber().toString(),
                 new File(destinationFilePath.substring(0, destinationFilePath.lastIndexOf(File.separator))));
         try {
@@ -56,7 +57,7 @@ public class DownloadPartCallable implements Callable<File> {
         }
 
         if (s3.getObject(getPartRequest, partFile) == null) {
-            throw new AmazonClientException(
+            throw new SdkClientException(
                     "There is no object in S3 satisfying this request. The getObject method returned null");
         }
         return partFile;

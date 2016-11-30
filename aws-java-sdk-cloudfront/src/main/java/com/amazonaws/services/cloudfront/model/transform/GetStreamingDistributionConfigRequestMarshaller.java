@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -43,7 +43,7 @@ public class GetStreamingDistributionConfigRequestMarshaller implements
     public Request<GetStreamingDistributionConfigRequest> marshall(GetStreamingDistributionConfigRequest getStreamingDistributionConfigRequest) {
 
         if (getStreamingDistributionConfigRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<GetStreamingDistributionConfigRequest> request = new DefaultRequest<GetStreamingDistributionConfigRequest>(
@@ -51,7 +51,7 @@ public class GetStreamingDistributionConfigRequestMarshaller implements
 
         request.setHttpMethod(HttpMethodName.GET);
 
-        String uriResourcePath = "/2016-09-07/streaming-distribution/{Id}/config";
+        String uriResourcePath = "/2016-09-29/streaming-distribution/{Id}/config";
 
         uriResourcePath = uriResourcePath.replace(
                 "{Id}",

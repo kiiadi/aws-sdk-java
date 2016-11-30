@@ -49,8 +49,8 @@
     },
     "authPolicyActions" : {
       "actionPrefix" : null,
-      "fileNamePrefix" : "SNS",
-      "skip" : false
+      "fileNamePrefix" : null,
+      "skip" : true
     },
     "calculateCRC32FromCompressedData" : false,
     "convenienceTypeOverloads" : [ ],
@@ -65,6 +65,7 @@
     "customSignerProvider" : null,
     "operationModifiers" : null,
     "operationsWithResponseStreamContentLengthValidation" : null,
+    "presignersFqcn" : null,
     "renameShapes" : null,
     "requestMetrics" : null,
     "requiredParamValidationEnabled" : false,
@@ -172,6 +173,7 @@
     "packagePath" : "com/amazonaws/services/sns",
     "protocol" : "query",
     "protocolDefaultExceptionUmarshallerImpl" : "StandardErrorUnmarshaller",
+    "requestBaseFqcn" : "com.amazonaws.AmazonWebServiceRequest",
     "serviceAbbreviation" : "Amazon SNS",
     "serviceFullName" : "Amazon Simple Notification Service",
     "serviceName" : "Amazon SNS",

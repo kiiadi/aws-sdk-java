@@ -39,7 +39,11 @@ public class RespondToAuthChallengeResult extends com.amazonaws.AmazonWebService
      * </p>
      */
     private java.util.Map<String, String> challengeParameters;
-
+    /**
+     * <p>
+     * The result returned by the server in response to the request to respond to the authentication challenge.
+     * </p>
+     */
     private AuthenticationResultType authenticationResult;
 
     /**
@@ -206,8 +210,9 @@ public class RespondToAuthChallengeResult extends com.amazonaws.AmazonWebService
     }
 
     /**
-     * Removes all the entries added into ChallengeParameters. &lt;p> Returns a reference to this object so that method
-     * calls can be chained together.
+     * Removes all the entries added into ChallengeParameters.
+     *
+     * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public RespondToAuthChallengeResult clearChallengeParametersEntries() {
@@ -216,7 +221,12 @@ public class RespondToAuthChallengeResult extends com.amazonaws.AmazonWebService
     }
 
     /**
+     * <p>
+     * The result returned by the server in response to the request to respond to the authentication challenge.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result returned by the server in response to the request to respond to the authentication challenge.
      */
 
     public void setAuthenticationResult(AuthenticationResultType authenticationResult) {
@@ -224,7 +234,11 @@ public class RespondToAuthChallengeResult extends com.amazonaws.AmazonWebService
     }
 
     /**
-     * @return
+     * <p>
+     * The result returned by the server in response to the request to respond to the authentication challenge.
+     * </p>
+     * 
+     * @return The result returned by the server in response to the request to respond to the authentication challenge.
      */
 
     public AuthenticationResultType getAuthenticationResult() {
@@ -232,7 +246,12 @@ public class RespondToAuthChallengeResult extends com.amazonaws.AmazonWebService
     }
 
     /**
+     * <p>
+     * The result returned by the server in response to the request to respond to the authentication challenge.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result returned by the server in response to the request to respond to the authentication challenge.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

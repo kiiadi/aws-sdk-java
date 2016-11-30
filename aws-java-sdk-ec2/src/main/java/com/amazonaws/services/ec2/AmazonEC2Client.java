@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -229,6 +230,7 @@ public class AmazonEC2Client extends AmazonWebServiceClient implements AmazonEC2
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/ec2/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/ec2/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -10791,6 +10793,7 @@ public class AmazonEC2Client extends AmazonWebServiceClient implements AmazonEC2
         return client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 
+    @Override
     public AmazonEC2Waiters waiters() {
         if (waiters == null) {
             synchronized (this) {

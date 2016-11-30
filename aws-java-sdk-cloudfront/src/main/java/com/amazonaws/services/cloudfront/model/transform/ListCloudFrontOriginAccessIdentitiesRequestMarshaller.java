@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -43,7 +43,7 @@ public class ListCloudFrontOriginAccessIdentitiesRequestMarshaller implements
     public Request<ListCloudFrontOriginAccessIdentitiesRequest> marshall(ListCloudFrontOriginAccessIdentitiesRequest listCloudFrontOriginAccessIdentitiesRequest) {
 
         if (listCloudFrontOriginAccessIdentitiesRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<ListCloudFrontOriginAccessIdentitiesRequest> request = new DefaultRequest<ListCloudFrontOriginAccessIdentitiesRequest>(
@@ -51,7 +51,7 @@ public class ListCloudFrontOriginAccessIdentitiesRequestMarshaller implements
 
         request.setHttpMethod(HttpMethodName.GET);
 
-        String uriResourcePath = "/2016-09-07/origin-access-identity/cloudfront";
+        String uriResourcePath = "/2016-09-29/origin-access-identity/cloudfront";
 
         request.setResourcePath(uriResourcePath);
 

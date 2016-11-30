@@ -15,7 +15,7 @@ package com.amazonaws.services.apigateway.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.apigateway.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class IntegrationJsonMarshaller {
     public void marshall(Integration integration, StructuredJsonGenerator jsonGenerator) {
 
         if (integration == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -86,6 +86,9 @@ public class IntegrationJsonMarshaller {
             if (integration.getPassthroughBehavior() != null) {
                 jsonGenerator.writeFieldName("passthroughBehavior").writeValue(integration.getPassthroughBehavior());
             }
+            if (integration.getContentHandling() != null) {
+                jsonGenerator.writeFieldName("contentHandling").writeValue(integration.getContentHandling());
+            }
             if (integration.getCacheNamespace() != null) {
                 jsonGenerator.writeFieldName("cacheNamespace").writeValue(integration.getCacheNamespace());
             }
@@ -119,7 +122,7 @@ public class IntegrationJsonMarshaller {
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

@@ -15,7 +15,7 @@ package com.amazonaws.services.kinesis.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.kinesis.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class StreamDescriptionJsonMarshaller {
     public void marshall(StreamDescription streamDescription, StructuredJsonGenerator jsonGenerator) {
 
         if (streamDescription == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -69,6 +69,9 @@ public class StreamDescriptionJsonMarshaller {
             if (streamDescription.getRetentionPeriodHours() != null) {
                 jsonGenerator.writeFieldName("RetentionPeriodHours").writeValue(streamDescription.getRetentionPeriodHours());
             }
+            if (streamDescription.getStreamCreationTimestamp() != null) {
+                jsonGenerator.writeFieldName("StreamCreationTimestamp").writeValue(streamDescription.getStreamCreationTimestamp());
+            }
 
             com.amazonaws.internal.SdkInternalList<EnhancedMetrics> enhancedMonitoringList = (com.amazonaws.internal.SdkInternalList<EnhancedMetrics>) streamDescription
                     .getEnhancedMonitoring();
@@ -86,7 +89,7 @@ public class StreamDescriptionJsonMarshaller {
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

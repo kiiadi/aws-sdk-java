@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -282,6 +283,7 @@ public class AmazonElastiCacheClient extends AmazonWebServiceClient implements A
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/elasticache/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/elasticache/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -804,7 +806,7 @@ public class AmazonElastiCacheClient extends AmazonWebServiceClient implements A
      * <p>
      * When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more
      * read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled)
-     * replication group once it has been created.
+     * replication group after it has been created.
      * </p>
      * <note>
      * <p>
@@ -2605,6 +2607,7 @@ public class AmazonElastiCacheClient extends AmazonWebServiceClient implements A
         return client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 
+    @Override
     public AmazonElastiCacheWaiters waiters() {
         if (waiters == null) {
             synchronized (this) {

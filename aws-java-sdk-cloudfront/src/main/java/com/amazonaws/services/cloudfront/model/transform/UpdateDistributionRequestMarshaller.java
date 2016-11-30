@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -42,7 +42,7 @@ public class UpdateDistributionRequestMarshaller implements Marshaller<Request<U
     public Request<UpdateDistributionRequest> marshall(UpdateDistributionRequest updateDistributionRequest) {
 
         if (updateDistributionRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<UpdateDistributionRequest> request = new DefaultRequest<UpdateDistributionRequest>(updateDistributionRequest, "AmazonCloudFront");
@@ -53,7 +53,7 @@ public class UpdateDistributionRequestMarshaller implements Marshaller<Request<U
             request.addHeader("If-Match", StringUtils.fromString(updateDistributionRequest.getIfMatch()));
         }
 
-        String uriResourcePath = "/2016-09-07/distribution/{Id}/config";
+        String uriResourcePath = "/2016-09-29/distribution/{Id}/config";
 
         uriResourcePath = uriResourcePath.replace("{Id}",
                 (updateDistributionRequest.getId() != null) ? SdkHttpUtils.urlEncode(StringUtils.fromString(updateDistributionRequest.getId()), false) : "");
@@ -61,7 +61,7 @@ public class UpdateDistributionRequestMarshaller implements Marshaller<Request<U
 
         try {
             StringWriter stringWriter = new StringWriter();
-            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2016-09-07/");
+            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2016-09-29/");
 
             DistributionConfig distributionConfig = updateDistributionRequest.getDistributionConfig();
             if (distributionConfig != null) {
@@ -769,6 +769,10 @@ public class UpdateDistributionRequestMarshaller implements Marshaller<Request<U
                 if (distributionConfig.getHttpVersion() != null) {
                     xmlWriter.startElement("HttpVersion").value(distributionConfig.getHttpVersion()).endElement();
                 }
+
+                if (distributionConfig.getIsIPV6Enabled() != null) {
+                    xmlWriter.startElement("IsIPV6Enabled").value(distributionConfig.getIsIPV6Enabled()).endElement();
+                }
                 xmlWriter.endElement();
             }
 
@@ -778,7 +782,7 @@ public class UpdateDistributionRequestMarshaller implements Marshaller<Request<U
                 request.addHeader("Content-Type", "application/xml");
             }
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to XML: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to XML: " + t.getMessage(), t);
         }
 
         return request;

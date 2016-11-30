@@ -17,7 +17,7 @@ import com.amazonaws.client.AwsAsyncClientParams;
 import com.amazonaws.annotation.ThreadSafe;
 
 /**
- * Interface for accessing Amazon Elastic Transcoder asynchronously. Each asynchronous method will return a Java Future
+ * Client for accessing Amazon Elastic Transcoder asynchronously. Each asynchronous method will return a Java Future
  * object representing the asynchronous operation; overloads which accept an {@code AsyncHandler} can be used to receive
  * notification when an asynchronous operation completes.
  * <p>
@@ -676,12 +676,14 @@ public class AmazonElasticTranscoderAsyncClient extends AmazonElasticTranscoderC
     }
 
     @Override
+    @Deprecated
     public java.util.concurrent.Future<TestRoleResult> testRoleAsync(TestRoleRequest request) {
 
         return testRoleAsync(request, null);
     }
 
     @Override
+    @Deprecated
     public java.util.concurrent.Future<TestRoleResult> testRoleAsync(final TestRoleRequest request,
             final com.amazonaws.handlers.AsyncHandler<TestRoleRequest, TestRoleResult> asyncHandler) {
 

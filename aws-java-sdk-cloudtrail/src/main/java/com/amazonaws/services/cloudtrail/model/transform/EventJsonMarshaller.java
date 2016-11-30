@@ -15,7 +15,7 @@ package com.amazonaws.services.cloudtrail.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.cloudtrail.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class EventJsonMarshaller {
     public void marshall(Event event, StructuredJsonGenerator jsonGenerator) {
 
         if (event == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -49,6 +49,9 @@ public class EventJsonMarshaller {
             }
             if (event.getEventTime() != null) {
                 jsonGenerator.writeFieldName("EventTime").writeValue(event.getEventTime());
+            }
+            if (event.getEventSource() != null) {
+                jsonGenerator.writeFieldName("EventSource").writeValue(event.getEventSource());
             }
             if (event.getUsername() != null) {
                 jsonGenerator.writeFieldName("Username").writeValue(event.getUsername());
@@ -72,7 +75,7 @@ public class EventJsonMarshaller {
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

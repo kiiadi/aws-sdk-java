@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -44,7 +44,7 @@ public class DescribeMetricFiltersRequestMarshaller implements Marshaller<Reques
     public Request<DescribeMetricFiltersRequest> marshall(DescribeMetricFiltersRequest describeMetricFiltersRequest) {
 
         if (describeMetricFiltersRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<DescribeMetricFiltersRequest> request = new DefaultRequest<DescribeMetricFiltersRequest>(describeMetricFiltersRequest, "AWSLogs");
@@ -71,6 +71,12 @@ public class DescribeMetricFiltersRequestMarshaller implements Marshaller<Reques
             if (describeMetricFiltersRequest.getLimit() != null) {
                 jsonGenerator.writeFieldName("limit").writeValue(describeMetricFiltersRequest.getLimit());
             }
+            if (describeMetricFiltersRequest.getMetricName() != null) {
+                jsonGenerator.writeFieldName("metricName").writeValue(describeMetricFiltersRequest.getMetricName());
+            }
+            if (describeMetricFiltersRequest.getMetricNamespace() != null) {
+                jsonGenerator.writeFieldName("metricNamespace").writeValue(describeMetricFiltersRequest.getMetricNamespace());
+            }
 
             jsonGenerator.writeEndObject();
 
@@ -79,7 +85,7 @@ public class DescribeMetricFiltersRequestMarshaller implements Marshaller<Reques
             request.addHeader("Content-Length", Integer.toString(content.length));
             request.addHeader("Content-Type", protocolFactory.getContentType());
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
 
         return request;

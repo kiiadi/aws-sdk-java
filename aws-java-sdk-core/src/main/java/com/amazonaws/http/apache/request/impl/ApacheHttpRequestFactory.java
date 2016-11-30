@@ -14,7 +14,7 @@
  */
 package com.amazonaws.http.apache.request.impl;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.http.HttpMethodName;
 import com.amazonaws.http.RepeatableInputStreamRequestEntity;
@@ -30,6 +30,7 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
+import org.apache.http.client.methods.HttpOptions;
 import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -121,6 +122,8 @@ public class ApacheHttpRequestFactory implements
                 return new HttpGet(uri);
             case DELETE:
                 return new HttpDelete(uri);
+            case OPTIONS:
+                return new HttpOptions(uri);
             case PATCH:
                 return wrapEntity(request, new HttpPatch(uri), encodedParams);
             case POST:
@@ -128,7 +131,7 @@ public class ApacheHttpRequestFactory implements
             case PUT:
                 return wrapEntity(request, new HttpPut(uri), encodedParams);
             default:
-                throw new AmazonClientException("Unknown HTTP method name: " + request.getHttpMethod());
+                throw new SdkClientException("Unknown HTTP method name: " + request.getHttpMethod());
         }
     }
 

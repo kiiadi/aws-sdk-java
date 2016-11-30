@@ -39,7 +39,11 @@ public class InitiateAuthResult extends com.amazonaws.AmazonWebServiceResult<com
      * </p>
      */
     private java.util.Map<String, String> challengeParameters;
-
+    /**
+     * <p>
+     * The result returned by the server in response to the request to initiate authentication.
+     * </p>
+     */
     private AuthenticationResultType authenticationResult;
 
     /**
@@ -206,8 +210,9 @@ public class InitiateAuthResult extends com.amazonaws.AmazonWebServiceResult<com
     }
 
     /**
-     * Removes all the entries added into ChallengeParameters. &lt;p> Returns a reference to this object so that method
-     * calls can be chained together.
+     * Removes all the entries added into ChallengeParameters.
+     *
+     * @return Returns a reference to this object so that method calls can be chained together.
      */
 
     public InitiateAuthResult clearChallengeParametersEntries() {
@@ -216,7 +221,12 @@ public class InitiateAuthResult extends com.amazonaws.AmazonWebServiceResult<com
     }
 
     /**
+     * <p>
+     * The result returned by the server in response to the request to initiate authentication.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result returned by the server in response to the request to initiate authentication.
      */
 
     public void setAuthenticationResult(AuthenticationResultType authenticationResult) {
@@ -224,7 +234,11 @@ public class InitiateAuthResult extends com.amazonaws.AmazonWebServiceResult<com
     }
 
     /**
-     * @return
+     * <p>
+     * The result returned by the server in response to the request to initiate authentication.
+     * </p>
+     * 
+     * @return The result returned by the server in response to the request to initiate authentication.
      */
 
     public AuthenticationResultType getAuthenticationResult() {
@@ -232,7 +246,12 @@ public class InitiateAuthResult extends com.amazonaws.AmazonWebServiceResult<com
     }
 
     /**
+     * <p>
+     * The result returned by the server in response to the request to initiate authentication.
+     * </p>
+     * 
      * @param authenticationResult
+     *        The result returned by the server in response to the request to initiate authentication.
      * @return Returns a reference to this object so that method calls can be chained together.
      */
 

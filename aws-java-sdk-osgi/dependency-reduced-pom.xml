@@ -3,7 +3,7 @@
   <parent>
     <artifactId>aws-java-sdk-pom</artifactId>
     <groupId>com.amazonaws</groupId>
-    <version>1.11.43</version>
+    <version>1.11.62</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.amazonaws</groupId>
@@ -114,10 +114,10 @@
                   <use>false</use>
                   <notree>true</notree>
                   <nodeprecatedlist>true</nodeprecatedlist>
-                  <windowtitle>AWS SDK for Java - 1.11.43</windowtitle>
+                  <windowtitle>AWS SDK for Java - 1.11.62</windowtitle>
                   <encoding>UTF-8</encoding>
                   <docencoding>UTF-8</docencoding>
-                  <doctitle>AWS SDK for Java API Reference - 1.11.43</doctitle>
+                  <doctitle>AWS SDK for Java API Reference - 1.11.62</doctitle>
                   <packagesheader>AWS SDK for Java</packagesheader>
                   <docfilessubdirs>true</docfilessubdirs>
                   <taglets>
@@ -390,6 +390,26 @@
                     <group>
                       <title>AWS Service Catalog</title>
                       <packages>com.amazonaws.services.servicecatalog*</packages>
+                    </group>
+                    <group>
+                      <title>AWS Budgets</title>
+                      <packages>com.amazonaws.services.budgets*</packages>
+                    </group>
+                    <group>
+                      <title>AWS Server Migration</title>
+                      <packages>com.amazonaws.services.servermigration*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Rekognition</title>
+                      <packages>com.amazonaws.services.rekognition*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Polly</title>
+                      <packages>com.amazonaws.services.polly*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Lightsail</title>
+                      <packages>com.amazonaws.services.lightsail*</packages>
                     </group>
                     <group>
                       <title>Common</title>
@@ -528,10 +548,10 @@
                   <use>false</use>
                   <notree>true</notree>
                   <nodeprecatedlist>true</nodeprecatedlist>
-                  <windowtitle>AWS SDK for Java - 1.11.43</windowtitle>
+                  <windowtitle>AWS SDK for Java - 1.11.62</windowtitle>
                   <encoding>UTF-8</encoding>
                   <docencoding>UTF-8</docencoding>
-                  <doctitle>AWS SDK for Java API Reference - 1.11.43</doctitle>
+                  <doctitle>AWS SDK for Java API Reference - 1.11.62</doctitle>
                   <packagesheader>AWS SDK for Java</packagesheader>
                   <docfilessubdirs>true</docfilessubdirs>
                   <taglets>
@@ -806,6 +826,26 @@
                       <packages>com.amazonaws.services.servicecatalog*</packages>
                     </group>
                     <group>
+                      <title>AWS Budgets</title>
+                      <packages>com.amazonaws.services.budgets*</packages>
+                    </group>
+                    <group>
+                      <title>AWS Server Migration</title>
+                      <packages>com.amazonaws.services.servermigration*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Rekognition</title>
+                      <packages>com.amazonaws.services.rekognition*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Polly</title>
+                      <packages>com.amazonaws.services.polly*</packages>
+                    </group>
+                    <group>
+                      <title>Amazon Lightsail</title>
+                      <packages>com.amazonaws.services.lightsail*</packages>
+                    </group>
+                    <group>
                       <title>Common</title>
                       <packages>com.amazonaws*</packages>
                     </group>
@@ -938,10 +978,10 @@
               <use>false</use>
               <notree>true</notree>
               <nodeprecatedlist>true</nodeprecatedlist>
-              <windowtitle>AWS SDK for Java - 1.11.43</windowtitle>
+              <windowtitle>AWS SDK for Java - 1.11.62</windowtitle>
               <encoding>UTF-8</encoding>
               <docencoding>UTF-8</docencoding>
-              <doctitle>AWS SDK for Java API Reference - 1.11.43</doctitle>
+              <doctitle>AWS SDK for Java API Reference - 1.11.62</doctitle>
               <packagesheader>AWS SDK for Java</packagesheader>
               <docfilessubdirs>true</docfilessubdirs>
               <taglets>
@@ -1214,6 +1254,26 @@
                 <group>
                   <title>AWS Service Catalog</title>
                   <packages>com.amazonaws.services.servicecatalog*</packages>
+                </group>
+                <group>
+                  <title>AWS Budgets</title>
+                  <packages>com.amazonaws.services.budgets*</packages>
+                </group>
+                <group>
+                  <title>AWS Server Migration</title>
+                  <packages>com.amazonaws.services.servermigration*</packages>
+                </group>
+                <group>
+                  <title>Amazon Rekognition</title>
+                  <packages>com.amazonaws.services.rekognition*</packages>
+                </group>
+                <group>
+                  <title>Amazon Polly</title>
+                  <packages>com.amazonaws.services.polly*</packages>
+                </group>
+                <group>
+                  <title>Amazon Lightsail</title>
+                  <packages>com.amazonaws.services.lightsail*</packages>
                 </group>
                 <group>
                   <title>Common</title>
@@ -1545,7 +1605,7 @@
                   <goal>exec</goal>
                 </goals>
                 <configuration>
-                  <workingDirectory>target/aws-java-sdk-osgi-1.11.43-sdk-zip-archive-assembly/</workingDirectory>
+                  <workingDirectory>target/aws-java-sdk-osgi-1.11.62-sdk-zip-archive-assembly/</workingDirectory>
                   <executable>zip</executable>
                   <commandlineArgs>-r ../aws-java-sdk.zip .</commandlineArgs>
                 </configuration>

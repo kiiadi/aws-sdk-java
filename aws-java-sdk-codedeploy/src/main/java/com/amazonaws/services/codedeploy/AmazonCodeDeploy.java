@@ -21,6 +21,10 @@ import com.amazonaws.services.codedeploy.waiters.AmazonCodeDeployWaiters;
 /**
  * Interface for accessing CodeDeploy.
  * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.codedeploy.AbstractAmazonCodeDeploy} instead.
+ * </p>
+ * <p>
  * <fullname>AWS CodeDeploy</fullname>
  * <p>
  * <b>Overview</b>
@@ -1118,4 +1122,5 @@ public interface AmazonCodeDeploy {
     ResponseMetadata getCachedResponseMetadata(AmazonWebServiceRequest request);
 
     AmazonCodeDeployWaiters waiters();
+
 }

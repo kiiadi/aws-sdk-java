@@ -15,7 +15,7 @@ package com.amazonaws.services.snowball.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.snowball.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class JobResourceJsonMarshaller {
     public void marshall(JobResource jobResource, StructuredJsonGenerator jsonGenerator) {
 
         if (jobResource == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -54,9 +54,22 @@ public class JobResourceJsonMarshaller {
                 jsonGenerator.writeEndArray();
             }
 
+            java.util.List<LambdaResource> lambdaResourcesList = jobResource.getLambdaResources();
+            if (lambdaResourcesList != null) {
+                jsonGenerator.writeFieldName("LambdaResources");
+                jsonGenerator.writeStartArray();
+                for (LambdaResource lambdaResourcesListValue : lambdaResourcesList) {
+                    if (lambdaResourcesListValue != null) {
+
+                        LambdaResourceJsonMarshaller.getInstance().marshall(lambdaResourcesListValue, jsonGenerator);
+                    }
+                }
+                jsonGenerator.writeEndArray();
+            }
+
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

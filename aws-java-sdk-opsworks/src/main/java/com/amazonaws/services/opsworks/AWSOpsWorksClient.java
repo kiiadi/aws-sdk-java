@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -365,6 +366,7 @@ public class AWSOpsWorksClient extends AmazonWebServiceClient implements AWSOpsW
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/opsworks/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/opsworks/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -4041,6 +4043,7 @@ public class AWSOpsWorksClient extends AmazonWebServiceClient implements AWSOpsW
         return client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 
+    @Override
     public AWSOpsWorksWaiters waiters() {
         if (waiters == null) {
             synchronized (this) {

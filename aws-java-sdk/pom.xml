@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.amazonaws</groupId>
     <artifactId>aws-java-sdk-pom</artifactId>
-    <version>1.11.44-SNAPSHOT</version>
+    <version>1.11.63-SNAPSHOT</version>
   </parent>
   <groupId>com.amazonaws</groupId>
   <artifactId>aws-java-sdk</artifactId>
@@ -29,6 +29,12 @@
     </dependency>
     <dependency>
         <artifactId>aws-java-sdk-servicecatalog</artifactId>
+        <groupId>com.amazonaws</groupId>
+        <optional>false</optional>
+        <version>${awsjavasdk.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>aws-java-sdk-servermigration</artifactId>
         <groupId>com.amazonaws</groupId>
         <optional>false</optional>
         <version>${awsjavasdk.version}</version>
@@ -155,6 +161,12 @@
     </dependency>
     <dependency>
         <artifactId>aws-java-sdk-sns</artifactId>
+        <groupId>com.amazonaws</groupId>
+        <optional>false</optional>
+        <version>${awsjavasdk.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>aws-java-sdk-budgets</artifactId>
         <groupId>com.amazonaws</groupId>
         <optional>false</optional>
         <version>${awsjavasdk.version}</version>
@@ -419,6 +431,24 @@
     </dependency>
     <dependency>
         <artifactId>aws-java-sdk-snowball</artifactId>
+        <groupId>com.amazonaws</groupId>
+        <optional>false</optional>
+        <version>${awsjavasdk.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>aws-java-sdk-rekognition</artifactId>
+        <groupId>com.amazonaws</groupId>
+        <optional>false</optional>
+        <version>${awsjavasdk.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>aws-java-sdk-polly</artifactId>
+        <groupId>com.amazonaws</groupId>
+        <optional>false</optional>
+        <version>${awsjavasdk.version}</version>
+    </dependency>
+    <dependency>
+        <artifactId>aws-java-sdk-lightsail</artifactId>
         <groupId>com.amazonaws</groupId>
         <optional>false</optional>
         <version>${awsjavasdk.version}</version>

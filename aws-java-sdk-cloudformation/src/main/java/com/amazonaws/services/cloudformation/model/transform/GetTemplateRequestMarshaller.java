@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class GetTemplateRequestMarshaller implements Marshaller<Request<GetTempl
     public Request<GetTemplateRequest> marshall(GetTemplateRequest getTemplateRequest) {
 
         if (getTemplateRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<GetTemplateRequest> request = new DefaultRequest<GetTemplateRequest>(getTemplateRequest, "AmazonCloudFormation");
@@ -44,6 +44,14 @@ public class GetTemplateRequestMarshaller implements Marshaller<Request<GetTempl
 
         if (getTemplateRequest.getStackName() != null) {
             request.addParameter("StackName", StringUtils.fromString(getTemplateRequest.getStackName()));
+        }
+
+        if (getTemplateRequest.getChangeSetName() != null) {
+            request.addParameter("ChangeSetName", StringUtils.fromString(getTemplateRequest.getChangeSetName()));
+        }
+
+        if (getTemplateRequest.getTemplateStage() != null) {
+            request.addParameter("TemplateStage", StringUtils.fromString(getTemplateRequest.getTemplateStage()));
         }
 
         return request;

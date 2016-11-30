@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -47,10 +48,10 @@ import com.amazonaws.services.cloudformation.model.transform.*;
  * <p>
  * <fullname>AWS CloudFormation</fullname>
  * <p>
- * AWS CloudFormation enables you to create and manage AWS infrastructure deployments predictably and repeatedly. AWS
- * CloudFormation helps you leverage AWS products such as Amazon EC2, EBS, Amazon SNS, ELB, and Auto Scaling to build
- * highly-reliable, highly scalable, cost effective applications without worrying about creating and configuring the
- * underlying AWS infrastructure.
+ * AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can
+ * use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store,
+ * Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly
+ * scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.
  * </p>
  * <p>
  * With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines
@@ -58,13 +59,13 @@ import com.amazonaws.services.cloudformation.model.transform.*;
  * resources of the stack together and manages all dependencies between the resources for you.
  * </p>
  * <p>
- * For more information about this product, go to the <a href="http://aws.amazon.com/cloudformation/">CloudFormation
- * Product Page</a>.
+ * For more information about AWS CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">AWS
+ * CloudFormation Product Page</a>.
  * </p>
  * <p>
  * Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific
  * AWS product, you can find the product's technical documentation at <a
- * href="http://docs.aws.amazon.com/">http://docs.aws.amazon.com/</a>.
+ * href="http://docs.aws.amazon.com/http:/docs.aws.amazon.com/">http://docs.aws.amazon.com/</a>.
  * </p>
  */
 @ThreadSafe
@@ -251,6 +252,7 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/cloudformation/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/cloudformation/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -352,10 +354,10 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
 
     /**
      * <p>
-     * Creates a list of changes for a stack. AWS CloudFormation generates the change set by comparing the stack's
+     * Creates a list of changes for a stack. AWS CloudFormation generates the change set by comparing the template's
      * information with the information that you submit. A change set can help you understand which resources AWS
-     * CloudFormation will change and how it will change them before you update your stack. Change sets allow you to
-     * check before you make a change so that you don't delete or replace critical resources.
+     * CloudFormation will change, and how it will change them, before you update your stack. Change sets allow you to
+     * check before making a change to avoid deleting or replacing critical resources.
      * </p>
      * <p>
      * AWS CloudFormation doesn't make any changes to the stack when you create a change set. To make the specified
@@ -904,6 +906,8 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
      * @throws ChangeSetNotFoundException
      *         The specified change set name or ID doesn't exit. To view valid change sets for a stack, use the
      *         <code>ListChangeSets</code> action.
+     * @throws InsufficientCapabilitiesException
+     *         The template contains resources with capabilities that were not specified in the Capabilities parameter.
      * @sample AmazonCloudFormation.ExecuteChangeSet
      */
     @Override
@@ -992,6 +996,9 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
      * @param getTemplateRequest
      *        The input for a <a>GetTemplate</a> action.
      * @return Result of the GetTemplate operation returned by the service.
+     * @throws ChangeSetNotFoundException
+     *         The specified change set name or ID doesn't exit. To view valid change sets for a stack, use the
+     *         <code>ListChangeSets</code> action.
      * @sample AmazonCloudFormation.GetTemplate
      */
     @Override
@@ -1109,6 +1116,97 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
 
             StaxResponseHandler<ListChangeSetsResult> responseHandler = new StaxResponseHandler<ListChangeSetsResult>(
                     new ListChangeSetsResultStaxUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Lists all exported output values in the account and region in which you call this action. Use this action to see
+     * the exported output values that you can import into other stacks. To import values, use the <a href=
+     * "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html">
+     * <code>Fn::ImportValue</code> </a> function.
+     * </p>
+     * <p>
+     * For more information, see <a
+     * href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html"> AWS
+     * CloudFormation Export Stack Output Values</a>.
+     * </p>
+     * 
+     * @param listExportsRequest
+     * @return Result of the ListExports operation returned by the service.
+     * @sample AmazonCloudFormation.ListExports
+     */
+    @Override
+    public ListExportsResult listExports(ListExportsRequest listExportsRequest) {
+        ExecutionContext executionContext = createExecutionContext(listExportsRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<ListExportsRequest> request = null;
+        Response<ListExportsResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new ListExportsRequestMarshaller().marshall(super.beforeMarshalling(listExportsRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            StaxResponseHandler<ListExportsResult> responseHandler = new StaxResponseHandler<ListExportsResult>(new ListExportsResultStaxUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first
+     * use this action to see which stacks are using it. To see the exported output values in your account, see
+     * <a>ListExports</a>.
+     * </p>
+     * <p>
+     * For more information about importing an exported output value, see the <a href=
+     * "http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html">
+     * <code>Fn::ImportValue</code> </a> function.
+     * </p>
+     * 
+     * @param listImportsRequest
+     * @return Result of the ListImports operation returned by the service.
+     * @sample AmazonCloudFormation.ListImports
+     */
+    @Override
+    public ListImportsResult listImports(ListImportsRequest listImportsRequest) {
+        ExecutionContext executionContext = createExecutionContext(listImportsRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<ListImportsRequest> request = null;
+        Response<ListImportsResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new ListImportsRequestMarshaller().marshall(super.beforeMarshalling(listImportsRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            StaxResponseHandler<ListImportsResult> responseHandler = new StaxResponseHandler<ListImportsResult>(new ListImportsResultStaxUnmarshaller());
             response = invoke(request, responseHandler, executionContext);
 
             return response.getAwsResponse();
@@ -1440,6 +1538,7 @@ public class AmazonCloudFormationClient extends AmazonWebServiceClient implement
         return client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 
+    @Override
     public AmazonCloudFormationWaiters waiters() {
         if (waiters == null) {
             synchronized (this) {

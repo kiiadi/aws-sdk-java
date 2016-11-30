@@ -15,7 +15,7 @@ package com.amazonaws.services.snowball.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.snowball.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class JobMetadataJsonMarshaller {
     public void marshall(JobMetadata jobMetadata, StructuredJsonGenerator jsonGenerator) {
 
         if (jobMetadata == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -49,6 +49,9 @@ public class JobMetadataJsonMarshaller {
             }
             if (jobMetadata.getJobType() != null) {
                 jsonGenerator.writeFieldName("JobType").writeValue(jobMetadata.getJobType());
+            }
+            if (jobMetadata.getSnowballType() != null) {
+                jsonGenerator.writeFieldName("SnowballType").writeValue(jobMetadata.getSnowballType());
             }
             if (jobMetadata.getCreationDate() != null) {
                 jsonGenerator.writeFieldName("CreationDate").writeValue(jobMetadata.getCreationDate());
@@ -88,10 +91,13 @@ public class JobMetadataJsonMarshaller {
                 jsonGenerator.writeFieldName("JobLogInfo");
                 JobLogsJsonMarshaller.getInstance().marshall(jobMetadata.getJobLogInfo(), jsonGenerator);
             }
+            if (jobMetadata.getClusterId() != null) {
+                jsonGenerator.writeFieldName("ClusterId").writeValue(jobMetadata.getClusterId());
+            }
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

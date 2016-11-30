@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -43,7 +43,7 @@ public class DeleteCloudFrontOriginAccessIdentityRequestMarshaller implements
     public Request<DeleteCloudFrontOriginAccessIdentityRequest> marshall(DeleteCloudFrontOriginAccessIdentityRequest deleteCloudFrontOriginAccessIdentityRequest) {
 
         if (deleteCloudFrontOriginAccessIdentityRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<DeleteCloudFrontOriginAccessIdentityRequest> request = new DefaultRequest<DeleteCloudFrontOriginAccessIdentityRequest>(
@@ -55,7 +55,7 @@ public class DeleteCloudFrontOriginAccessIdentityRequestMarshaller implements
             request.addHeader("If-Match", StringUtils.fromString(deleteCloudFrontOriginAccessIdentityRequest.getIfMatch()));
         }
 
-        String uriResourcePath = "/2016-09-07/origin-access-identity/cloudfront/{Id}";
+        String uriResourcePath = "/2016-09-29/origin-access-identity/cloudfront/{Id}";
 
         uriResourcePath = uriResourcePath.replace(
                 "{Id}",

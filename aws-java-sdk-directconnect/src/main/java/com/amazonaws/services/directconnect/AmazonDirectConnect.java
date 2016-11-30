@@ -20,6 +20,10 @@ import com.amazonaws.services.directconnect.model.*;
 /**
  * Interface for accessing AWS Direct Connect.
  * <p>
+ * <b>Note:</b> Do not directly implement this interface, new methods are added to it regularly. Extend from
+ * {@link com.amazonaws.services.directconnect.AbstractAmazonDirectConnect} instead.
+ * </p>
+ * <p>
  * <p>
  * AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10
  * gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct
@@ -551,6 +555,24 @@ public interface AmazonDirectConnect {
 
     /**
      * <p>
+     * Describes the tags associated with the specified Direct Connect resources.
+     * </p>
+     * 
+     * @param describeTagsRequest
+     *        Container for the parameters to the DescribeTags operation.
+     * @return Result of the DescribeTags operation returned by the service.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.DescribeTags
+     */
+    DescribeTagsResult describeTags(DescribeTagsRequest describeTagsRequest);
+
+    /**
+     * <p>
      * Returns a list of virtual private gateways owned by the AWS account.
      * </p>
      * <p>
@@ -613,6 +635,51 @@ public interface AmazonDirectConnect {
      * @see #describeVirtualInterfaces(DescribeVirtualInterfacesRequest)
      */
     DescribeVirtualInterfacesResult describeVirtualInterfaces();
+
+    /**
+     * <p>
+     * Adds the specified tags to the specified Direct Connect resource. Each Direct Connect resource can have a maximum
+     * of 50 tags.
+     * </p>
+     * <p>
+     * Each tag consists of a key and an optional value. If a tag with the same key is already associated with the
+     * Direct Connect resource, this action updates its value.
+     * </p>
+     * 
+     * @param tagResourceRequest
+     *        Container for the parameters to the TagResource operation.
+     * @return Result of the TagResource operation returned by the service.
+     * @throws DuplicateTagKeysException
+     *         A tag key was specified more than once.
+     * @throws TooManyTagsException
+     *         You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.TagResource
+     */
+    TagResourceResult tagResource(TagResourceRequest tagResourceRequest);
+
+    /**
+     * <p>
+     * Removes one or more tags from the specified Direct Connect resource.
+     * </p>
+     * 
+     * @param untagResourceRequest
+     *        Container for the parameters to the UntagResource operation.
+     * @return Result of the UntagResource operation returned by the service.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.UntagResource
+     */
+    UntagResourceResult untagResource(UntagResourceRequest untagResourceRequest);
 
     /**
      * Shuts down this client object, releasing any resources that might be held open. This is an optional method, and

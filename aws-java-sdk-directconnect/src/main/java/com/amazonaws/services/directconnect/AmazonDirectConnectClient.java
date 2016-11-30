@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -73,11 +74,17 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
             .withSupportsCbor(false)
             .withSupportsIon(false)
             .addErrorMetadata(
+                    new JsonErrorShapeMetadata().withErrorCode("TooManyTagsException").withModeledClass(
+                            com.amazonaws.services.directconnect.model.TooManyTagsException.class))
+            .addErrorMetadata(
                     new JsonErrorShapeMetadata().withErrorCode("DirectConnectServerException").withModeledClass(
                             com.amazonaws.services.directconnect.model.DirectConnectServerException.class))
             .addErrorMetadata(
                     new JsonErrorShapeMetadata().withErrorCode("DirectConnectClientException").withModeledClass(
                             com.amazonaws.services.directconnect.model.DirectConnectClientException.class))
+            .addErrorMetadata(
+                    new JsonErrorShapeMetadata().withErrorCode("DuplicateTagKeysException").withModeledClass(
+                            com.amazonaws.services.directconnect.model.DuplicateTagKeysException.class))
             .withBaseServiceExceptionClass(com.amazonaws.services.directconnect.model.AmazonDirectConnectException.class));
 
     /**
@@ -237,6 +244,7 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/directconnect/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/directconnect/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -1252,6 +1260,52 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
 
     /**
      * <p>
+     * Describes the tags associated with the specified Direct Connect resources.
+     * </p>
+     * 
+     * @param describeTagsRequest
+     *        Container for the parameters to the DescribeTags operation.
+     * @return Result of the DescribeTags operation returned by the service.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.DescribeTags
+     */
+    @Override
+    public DescribeTagsResult describeTags(DescribeTagsRequest describeTagsRequest) {
+        ExecutionContext executionContext = createExecutionContext(describeTagsRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<DescribeTagsRequest> request = null;
+        Response<DescribeTagsResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new DescribeTagsRequestMarshaller(protocolFactory).marshall(super.beforeMarshalling(describeTagsRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<DescribeTagsResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new DescribeTagsResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
      * Returns a list of virtual private gateways owned by the AWS account.
      * </p>
      * <p>
@@ -1367,6 +1421,107 @@ public class AmazonDirectConnectClient extends AmazonWebServiceClient implements
     @Override
     public DescribeVirtualInterfacesResult describeVirtualInterfaces() {
         return describeVirtualInterfaces(new DescribeVirtualInterfacesRequest());
+    }
+
+    /**
+     * <p>
+     * Adds the specified tags to the specified Direct Connect resource. Each Direct Connect resource can have a maximum
+     * of 50 tags.
+     * </p>
+     * <p>
+     * Each tag consists of a key and an optional value. If a tag with the same key is already associated with the
+     * Direct Connect resource, this action updates its value.
+     * </p>
+     * 
+     * @param tagResourceRequest
+     *        Container for the parameters to the TagResource operation.
+     * @return Result of the TagResource operation returned by the service.
+     * @throws DuplicateTagKeysException
+     *         A tag key was specified more than once.
+     * @throws TooManyTagsException
+     *         You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.TagResource
+     */
+    @Override
+    public TagResourceResult tagResource(TagResourceRequest tagResourceRequest) {
+        ExecutionContext executionContext = createExecutionContext(tagResourceRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<TagResourceRequest> request = null;
+        Response<TagResourceResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new TagResourceRequestMarshaller(protocolFactory).marshall(super.beforeMarshalling(tagResourceRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<TagResourceResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new TagResourceResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
+    }
+
+    /**
+     * <p>
+     * Removes one or more tags from the specified Direct Connect resource.
+     * </p>
+     * 
+     * @param untagResourceRequest
+     *        Container for the parameters to the UntagResource operation.
+     * @return Result of the UntagResource operation returned by the service.
+     * @throws DirectConnectServerException
+     *         A server-side error occurred during the API call. The error message will contain additional details about
+     *         the cause.
+     * @throws DirectConnectClientException
+     *         The API was called with invalid parameters. The error message will contain additional details about the
+     *         cause.
+     * @sample AmazonDirectConnect.UntagResource
+     */
+    @Override
+    public UntagResourceResult untagResource(UntagResourceRequest untagResourceRequest) {
+        ExecutionContext executionContext = createExecutionContext(untagResourceRequest);
+        AWSRequestMetrics awsRequestMetrics = executionContext.getAwsRequestMetrics();
+        awsRequestMetrics.startEvent(Field.ClientExecuteTime);
+        Request<UntagResourceRequest> request = null;
+        Response<UntagResourceResult> response = null;
+
+        try {
+            awsRequestMetrics.startEvent(Field.RequestMarshallTime);
+            try {
+                request = new UntagResourceRequestMarshaller(protocolFactory).marshall(super.beforeMarshalling(untagResourceRequest));
+                // Binds the request metrics to the current request.
+                request.setAWSRequestMetrics(awsRequestMetrics);
+            } finally {
+                awsRequestMetrics.endEvent(Field.RequestMarshallTime);
+            }
+
+            HttpResponseHandler<AmazonWebServiceResponse<UntagResourceResult>> responseHandler = protocolFactory.createResponseHandler(
+                    new JsonOperationMetadata().withPayloadJson(true).withHasStreamingSuccessResponse(false), new UntagResourceResultJsonUnmarshaller());
+            response = invoke(request, responseHandler, executionContext);
+
+            return response.getAwsResponse();
+
+        } finally {
+
+            endClientExecution(awsRequestMetrics, request, response);
+        }
     }
 
     /**

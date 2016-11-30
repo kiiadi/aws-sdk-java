@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -52,7 +52,7 @@ public class CreateRestApiRequestMarshaller implements Marshaller<Request<Create
     public Request<CreateRestApiRequest> marshall(CreateRestApiRequest createRestApiRequest) {
 
         if (createRestApiRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<CreateRestApiRequest> request = new DefaultRequest<CreateRestApiRequest>(createRestApiRequest, "AmazonApiGateway");
@@ -77,6 +77,18 @@ public class CreateRestApiRequestMarshaller implements Marshaller<Request<Create
                 jsonGenerator.writeFieldName("cloneFrom").writeValue(createRestApiRequest.getCloneFrom());
             }
 
+            java.util.List<String> binaryMediaTypesList = createRestApiRequest.getBinaryMediaTypes();
+            if (binaryMediaTypesList != null) {
+                jsonGenerator.writeFieldName("binaryMediaTypes");
+                jsonGenerator.writeStartArray();
+                for (String binaryMediaTypesListValue : binaryMediaTypesList) {
+                    if (binaryMediaTypesListValue != null) {
+                        jsonGenerator.writeValue(binaryMediaTypesListValue);
+                    }
+                }
+                jsonGenerator.writeEndArray();
+            }
+
             jsonGenerator.writeEndObject();
 
             byte[] content = jsonGenerator.getBytes();
@@ -86,7 +98,7 @@ public class CreateRestApiRequestMarshaller implements Marshaller<Request<Create
                 request.addHeader("Content-Type", protocolFactory.getContentType());
             }
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
 
         return request;

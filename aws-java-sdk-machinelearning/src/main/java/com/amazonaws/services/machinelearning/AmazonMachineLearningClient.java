@@ -22,6 +22,7 @@ import org.apache.commons.logging.*;
 
 import com.amazonaws.*;
 import com.amazonaws.auth.*;
+import com.amazonaws.auth.presign.PresignerParams;
 import com.amazonaws.handlers.*;
 import com.amazonaws.http.*;
 import com.amazonaws.internal.*;
@@ -249,6 +250,7 @@ public class AmazonMachineLearningClient extends AmazonWebServiceClient implemen
         HandlerChainFactory chainFactory = new HandlerChainFactory();
         requestHandler2s.addAll(chainFactory.newRequestHandlerChain("/com/amazonaws/services/machinelearning/request.handlers"));
         requestHandler2s.addAll(chainFactory.newRequestHandler2Chain("/com/amazonaws/services/machinelearning/request.handler2s"));
+        requestHandler2s.addAll(chainFactory.getGlobalHandlers());
     }
 
     /**
@@ -1796,6 +1798,7 @@ public class AmazonMachineLearningClient extends AmazonWebServiceClient implemen
         return client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 
+    @Override
     public AmazonMachineLearningWaiters waiters() {
         if (waiters == null) {
             synchronized (this) {

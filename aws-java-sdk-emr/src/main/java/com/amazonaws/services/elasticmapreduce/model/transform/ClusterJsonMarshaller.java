@@ -15,7 +15,7 @@ package com.amazonaws.services.elasticmapreduce.model.transform;
 import java.util.Map;
 import java.util.List;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.elasticmapreduce.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.BinaryUtils;
@@ -35,7 +35,7 @@ public class ClusterJsonMarshaller {
     public void marshall(Cluster cluster, StructuredJsonGenerator jsonGenerator) {
 
         if (cluster == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         try {
@@ -129,10 +129,16 @@ public class ClusterJsonMarshaller {
             if (cluster.getSecurityConfiguration() != null) {
                 jsonGenerator.writeFieldName("SecurityConfiguration").writeValue(cluster.getSecurityConfiguration());
             }
+            if (cluster.getAutoScalingRole() != null) {
+                jsonGenerator.writeFieldName("AutoScalingRole").writeValue(cluster.getAutoScalingRole());
+            }
+            if (cluster.getScaleDownBehavior() != null) {
+                jsonGenerator.writeFieldName("ScaleDownBehavior").writeValue(cluster.getScaleDownBehavior());
+            }
 
             jsonGenerator.writeEndObject();
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
     }
 

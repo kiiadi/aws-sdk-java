@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -43,7 +43,7 @@ public class UpdateCloudFrontOriginAccessIdentityRequestMarshaller implements
     public Request<UpdateCloudFrontOriginAccessIdentityRequest> marshall(UpdateCloudFrontOriginAccessIdentityRequest updateCloudFrontOriginAccessIdentityRequest) {
 
         if (updateCloudFrontOriginAccessIdentityRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<UpdateCloudFrontOriginAccessIdentityRequest> request = new DefaultRequest<UpdateCloudFrontOriginAccessIdentityRequest>(
@@ -55,7 +55,7 @@ public class UpdateCloudFrontOriginAccessIdentityRequestMarshaller implements
             request.addHeader("If-Match", StringUtils.fromString(updateCloudFrontOriginAccessIdentityRequest.getIfMatch()));
         }
 
-        String uriResourcePath = "/2016-09-07/origin-access-identity/cloudfront/{Id}/config";
+        String uriResourcePath = "/2016-09-29/origin-access-identity/cloudfront/{Id}/config";
 
         uriResourcePath = uriResourcePath.replace(
                 "{Id}",
@@ -65,7 +65,7 @@ public class UpdateCloudFrontOriginAccessIdentityRequestMarshaller implements
 
         try {
             StringWriter stringWriter = new StringWriter();
-            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2016-09-07/");
+            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2016-09-29/");
 
             CloudFrontOriginAccessIdentityConfig cloudFrontOriginAccessIdentityConfig = updateCloudFrontOriginAccessIdentityRequest
                     .getCloudFrontOriginAccessIdentityConfig();
@@ -88,7 +88,7 @@ public class UpdateCloudFrontOriginAccessIdentityRequestMarshaller implements
                 request.addHeader("Content-Type", "application/xml");
             }
         } catch (Throwable t) {
-            throw new AmazonClientException("Unable to marshall request to XML: " + t.getMessage(), t);
+            throw new SdkClientException("Unable to marshall request to XML: " + t.getMessage(), t);
         }
 
         return request;

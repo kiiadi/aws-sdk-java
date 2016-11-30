@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.AmazonClientException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
 import com.amazonaws.http.HttpMethodName;
@@ -34,7 +34,7 @@ public class SendRawEmailRequestMarshaller implements Marshaller<Request<SendRaw
     public Request<SendRawEmailRequest> marshall(SendRawEmailRequest sendRawEmailRequest) {
 
         if (sendRawEmailRequest == null) {
-            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+            throw new SdkClientException("Invalid argument passed to marshall(...)");
         }
 
         Request<SendRawEmailRequest> request = new DefaultRequest<SendRawEmailRequest>(sendRawEmailRequest, "AmazonSimpleEmailService");
@@ -77,6 +77,27 @@ public class SendRawEmailRequestMarshaller implements Marshaller<Request<SendRaw
 
         if (sendRawEmailRequest.getReturnPathArn() != null) {
             request.addParameter("ReturnPathArn", StringUtils.fromString(sendRawEmailRequest.getReturnPathArn()));
+        }
+
+        com.amazonaws.internal.SdkInternalList<MessageTag> tagsList = (com.amazonaws.internal.SdkInternalList<MessageTag>) sendRawEmailRequest.getTags();
+        if (!tagsList.isEmpty() || !tagsList.isAutoConstruct()) {
+            int tagsListIndex = 1;
+
+            for (MessageTag tagsListValue : tagsList) {
+
+                if (tagsListValue.getName() != null) {
+                    request.addParameter("Tags.member." + tagsListIndex + ".Name", StringUtils.fromString(tagsListValue.getName()));
+                }
+
+                if (tagsListValue.getValue() != null) {
+                    request.addParameter("Tags.member." + tagsListIndex + ".Value", StringUtils.fromString(tagsListValue.getValue()));
+                }
+                tagsListIndex++;
+            }
+        }
+
+        if (sendRawEmailRequest.getConfigurationSetName() != null) {
+            request.addParameter("ConfigurationSetName", StringUtils.fromString(sendRawEmailRequest.getConfigurationSetName()));
         }
 
         return request;
